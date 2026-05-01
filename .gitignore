@@ -1,0 +1,24 @@
+# Local agent/runtime files
+.agents/
+.codex-tmp/
+
+# Logs
+*.log
+
+# Dependencies and generated output
+node_modules/
+dist/
+build/
+coverage/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/

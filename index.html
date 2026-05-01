@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LittleGame - 游戏大厅</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="lobby-container">
+        <header class="header">
+            <h1 class="logo">LittleGame</h1>
+            <p class="subtitle">精选休闲游戏合集</p>
+        </header>
+        
+        <main class="game-grid">
+            <div class="game-card" data-game="schulte">
+                <div class="game-icon">
+                    <span class="icon-text">🎯</span>
+                </div>
+                <h3 class="game-title">舒尔特方格</h3>
+                <p class="game-description">提升专注力与反应速度</p>
+                <div class="game-tags">
+                    <span class="tag">益智</span>
+                    <span class="tag">训练</span>
+                </div>
+                <button class="play-btn">开始游戏</button>
+            </div>
+            
+            <div class="game-card" data-game="sudoku">
+                <div class="game-icon">
+                    <span class="icon-text">🔢</span>
+                </div>
+                <h3 class="game-title">数独</h3>
+                <p class="game-description">经典数字逻辑填空游戏</p>
+                <div class="game-tags">
+                    <span class="tag">逻辑</span>
+                    <span class="tag">休闲</span>
+                </div>
+                <button class="play-btn">开始游戏</button>
+            </div>
+            
+            <div class="game-card coming-soon">
+                <div class="game-icon">
+                    <span class="icon-text">🎮</span>
+                </div>
+                <h3 class="game-title">更多游戏</h3>
+                <p class="game-description">敬请期待...</p>
+                <div class="game-tags">
+                    <span class="tag">开发中</span>
+                </div>
+                <button class="play-btn disabled">即将上线</button>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>© 2024 LittleGame</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
