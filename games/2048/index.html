@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048 - LittleGame</title>
+    <link rel="stylesheet" href="../../assets/theme.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
+</head>
+<body data-game="2048">
+    <div class="container">
+        <header class="header">
+            <div>
+                <h1>2048</h1>
+                <p>合并相同数字，冲到 2048。</p>
+            </div>
+            <button class="return-lobby-btn ghost-btn">返回大厅</button>
+        </header>
+
+        <main>
+            <section class="score-row" aria-label="分数面板">
+                <div class="score-box">
+                    <span class="score-label">分数</span>
+                    <span id="score" class="score-value">0</span>
+                </div>
+                <div class="score-box">
+                    <span class="score-label">用时</span>
+                    <span id="time" class="score-value">0.00</span>
+                </div>
+                <div class="score-box">
+                    <span class="score-label">最佳(最高分)</span>
+                    <span id="best-score" class="score-value">0</span>
+                </div>
+            </section>
+
+            <section class="board-wrap">
+                <div id="game-board" class="game-board" aria-label="2048 游戏棋盘"></div>
+                <div id="start-overlay" class="start-overlay">
+                    <button class="start-btn" type="button">开始游戏</button>
+                </div>
+                <div id="message-panel" class="message-panel" style="display: none;">
+                    <h2 id="message-title">游戏结束</h2>
+                    <p id="message-text"></p>
+                    <div class="message-actions">
+                        <button id="continue-btn" class="btn secondary-btn">继续挑战</button>
+                        <button id="message-restart-btn" class="btn">重新开始</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="direction-pad" aria-label="方向控制">
+                <button class="direction-btn up" data-direction="up" type="button" title="向上移动" aria-label="向上移动">↑</button>
+                <button class="direction-btn left" data-direction="left" type="button" title="向左移动" aria-label="向左移动">←</button>
+                <button class="direction-btn right" data-direction="right" type="button" title="向右移动" aria-label="向右移动">→</button>
+                <button class="direction-btn down" data-direction="down" type="button" title="向下移动" aria-label="向下移动">↓</button>
+            </section>
+
+            <p class="keyboard-hint">⌨️ 小提示：键盘 ↑ ↓ ← → 方向键同样可以操作</p>
+
+            <div class="controls">
+                <button id="restart-btn" class="btn">重新开始</button>
+                <button id="undo-btn" class="btn secondary-btn">撤销一步</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../assets/util.js?v=3"></script>
+    <script src="../../assets/player.js?v=3"></script>
+    <script src="../../assets/audio.js?v=3"></script>
+    <script src="../../assets/features.js?v=5"></script>
+    <script src="script.js?v=3"></script>
+</body>
+</html>

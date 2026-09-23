@@ -1,0 +1,185 @@
+/* 记忆翻牌专有样式（通用部分见 ../../assets/theme.css） */
+
+.container {
+    width: min(980px, 100%);
+    padding: 36px;
+    transition: width 0.25s ease, padding 0.25s ease;
+}
+
+/* 菜单屏（难度选择）：与舒尔特/数独的难度界面同宽（600px 卡片 + 40px 内边距） */
+.container.menu-mode {
+    width: min(600px, 100%);
+    padding: 40px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.header h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+    color: var(--accent);
+    letter-spacing: 0;
+}
+
+.screen {
+    animation: fadeIn 0.28s ease;
+}
+
+h2 {
+    margin-bottom: 22px;
+    text-align: center;
+    font-size: 1.7rem;
+    color: var(--text);
+}
+
+.board-wrap {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto 24px;
+}
+
+.memory-board {
+    display: grid;
+    gap: 10px;
+}
+
+.memory-board.easy,
+.memory-board.medium {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.memory-board.hard {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    cursor: pointer;
+    perspective: 900px;
+}
+
+.card:focus-visible {
+    outline: 3px solid #ffd166;
+    outline-offset: 3px;
+}
+
+.card-inner {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    transform-style: preserve-3d;
+    transition: transform 0.34s ease;
+}
+
+.card.flipped .card-inner,
+.card.matched .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: inherit;
+    backface-visibility: hidden;
+    box-shadow: 0 8px 18px rgba(58, 45, 102, 0.15);
+}
+
+.card-back {
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.22), transparent 42%),
+        var(--btn-start);
+}
+
+.card-back::after {
+    content: "?";
+    color: #fffdf8;
+    font-size: clamp(1.5rem, 5vw, 2.6rem);
+    font-weight: 800;
+}
+
+.card-front {
+    background: #fff6d7;
+    border: 2px solid #ffd166;
+    transform: rotateY(180deg);
+    font-size: clamp(1.6rem, 5vw, 2.8rem);
+}
+
+.card.matched .card-front {
+    background: #e4f7df;
+    border-color: #77c66e;
+}
+
+.game-controls,
+.bottom-buttons,
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* 游戏内主操作按钮（与通用 .btn 同风格，尺寸略大） */
+.control-btn {
+    min-width: 148px;
+    padding: 12px 24px;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-btn);
+}
+
+.control-btn:hover,
+.control-btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-btn-hover);
+    outline: none;
+}
+
+.secondary-control {
+    background: var(--surface);
+    color: var(--accent-strong);
+    border: 2px solid var(--border);
+    box-shadow: none;
+}
+
+@media (max-width: 720px) {
+    .memory-board.hard {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* 窄屏断点与内边距与舒尔特/数独一致，保证三家的难度选择界面宽度相同 */
+@media (max-width: 600px) {
+    .container,
+    .container.menu-mode {
+        padding: 25px 15px;
+    }
+}
+
+@media (max-width: 430px) {
+    .memory-board {
+        gap: 8px;
+    }
+
+    .card {
+        border-radius: 10px;
+    }
+}

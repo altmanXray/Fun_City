@@ -8,6 +8,18 @@ class GameLobby {
             sudoku: {
                 name: '数独',
                 path: 'sudoku/index.html'
+            },
+            memory: {
+                name: '记忆翻牌',
+                path: 'memory/index.html'
+            },
+            2048: {
+                name: '2048',
+                path: '2048/index.html'
+            },
+            gomoku: {
+                name: '五子棋',
+                path: 'gomoku/index.html'
             }
         };
         

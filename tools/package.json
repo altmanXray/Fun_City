@@ -1,0 +1,12 @@
+{
+  "name": "littlegame-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LittleGame 离线构建工具：生成简体+拼音唐诗三百首诗库（不影响游戏运行时，游戏本体零依赖）",
+  "scripts": {
+    "build:poems": "node build-poems.js"
+  },
+  "dependencies": {
+    "pinyin-pro": "^3.0.0"
+  }
+}

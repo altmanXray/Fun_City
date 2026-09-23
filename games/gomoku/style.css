@@ -1,0 +1,223 @@
+/* 五子棋专有样式（通用部分见 ../../assets/theme.css） */
+
+.container {
+    width: min(580px, 100%);
+    padding: 14px 20px;
+}
+
+.header {
+    margin-bottom: 10px;
+}
+
+.header h1 {
+    font-size: clamp(1.9rem, 7vw, 2.5rem);
+    line-height: 1;
+    color: var(--accent);
+}
+
+.header p {
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+/* 顶行：模式切换 + 回合状态 同行排布，为棋盘腾出纵向空间 */
+.top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    margin-bottom: 10px;
+}
+
+.mode-switch {
+    display: flex;
+    flex: 1;
+    gap: 8px;
+    min-width: 220px;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 8px 10px;
+    border: 2px solid #d8cdf1;
+    border-radius: 12px;
+    background: var(--surface-soft);
+    color: var(--accent);
+    cursor: pointer;
+    font-size: 0.92rem;
+    font-weight: 800;
+    transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.mode-btn:hover {
+    transform: translateY(-1px);
+}
+
+.mode-btn.active {
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    border-color: transparent;
+    color: #fff;
+    box-shadow: var(--shadow-btn);
+}
+
+.status-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: var(--surface-alt);
+}
+
+.turn-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+    flex: none;
+}
+
+.turn-dot.black {
+    background: radial-gradient(circle at 35% 30%, #6a6a6a, #111 70%);
+}
+
+.turn-dot.white {
+    background: radial-gradient(circle at 35% 30%, #fff, #cfcfcf 75%);
+}
+
+.status-text {
+    color: var(--accent-strong);
+    font-size: 0.95rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.board-wrap {
+    position: relative;
+    /* 棋盘封顶：视口高度减去头部/顶行/底行，保证整页一屏放下 */
+    width: clamp(260px, calc(100vh - 350px), 100%);
+    width: clamp(260px, calc(100dvh - 350px), 100%);
+    margin: 0 auto;
+}
+
+/* 终局：结算横幅占位、状态收起，棋盘微缩一档仍保一屏 */
+.board-wrap.ended {
+    width: clamp(220px, calc(100vh - 418px), 100%);
+    width: clamp(220px, calc(100dvh - 418px), 100%);
+}
+
+.board {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    background: #e6b877;
+    box-shadow: inset 0 0 0 2px rgba(120, 80, 30, 0.25);
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+/* 底行：用时/最快记录 + 操作按钮 同行排布 */
+.bottom-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    margin-top: 12px;
+}
+
+.bottom-row .info-item {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: var(--surface-alt);
+}
+
+.bottom-row .info-item .label {
+    margin: 0;
+    font-size: 0.78rem;
+    white-space: nowrap;
+}
+
+.bottom-row .info-item .value {
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.bottom-row .btn {
+    min-width: auto;
+    padding: 9px 16px;
+    font-size: 0.9rem;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+
+/* 结算横幅：棋盘下方紧凑单行（不遮挡最终棋面与连珠线） */
+.message-panel {
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2px 12px;
+    margin-top: 8px;
+    padding: 8px 14px;
+    border-radius: 12px;
+    background: var(--surface-alt);
+    text-align: center;
+}
+
+.message-panel h2 {
+    margin: 0;
+    color: var(--accent-strong);
+    font-size: 1.12rem;
+}
+
+.message-panel p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+/* 下方操作行已有「重新开始」，横幅内按钮隐藏以省空间 */
+.message-panel .message-actions {
+    display: none;
+}
+
+/* 终局后悔棋按钮置灰 */
+#undo-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+@media (max-width: 500px) {
+    .container {
+        width: 100%;
+        padding: 16px 12px;
+    }
+
+    .header {
+        align-items: center;
+    }
+
+    .status-chip {
+        margin: 0 auto;
+    }
+
+    .bottom-row .controls {
+        width: 100%;
+        margin-left: 0;
+    }
+}

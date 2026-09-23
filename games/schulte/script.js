@@ -2,13 +2,13 @@ class SchulteGame {
     constructor() {
         this.screens = {
             main: document.getElementById('main-menu'),
-            classic: document.getElementById('classic-mode-screen'),
             standard: document.getElementById('standard-mode-screen'),
             poetry: document.getElementById('poetry-mode-screen'),
             game: document.getElementById('game-screen')
         };
 
         this.gameBoard = document.getElementById('game-board');
+        this.startOverlay = document.getElementById('start-overlay');
         this.targetNumberDisplay = document.getElementById('target-number');
         this.timerDisplay = document.getElementById('timer');
         this.restartBtn = document.getElementById('restart-btn');
@@ -22,8 +22,8 @@ class SchulteGame {
         this.currentTarget = 1;
         this.gridSize = 5;
         this.mode = null;
-        this.timer = null;
-        this.startTime = null;
+        this.timer = new GameTimer(this.timerDisplay);
+        this.bestDisplay = document.getElementById('best-time');
         this.gameActive = false;
         this.currentPoetry = null;
         this.currentPoetryIndex = 0;
@@ -33,11 +33,11 @@ class SchulteGame {
     }
 
     async init() {
-        document.getElementById('classic-mode-btn').addEventListener('click', () => this.showScreen('classic'));
+        document.getElementById('classic-mode-btn').addEventListener('click', () => this.startClassicGame());
         document.getElementById('standard-mode-btn').addEventListener('click', () => this.showScreen('standard'));
         document.getElementById('poetry-mode-btn').addEventListener('click', () => this.showScreen('poetry'));
 
-        document.getElementById('classic-start-btn').addEventListener('click', () => this.startClassicGame());
+        this.startOverlay.addEventListener('click', () => this.beginPlay());
 
         document.querySelectorAll('.back-btn').forEach(btn => {
             btn.addEventListener('click', () => this.showScreen('main'));
@@ -58,11 +58,6 @@ class SchulteGame {
         document.getElementById('modal-restart-btn').addEventListener('click', () => {
             document.getElementById('result-modal').style.display = 'none';
             this.restartGame();
-        });
-
-        document.getElementById('modal-back-btn').addEventListener('click', () => {
-            document.getElementById('result-modal').style.display = 'none';
-            window.location.href = '../../index.html';
         });
 
         document.getElementById('modal-next-btn').addEventListener('click', () => {
@@ -90,7 +85,7 @@ class SchulteGame {
 
     async loadPoems() {
         try {
-            const response = await fetch('poems-tang300.json');
+            const response = await fetch('poems-tang300.json?v=4');
 
             if (!response.ok) {
                 throw new Error(`Failed to load poems: ${response.status}`);
@@ -98,6 +93,7 @@ class SchulteGame {
 
             const poems = await response.json();
             this.poems = poems.map((poem, index) => this.normalizePoem(poem, index));
+            window.LG_POEM_COUNT = this.poems.length;
         } catch (error) {
             console.error('唐诗诗库加载失败：', error);
             this.poems = [];
@@ -143,7 +139,7 @@ class SchulteGame {
     }
 
     startStandardGame(e) {
-        const size = parseInt(e.target.dataset.size, 10);
+        const size = parseInt(e.currentTarget.dataset.size, 10);
         this.mode = 'standard';
         this.gridSize = size;
         this.startGame();
@@ -158,7 +154,7 @@ class SchulteGame {
         }
 
         const completedCount = this.poems.filter(poem => this.getPoemStats(poem).completed).length;
-        this.poetryDescription.textContent = `已收录 ${this.poems.length} 首，已完成 ${completedCount} 首`;
+        this.poetryDescription.textContent = `已收录 ${this.poems.length} 首，已完成 ${completedCount} 首（由易到难排列）`;
         this.poetryList.innerHTML = '';
 
         this.poems.forEach((poem, index) => {
@@ -168,10 +164,11 @@ class SchulteGame {
 
             const bestTimeText = stats.bestTime !== null ? `${stats.bestTime.toFixed(2)} 秒` : '--';
             const preview = this.getPoemPreview(poem);
+            const diff = this.getPoemDifficulty(poem);
 
             item.innerHTML = `
                 <div class="poetry-item-header">
-                    <div class="poetry-item-title">${poem.title}</div>
+                    <div class="poetry-item-title">${poem.title}<span class="poetry-diff diff-${diff.tier}">${diff.label}</span></div>
                     <span class="poetry-status ${stats.completed ? 'done' : 'pending'}">
                         ${stats.completed ? '已完成' : '未完成'}
                     </span>
@@ -187,6 +184,16 @@ class SchulteGame {
             item.addEventListener('click', () => this.startPoetryGame(index));
             this.poetryList.appendChild(item);
         });
+    }
+
+    // 难度分档：字数决定舒尔特网格规模（20 字 6×6 … 56 字 9×9，更长为长诗）
+    getPoemDifficulty(poem) {
+        const count = this.getPoemCharacters(poem).length;
+        if (count <= 20) return { tier: 1, label: '入门' };
+        if (count <= 28) return { tier: 2, label: '简单' };
+        if (count <= 40) return { tier: 3, label: '进阶' };
+        if (count <= 56) return { tier: 4, label: '挑战' };
+        return { tier: 5, label: '长诗' };
     }
 
     getPoemPreview(poem) {
@@ -227,32 +234,42 @@ class SchulteGame {
         }
 
         this.showScreen('game');
+        this.gameActive = false;
+        this.updateBestDisplay();
+        this.startOverlay.classList.remove('hidden');
+    }
+
+    beginPlay() {
+        if (this.screens.game.style.display === 'none') return;
+        this.startOverlay.classList.add('hidden');
         this.gameActive = true;
-        this.startTime = Date.now();
-        this.timer = setInterval(() => this.updateTimer(), 10);
+        this.timer.start();
+    }
+
+    getGameKey() {
+        if (this.mode === 'standard') return `schulte_standard_${this.gridSize}`;
+        if (this.mode === 'classic') return 'schulte_classic_5';
+        if (this.mode === 'poetry' && this.currentPoetry) return `schulte_poetry_${this.currentPoetry.id}`;
+        return 'schulte_unknown';
+    }
+
+    updateBestDisplay() {
+        const best = GameUtils.loadBestTime(`schulte_bestms_${this.getGameKey()}`);
+        this.bestDisplay.textContent = GameUtils.formatTimeText(best);
     }
 
     resetGame() {
         this.currentTarget = 1;
         this.targetNumberDisplay.textContent = '1';
-        this.timerDisplay.textContent = '0.00';
+        this.timer.reset();
         this.gameBoard.innerHTML = '';
         this.gameBoard.className = 'game-board';
         this.gameBoard.classList.remove('poetry-mode');
-
-        if (this.timer) {
-            clearInterval(this.timer);
-            this.timer = null;
-        }
     }
 
     stopGame() {
         this.gameActive = false;
-
-        if (this.timer) {
-            clearInterval(this.timer);
-            this.timer = null;
-        }
+        this.timer.stop();
     }
 
     restartGame() {
@@ -406,6 +423,7 @@ class SchulteGame {
         if (clickedValue === this.currentTarget) {
             cell.classList.add('correct');
             cell.disabled = true;
+            AudioManager.play('click');
 
             if (this.mode === 'poetry') {
                 this.updatePoetryDisplay(this.currentTarget + 1);
@@ -419,80 +437,89 @@ class SchulteGame {
             }
         } else {
             cell.classList.add('wrong');
+            AudioManager.play('error');
             setTimeout(() => {
                 cell.classList.remove('wrong');
             }, 300);
         }
     }
 
-    updateTimer() {
-        const elapsed = Date.now() - this.startTime;
-        this.timerDisplay.textContent = (elapsed / 1000).toFixed(2);
-    }
-
     endGame() {
         this.gameActive = false;
-        clearInterval(this.timer);
+        this.timer.stop();
 
-        const finalTime = this.timerDisplay.textContent;
-        const finalTimeNum = parseFloat(finalTime);
+        const ms = this.timer.elapsed();
+        const gameKey = this.getGameKey();
 
         let info = '';
         let hasNext = false;
-        let gameKey = '';
 
         if (this.mode === 'standard') {
             info = `标准模式 ${this.gridSize}×${this.gridSize}`;
-            gameKey = `schulte_standard_${this.gridSize}`;
-
             if (this.gridSize < 9) {
                 hasNext = true;
             }
         } else if (this.mode === 'classic') {
             info = `经典模式 ${this.gridSize}×${this.gridSize}`;
-            gameKey = 'schulte_classic_5';
         } else if (this.mode === 'poetry' && this.currentPoetry) {
             info = `《${this.currentPoetry.title}》\n${this.currentPoetry.author}`;
-            gameKey = `schulte_poetry_${this.currentPoetry.id}`;
             hasNext = this.currentPoetryIndex < this.poems.length - 1;
-            this.savePoetryCompletion(this.currentPoetry, finalTimeNum);
+            this.savePoetryCompletion(this.currentPoetry, ms / 1000);
         }
 
         document.getElementById('result-info').innerHTML = info;
-        document.getElementById('result-time').textContent = `用时：${finalTime} 秒`;
+        document.getElementById('result-time').textContent = `用时：${GameUtils.formatTime(ms)} 秒`;
 
-        this.saveAndCompareResult(gameKey, finalTimeNum);
+        this.saveAndCompareResult(gameKey, ms);
+        this.updateBestDisplay();
+
+        // 排行榜与成就上报
+        AudioManager.play('win');
+        if (window.LG) {
+            if (this.mode === 'standard') {
+                LG.Records.add({ game: 'schulte', mode: `standard_${this.gridSize}`, value: ms });
+            } else if (this.mode === 'classic') {
+                LG.Records.add({ game: 'schulte', mode: 'classic_5', value: ms });
+            } else if (this.mode === 'poetry' && this.currentPoetry) {
+                LG.Records.add({ game: 'schulte', mode: 'poetry', value: ms, extra: this.currentPoetry.title });
+            }
+            LG.Achievements.report('schulte_win', {
+                mode: this.mode,
+                gridSize: this.gridSize,
+                ms,
+                poemId: this.currentPoetry ? this.currentPoetry.id : null
+            });
+        }
 
         document.getElementById('modal-next-btn').style.display = hasNext ? 'block' : 'none';
         document.getElementById('result-modal').style.display = 'flex';
     }
 
-    saveAndCompareResult(gameKey, currentTime) {
-        const lastResult = localStorage.getItem(gameKey);
+    saveAndCompareResult(gameKey, ms) {
+        const key = `schulte_bestms_${gameKey}`;
+        const prev = GameUtils.loadBestTime(key);
         const comparisonDiv = document.getElementById('result-comparison');
         const lastResultP = document.getElementById('last-result');
 
-        if (lastResult) {
-            const lastTime = parseFloat(lastResult);
-            const diff = lastTime - currentTime;
-
+        if (prev !== null) {
+            const diff = ms - prev;
             comparisonDiv.style.display = 'block';
 
-            if (diff > 0) {
-                lastResultP.innerHTML = `<span class="last-time">上次用时：${lastTime.toFixed(2)} 秒</span><br>
-                    <span class="time-change faster">快 ${diff.toFixed(2)} 秒</span>`;
-            } else if (diff < 0) {
-                lastResultP.innerHTML = `<span class="last-time">上次用时：${lastTime.toFixed(2)} 秒</span><br>
-                    <span class="time-change slower">慢 ${(-diff).toFixed(2)} 秒</span>`;
+            if (diff < 0) {
+                lastResultP.innerHTML = `<span class="last-time">上次最佳：${GameUtils.formatTime(prev)} 秒</span><br>
+                    <span class="time-change faster">新纪录！快 ${GameUtils.formatTime(-diff)} 秒</span>`;
+            } else if (diff > 0) {
+                lastResultP.innerHTML = `<span class="last-time">最佳记录：${GameUtils.formatTime(prev)} 秒</span><br>
+                    <span class="time-change slower">慢 ${GameUtils.formatTime(diff)} 秒</span>`;
             } else {
-                lastResultP.innerHTML = `<span class="last-time">上次用时：${lastTime.toFixed(2)} 秒</span><br>
+                lastResultP.innerHTML = `<span class="last-time">最佳记录：${GameUtils.formatTime(prev)} 秒</span><br>
                     <span class="time-change same">用时相同！</span>`;
             }
         } else {
             comparisonDiv.style.display = 'none';
         }
 
-        localStorage.setItem(gameKey, currentTime.toString());
+        GameUtils.saveBestTime(key, ms);
     }
 
     getPoemStatsKey(poem) {

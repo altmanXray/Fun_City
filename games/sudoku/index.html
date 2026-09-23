@@ -3,48 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数独游戏 - LittleGame</title>
-    <link rel="stylesheet" href="style.css">
+    <title>数独 - LittleGame</title>
+    <link rel="stylesheet" href="../../assets/theme.css?v=4">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
-<body>
+<body data-game="sudoku">
     <div class="container">
-        <div class="header">
-            <h1>数独游戏</h1>
-        </div>
+        <header class="header">
+            <h1>数独</h1>
+            <button class="return-lobby-btn ghost-btn">返回大厅</button>
+        </header>
         
         <div id="difficulty-screen" class="screen">
             <h2>选择难度</h2>
-            <div class="difficulty-selector">
-                <button class="difficulty-btn" data-level="easy">简单</button>
-                <button class="difficulty-btn" data-level="medium">中等</button>
-                <button class="difficulty-btn" data-level="hard">困难</button>
-                <button class="difficulty-btn" data-level="expert">专家</button>
+            <div class="difficulty-grid">
+                <button class="difficulty-btn" data-level="easy">
+                    <span class="difficulty-name">简单</span>
+                    <span class="difficulty-detail">40 个提示</span>
+                </button>
+                <button class="difficulty-btn" data-level="medium">
+                    <span class="difficulty-name">中等</span>
+                    <span class="difficulty-detail">30 个提示</span>
+                </button>
+                <button class="difficulty-btn" data-level="hard">
+                    <span class="difficulty-name">困难</span>
+                    <span class="difficulty-detail">25 个提示</span>
+                </button>
+                <button class="difficulty-btn" data-level="expert">
+                    <span class="difficulty-name">专家</span>
+                    <span class="difficulty-detail">20 个提示</span>
+                </button>
             </div>
-            <div class="stats-display">
+            <div class="best-panel">
                 <p>最佳记录：<span id="best-record">--</span></p>
-            </div>
-            <div class="bottom-buttons">
-                <button class="return-lobby-btn btn">返回大厅</button>
             </div>
         </div>
         
         <div id="game-screen" class="screen" style="display: none;">
-            <div class="game-info">
+            <div class="info-panel">
                 <div class="info-item">
-                    <span class="label">难度：</span>
+                    <span class="label">难度</span>
                     <span id="difficulty-display" class="value">简单</span>
                 </div>
                 <div class="info-item">
-                    <span class="label">用时：</span>
-                    <span id="timer" class="value">00:00</span>
+                    <span class="label">用时</span>
+                    <span id="timer" class="value">0.00</span>
                 </div>
                 <div class="info-item">
-                    <span class="label">错误：</span>
+                    <span class="label">错误</span>
                     <span id="mistakes" class="value">0/3</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">最佳</span>
+                    <span id="best-time" class="value">--</span>
                 </div>
             </div>
             
-            <div class="sudoku-board" id="sudoku-board"></div>
+            <div class="board-wrap">
+                <div class="sudoku-board" id="sudoku-board" aria-label="数独棋盘"></div>
+                <div id="start-overlay" class="start-overlay">
+                    <button class="start-btn" type="button">开始游戏</button>
+                </div>
+            </div>
             
             <div class="number-pad" id="number-pad">
                 <button class="num-btn" data-num="1"><span class="num-value">1</span><span class="num-remaining">剩余 9</span></button>
@@ -105,6 +125,10 @@
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="../../assets/util.js?v=3"></script>
+    <script src="../../assets/player.js?v=3"></script>
+    <script src="../../assets/audio.js?v=3"></script>
+    <script src="../../assets/features.js?v=5"></script>
+    <script src="script.js?v=3"></script>
 </body>
 </html>

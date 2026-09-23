@@ -8,10 +8,10 @@ class SudokuGame {
         this.maxMistakes = 3;
         this.hints = 0;
         this.maxHints = 3;
-        this.timer = null;
-        this.startTime = null;
         this.gameActive = false;
-        
+        this.startOverlay = document.getElementById('start-overlay');
+        this.timer = new GameTimer(document.getElementById('timer'));
+
         this.difficultySettings = {
             easy: { clues: 40, name: '简单' },
             medium: { clues: 30, name: '中等' },
@@ -65,26 +65,37 @@ class SudokuGame {
             }
         });
         
+        this.startOverlay.addEventListener('click', () => this.beginPlay());
+
         this.loadBestRecords();
     }
-    
+
     startGame(level) {
         this.difficulty = level;
         this.mistakes = 0;
         this.hints = 0;
-        this.gameActive = true;
+        this.gameActive = false;
         this.selectedCell = null;
-        
+
         this.generateSudoku();
         this.renderBoard();
         this.updateUI();
         this.updateHints();
         this.updateNumberPadCounts();
-        
+        this.timer.reset();
+        this.loadBestRecords();
+
         document.getElementById('difficulty-screen').style.display = 'none';
         document.getElementById('game-screen').style.display = 'block';
-        
-        this.startTimer();
+
+        this.startOverlay.classList.remove('hidden');
+    }
+
+    beginPlay() {
+        if (document.getElementById('game-screen').style.display === 'none') return;
+        this.startOverlay.classList.add('hidden');
+        this.gameActive = true;
+        this.timer.start();
     }
     
     generateSudoku() {
@@ -168,13 +179,61 @@ class SudokuGame {
                 positions.push({ row, col });
             }
         }
-        
+
         const shuffled = this.shuffleArray(positions);
-        
-        for (let i = 0; i < count && i < shuffled.length; i++) {
+        let removed = 0;
+
+        // 安全挖洞：挖掉一格后仍保证唯一解才保留，否则恢复原值。
+        // 挖不够目标数时保留更多提示（唯一解优先于难度目标）。
+        for (let i = 0; i < shuffled.length && removed < count; i++) {
             const { row, col } = shuffled[i];
+            const backup = this.board[row][col];
             this.board[row][col] = 0;
+
+            if (this.countSolutions(this.board, 2) === 1) {
+                removed++;
+            } else {
+                this.board[row][col] = backup;
+            }
         }
+    }
+
+    countSolutions(board, limit) {
+        // 确定性回溯数解器：数满 limit 个解立即剪枝（limit=2 即唯一性判定）
+        let count = 0;
+
+        const solve = () => {
+            if (count >= limit) return;
+
+            let emptyRow = -1;
+            let emptyCol = -1;
+            for (let row = 0; row < 9 && emptyRow === -1; row++) {
+                for (let col = 0; col < 9; col++) {
+                    if (board[row][col] === 0) {
+                        emptyRow = row;
+                        emptyCol = col;
+                        break;
+                    }
+                }
+            }
+
+            if (emptyRow === -1) {
+                count++;
+                return;
+            }
+
+            for (let num = 1; num <= 9; num++) {
+                if (this.isValid(board, emptyRow, emptyCol, num)) {
+                    board[emptyRow][emptyCol] = num;
+                    solve();
+                    board[emptyRow][emptyCol] = 0;
+                    if (count >= limit) return;
+                }
+            }
+        };
+
+        solve();
+        return count;
     }
     
     renderBoard() {
@@ -246,7 +305,8 @@ class SudokuGame {
             element.classList.remove('error');
             this.board[row][col] = num;
             this.updateNumberPadCounts();
-            
+            AudioManager.play('click');
+
             if (this.checkWin()) {
                 this.gameCompleted();
             }
@@ -256,6 +316,7 @@ class SudokuGame {
             this.board[row][col] = 0;
             this.mistakes++;
             this.updateMistakes();
+            AudioManager.play('error');
             
             setTimeout(() => {
                 element.textContent = '';
@@ -281,42 +342,53 @@ class SudokuGame {
     
     gameCompleted() {
         this.gameActive = false;
-        this.stopTimer();
-        
-        const time = document.getElementById('timer').textContent;
-        const oldRecord = localStorage.getItem(`sudoku_${this.difficulty}`);
-        
-        this.saveBestRecord();
-        
+        this.timer.stop();
+
+        const ms = this.timer.elapsed();
+        const key = `sudoku_bestms_${this.difficulty}`;
+        const prev = GameUtils.loadBestTime(key);
+        GameUtils.saveBestTime(key, ms);
+
         const comparisonDiv = document.getElementById('result-comparison');
         const lastResultP = document.getElementById('last-result');
-        
-        if (oldRecord) {
+
+        if (prev !== null) {
             comparisonDiv.style.display = 'block';
-            
-            if (time < oldRecord) {
-                lastResultP.innerHTML = `<span class="last-time">上次用时：${oldRecord}</span><br>
-                    <span class="time-change faster">新纪录！快 ${this.formatTimeDiff(oldRecord, time)}</span>`;
-            } else if (time > oldRecord) {
-                lastResultP.innerHTML = `<span class="last-time">上次用时：${oldRecord}</span><br>
-                    <span class="time-change slower">慢了 ${this.formatTimeDiff(time, oldRecord)}</span>`;
+            const diff = ms - prev;
+            if (diff < 0) {
+                lastResultP.innerHTML = `<span class="last-time">上次最佳：${GameUtils.formatTime(prev)} 秒</span><br>
+                    <span class="time-change faster">新纪录！快 ${GameUtils.formatTime(-diff)} 秒</span>`;
+            } else if (diff > 0) {
+                lastResultP.innerHTML = `<span class="last-time">最佳记录：${GameUtils.formatTime(prev)} 秒</span><br>
+                    <span class="time-change slower">慢了 ${GameUtils.formatTime(diff)} 秒</span>`;
             } else {
-                lastResultP.innerHTML = `<span class="last-time">上次用时：${oldRecord}</span><br>
+                lastResultP.innerHTML = `<span class="last-time">最佳记录：${GameUtils.formatTime(prev)} 秒</span><br>
                     <span class="time-change same">用时相同！</span>`;
             }
         } else {
             comparisonDiv.style.display = 'none';
         }
-        
+
         document.getElementById('result-info').textContent = `难度：${this.difficultySettings[this.difficulty].name}`;
-        document.getElementById('result-time').textContent = `用时：${time}`;
+        document.getElementById('result-time').textContent = `用时：${GameUtils.formatTime(ms)} 秒`;
         document.getElementById('result-modal').style.display = 'flex';
+        this.loadBestRecords();
+
+        AudioManager.play('win');
+        if (window.LG) {
+            LG.Records.add({ game: 'sudoku', mode: this.difficulty, value: ms });
+            LG.Achievements.report('sudoku_win', { difficulty: this.difficulty, ms, hints: this.hints });
+        }
     }
-    
+
     gameOver() {
         this.gameActive = false;
-        this.stopTimer();
+        this.timer.stop();
         document.getElementById('game-over-modal').style.display = 'flex';
+        AudioManager.play('lose');
+        if (window.LG) {
+            LG.Achievements.report('sudoku_lose', {});
+        }
     }
     
     useHint() {
@@ -377,65 +449,21 @@ class SudokuGame {
         });
     }
     
-    startTimer() {
-        this.startTime = Date.now();
-        document.getElementById('timer').textContent = '00:00';
-        this.timer = setInterval(() => this.updateTimer(), 1000);
-    }
-    
-    updateTimer() {
-        const elapsed = this.getElapsedSeconds();
-        document.getElementById('timer').textContent = this.formatTime(elapsed);
-    }
-    
-    getElapsedSeconds() {
-        return Math.floor((Date.now() - this.startTime) / 1000);
-    }
-    
-    formatTime(seconds) {
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    }
-    
-    formatTimeDiff(faster, slower) {
-        const fParts = faster.split(':').map(Number);
-        const sParts = slower.split(':').map(Number);
-        const diff = (fParts[0] * 60 + fParts[1]) - (sParts[0] * 60 + sParts[1]);
-        if (diff > 0) return `${diff} 秒`;
-        return '0 秒';
-    }
-    
-    stopTimer() {
-        if (this.timer) {
-            clearInterval(this.timer);
-            this.timer = null;
-        }
-    }
-    
-    saveBestRecord() {
-        const currentRecord = localStorage.getItem(`sudoku_${this.difficulty}`);
-        const currentTime = document.getElementById('timer').textContent;
-        
-        if (!currentRecord || currentTime < currentRecord) {
-            localStorage.setItem(`sudoku_${this.difficulty}`, currentTime);
-        }
-        
-        this.loadBestRecords();
-    }
-    
     loadBestRecords() {
-        const currentBest = localStorage.getItem(`sudoku_${this.difficulty}`);
-        document.getElementById('best-record').textContent = currentBest || '--';
+        const best = GameUtils.loadBestTime(`sudoku_bestms_${this.difficulty}`);
+        const text = GameUtils.formatTimeText(best);
+        document.getElementById('best-record').textContent = text;
+        const gameBest = document.getElementById('best-time');
+        if (gameBest) gameBest.textContent = text;
     }
-    
+
     restartGame() {
-        this.stopTimer();
+        this.timer.stop();
         this.startGame(this.difficulty);
     }
-    
+
     returnToDifficulty() {
-        this.stopTimer();
+        this.timer.stop();
         document.getElementById('game-screen').style.display = 'none';
         document.getElementById('difficulty-screen').style.display = 'block';
         this.closeModal('rules-modal');

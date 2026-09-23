@@ -1,6 +1,9 @@
 # Local agent/runtime files
 .agents/
-.codex-tmp/
+.zcode/
+
+# 离线构建工具的下载缓存（可用 node tools/build-poems.js 重新拉取）
+tools/.cache/
 
 # Logs
 *.log

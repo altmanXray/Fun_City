@@ -1,38 +1,22 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
+/* 舒尔特方格专有样式（通用部分见 ../../assets/theme.css） */
 
 .container {
-    background: white;
-    border-radius: 20px;
+    width: min(600px, 100%);
     padding: 40px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    max-width: 600px;
-    width: 100%;
     position: relative;
 }
 
 .header {
-    position: relative;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
     margin-bottom: 30px;
 }
 
 .header h1 {
     font-size: 2.5em;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -42,80 +26,18 @@ body {
     animation: fadeIn 0.3s ease;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .screen h2 {
     text-align: center;
-    color: #333;
+    color: var(--text);
     margin-bottom: 25px;
     font-size: 1.8em;
 }
 
-.mode-selector {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.mode-btn {
-    padding: 18px 50px;
-    font-size: 1.2em;
-    border: 2px solid #667eea;
-    border-radius: 25px;
-    background: white;
-    color: #667eea;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    min-width: 250px;
-}
-
-.mode-btn:hover {
-    background: #667eea;
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-}
-
 .mode-description {
     text-align: center;
-    color: #666;
+    color: var(--muted);
     margin-bottom: 25px;
     font-size: 1em;
-}
-
-.size-selector {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-    margin-bottom: 30px;
-}
-
-.size-btn {
-    padding: 12px 25px;
-    font-size: 1em;
-    border: 2px solid #667eea;
-    border-radius: 15px;
-    background: white;
-    color: #667eea;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    min-width: 80px;
-}
-
-.size-btn:hover {
-    background: #f0f0f0;
 }
 
 .poetry-list {
@@ -130,7 +52,7 @@ body {
 .poetry-empty {
     padding: 24px 16px;
     text-align: center;
-    color: #666;
+    color: var(--muted);
     font-size: 0.95em;
 }
 
@@ -150,8 +72,8 @@ body {
 }
 
 .poetry-item:hover {
-    background: #f0f0f0;
-    border-color: #667eea;
+    background: var(--surface-soft);
+    border-color: var(--accent);
     transform: translateX(5px);
 }
 
@@ -165,13 +87,31 @@ body {
 .poetry-item-title {
     font-size: 1em;
     font-weight: bold;
-    color: #333;
+    color: var(--text);
     margin-bottom: 4px;
 }
 
+/* 难度徽章：入门(20字) → 简单(28) → 进阶(40) → 挑战(56) → 长诗(>56) */
+.poetry-diff {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 0.72em;
+    font-weight: bold;
+    vertical-align: 1px;
+    border: 1px solid currentColor;
+}
+
+.poetry-diff.diff-1 { background: rgba(76, 175, 80, 0.16); color: #1d6c26; border-color: rgba(76, 175, 80, 0.5); }
+.poetry-diff.diff-2 { background: rgba(33, 150, 243, 0.15); color: #0f4f9e; border-color: rgba(33, 150, 243, 0.5); }
+.poetry-diff.diff-3 { background: rgba(255, 152, 0, 0.18); color: #8f5400; border-color: rgba(255, 152, 0, 0.55); }
+.poetry-diff.diff-4 { background: rgba(229, 72, 77, 0.15); color: #a31f1f; border-color: rgba(229, 72, 77, 0.5); }
+.poetry-diff.diff-5 { background: rgba(156, 39, 176, 0.15); color: #611478; border-color: rgba(156, 39, 176, 0.5); }
+
 .poetry-item-author {
     font-size: 0.85em;
-    color: #666;
+    color: var(--muted);
 }
 
 .poetry-item-content {
@@ -191,7 +131,7 @@ body {
 
 .poetry-stat {
     font-size: 0.82em;
-    color: #666;
+    color: var(--muted);
     padding: 4px 8px;
     background: rgba(102, 126, 234, 0.08);
     border-radius: 999px;
@@ -212,32 +152,7 @@ body {
 
 .poetry-status.pending {
     background: rgba(102, 126, 234, 0.10);
-    color: #667eea;
-}
-
-.info-panel {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 25px;
-    padding: 15px;
-    background: #f5f5f5;
-    border-radius: 10px;
-}
-
-.info-item {
-    text-align: center;
-}
-
-.label {
-    font-size: 1em;
-    color: #666;
-    margin-right: 8px;
-}
-
-.number {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #667eea;
+    color: var(--accent);
 }
 
 .poetry-display {
@@ -246,11 +161,11 @@ body {
     padding: 15px;
     background: #f9f9f9;
     border-radius: 10px;
-    border: 2px solid #667eea;
+    border: 2px solid var(--accent);
 }
 
 .poetry-display h3 {
-    color: #333;
+    color: var(--text);
     margin-bottom: 12px;
     font-size: 1.2em;
 }
@@ -258,13 +173,13 @@ body {
 .poetry-title-text {
     font-size: 1.2em;
     font-weight: bold;
-    color: #333;
+    color: var(--text);
     margin-bottom: 4px;
 }
 
 .poetry-author {
     font-size: 0.85em;
-    color: #666;
+    color: var(--muted);
     font-style: italic;
 }
 
@@ -280,7 +195,7 @@ body {
 
 .poetry-punct {
     margin: 0 2px;
-    color: #333;
+    color: var(--text);
     font-size: 0.9em;
     display: inline-block;
     vertical-align: top;
@@ -319,13 +234,13 @@ body {
     display: block;
     font-size: 1.2em;
     font-weight: bold;
-    color: #333;
+    color: var(--text);
     transition: all 0.3s ease;
 }
 
 .poetry-char-wrapper.found .poetry-char {
     background: #4caf50;
-    color: white;
+    color: #fff;
     border-radius: 3px;
 }
 
@@ -335,7 +250,7 @@ body {
 
 .poetry-char-wrapper.current .poetry-char {
     background: #ff9800;
-    color: white;
+    color: #fff;
     border-radius: 3px;
     animation: pulse 1s infinite;
 }
@@ -354,40 +269,24 @@ body {
     margin-bottom: 8px;
 }
 
+.board-wrap {
+    position: relative;
+    margin-bottom: 25px;
+}
+
 .game-board {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 8px;
-    margin-bottom: 25px;
 }
 
-.game-board.grid-3 {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.game-board.grid-4 {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.game-board.grid-5 {
-    grid-template-columns: repeat(5, 1fr);
-}
-
-.game-board.grid-6 {
-    grid-template-columns: repeat(6, 1fr);
-}
-
-.game-board.grid-7 {
-    grid-template-columns: repeat(7, 1fr);
-}
-
-.game-board.grid-8 {
-    grid-template-columns: repeat(8, 1fr);
-}
-
-.game-board.grid-9 {
-    grid-template-columns: repeat(9, 1fr);
-}
+.game-board.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.game-board.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.game-board.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.game-board.grid-6 { grid-template-columns: repeat(6, 1fr); }
+.game-board.grid-7 { grid-template-columns: repeat(7, 1fr); }
+.game-board.grid-8 { grid-template-columns: repeat(8, 1fr); }
+.game-board.grid-9 { grid-template-columns: repeat(9, 1fr); }
 
 .cell {
     width: 100%;
@@ -399,7 +298,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     background: #f0f0f0;
-    color: #333;
+    color: var(--text);
     padding: 0;
 }
 
@@ -436,13 +335,13 @@ body {
 
 .cell.correct {
     background: #4caf50;
-    color: white;
+    color: #fff;
     animation: pulse 0.3s ease;
 }
 
 .cell.wrong {
     background: #f44336;
-    color: white;
+    color: #fff;
     animation: shake 0.3s ease;
 }
 
@@ -462,11 +361,19 @@ body {
     margin-bottom: 20px;
 }
 
+/* schulte 的 .btn 沿用通用配色，仅保留块状居中的排布 */
+.btn {
+    display: block;
+    margin: 0 auto 12px;
+}
+
+.controls .btn:last-child {
+    margin-bottom: 0;
+}
+
 .back-btn {
     background: #95a5a6;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    box-shadow: none;
 }
 
 .back-btn:hover {
@@ -475,79 +382,15 @@ body {
     box-shadow: 0 5px 15px rgba(127, 140, 141, 0.4);
 }
 
-.controls .btn {
-    margin-bottom: 12px;
-}
-
-.controls .btn:last-child {
-    margin-bottom: 0;
-}
-
-.btn {
-    padding: 12px 30px;
-    font-size: 1.1em;
-    border: none;
-    border-radius: 25px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
-}
-
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    animation: fadeIn 0.3s ease;
-}
-
-.modal-content h2 {
-    color: #4caf50;
-    margin-bottom: 20px;
-    font-size: 1.8em;
-}
-
-.modal-content p {
-    color: #666;
-    margin-bottom: 10px;
-    font-size: 1.1em;
-}
-
 .modal-content #result-info {
     font-size: 1.2em;
-    color: #333;
+    color: var(--text);
     font-weight: bold;
 }
 
 .modal-content #result-time {
     font-size: 1.5em;
-    color: #667eea;
+    color: var(--accent);
     font-weight: bold;
     margin-bottom: 25px;
 }
@@ -559,7 +402,8 @@ body {
     align-items: center;
 }
 
-.modal-buttons .btn {
+.modal-buttons .btn,
+.bottom-buttons .btn {
     width: 200px;
 }
 
@@ -572,40 +416,6 @@ body {
     box-shadow: 0 8px 20px rgba(76, 175, 80, 0.5);
 }
 
-.result-comparison {
-    margin: 15px 0;
-    padding: 12px;
-    background: #f5f5f5;
-    border-radius: 10px;
-}
-
-.result-comparison p {
-    margin: 5px 0;
-    font-size: 1em;
-}
-
-.last-time {
-    color: #666;
-    font-size: 0.95em;
-}
-
-.time-change {
-    font-weight: bold;
-    margin-top: 8px;
-}
-
-.time-change.faster {
-    color: #4caf50;
-}
-
-.time-change.slower {
-    color: #f44336;
-}
-
-.time-change.same {
-    color: #999;
-}
-
 .bottom-buttons {
     display: flex;
     flex-direction: column;
@@ -614,23 +424,11 @@ body {
     margin-top: 30px;
 }
 
-.bottom-buttons .btn {
-    width: 200px;
-}
-
-.bottom-buttons .back-btn {
-    background: #95a5a6;
-}
-
-.bottom-buttons .back-btn:hover {
-    background: #7f8c8d;
-}
-
 @media (max-width: 600px) {
     .container {
         padding: 25px 15px;
     }
-    
+
     .header h1 {
         font-size: 2em;
     }
@@ -639,11 +437,11 @@ body {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .cell {
         font-size: 1.2em;
     }
-    
+
     .btn {
         padding: 12px 30px;
         font-size: 1em;

@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LittleGame - 游戏大厅</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/theme.css?v=4">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
-<body>
+<body data-lobby>
     <div class="lobby-container">
         <header class="header">
             <h1 class="logo">LittleGame</h1>
@@ -39,7 +40,46 @@
                 </div>
                 <button class="play-btn">开始游戏</button>
             </div>
-            
+
+            <div class="game-card" data-game="memory">
+                <div class="game-icon">
+                    <span class="icon-text">🧠</span>
+                </div>
+                <h3 class="game-title">记忆翻牌</h3>
+                <p class="game-description">翻开卡片，找出所有成对图案</p>
+                <div class="game-tags">
+                    <span class="tag">记忆</span>
+                    <span class="tag">配对</span>
+                </div>
+                <button class="play-btn">开始游戏</button>
+            </div>
+
+            <div class="game-card" data-game="2048">
+                <div class="game-icon">
+                    <span class="icon-text">🧮</span>
+                </div>
+                <h3 class="game-title">2048</h3>
+                <p class="game-description">滑动数字方块，合并冲击高分</p>
+                <div class="game-tags">
+                    <span class="tag">策略</span>
+                    <span class="tag">数字</span>
+                </div>
+                <button class="play-btn">开始游戏</button>
+            </div>
+
+            <div class="game-card" data-game="gomoku">
+                <div class="game-icon">
+                    <span class="icon-text">⚫</span>
+                </div>
+                <h3 class="game-title">五子棋</h3>
+                <p class="game-description">连成五子取胜，支持人机与双人</p>
+                <div class="game-tags">
+                    <span class="tag">对弈</span>
+                    <span class="tag">策略</span>
+                </div>
+                <button class="play-btn">开始游戏</button>
+            </div>
+
             <div class="game-card coming-soon">
                 <div class="game-icon">
                     <span class="icon-text">🎮</span>
@@ -58,6 +98,10 @@
         </footer>
     </div>
     
+    <script src="assets/util.js?v=3"></script>
+    <script src="assets/player.js?v=3"></script>
+    <script src="assets/audio.js?v=3"></script>
+    <script src="assets/features.js?v=5"></script>
     <script src="script.js"></script>
 </body>
 </html>

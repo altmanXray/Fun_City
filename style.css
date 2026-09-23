@@ -1,38 +1,13 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
+/* 游戏大厅专有样式（通用变量/基础见 assets/theme.css） */
 
 .lobby-container {
-    background: white;
+    background: #fff;
     border-radius: 20px;
     padding: 60px 40px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     max-width: 1200px;
     width: 100%;
     animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .header {
@@ -42,7 +17,7 @@ body {
 
 .logo {
     font-size: 3.5em;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -52,6 +27,53 @@ body {
 .subtitle {
     font-size: 1.2em;
     color: #666;
+}
+
+/* 大厅功能工具栏（👤玩家 / 🏆排行榜 / 🏅成就，由 assets/features.js 注入） */
+.lg-toolbar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.lg-tool-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border: 1px solid rgba(124, 108, 255, 0.4);
+    border-radius: 999px;
+    background: rgba(124, 108, 255, 0.08);
+    color: var(--text);
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.lg-tool-btn span {
+    font-size: 1.05rem;
+}
+
+.lg-tool-btn b {
+    font-weight: 700;
+}
+
+.lg-tool-btn:hover {
+    background: rgba(124, 108, 255, 0.18);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(124, 108, 255, 0.25);
+}
+
+.lg-tool-player {
+    border-color: rgba(255, 159, 67, 0.55);
+    background: rgba(255, 159, 67, 0.12);
+}
+
+.lg-tool-player:hover {
+    background: rgba(255, 159, 67, 0.2);
+    box-shadow: 0 8px 20px rgba(255, 159, 67, 0.25);
 }
 
 .game-grid {
@@ -74,7 +96,7 @@ body {
 .game-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-    border-color: #667eea;
+    border-color: var(--accent);
 }
 
 .game-card.coming-soon {
@@ -92,7 +114,7 @@ body {
     width: 100px;
     height: 100px;
     margin: 0 auto 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -151,8 +173,8 @@ body {
     font-size: 1.1em;
     border: none;
     border-radius: 25px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    color: #fff;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
@@ -180,20 +202,20 @@ body {
     .lobby-container {
         padding: 40px 20px;
     }
-    
+
     .logo {
         font-size: 2.5em;
     }
-    
+
     .subtitle {
         font-size: 1em;
     }
-    
+
     .game-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    
+
     .game-icon {
         width: 80px;
         height: 80px;

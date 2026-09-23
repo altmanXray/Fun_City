@@ -1,37 +1,21 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
+/* 数独专有样式（通用部分见 ../../assets/theme.css） */
 
 .container {
-    background: white;
-    border-radius: 20px;
+    width: min(600px, 100%);
     padding: 40px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    max-width: 600px;
-    width: 100%;
 }
 
 .header {
-    position: relative;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
     margin-bottom: 30px;
 }
 
 .header h1 {
     font-size: 2.5em;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -41,84 +25,16 @@ body {
     animation: fadeIn 0.3s ease;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .screen h2 {
     text-align: center;
-    color: #333;
+    color: var(--text);
     margin-bottom: 30px;
     font-size: 1.8em;
 }
 
-.difficulty-selector {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-.difficulty-btn {
-    padding: 20px;
-    font-size: 1.2em;
-    border: 2px solid #667eea;
-    border-radius: 15px;
-    background: white;
-    color: #667eea;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.difficulty-btn:hover {
-    background: #667eea;
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-}
-
-.stats-display {
-    text-align: center;
-    padding: 15px;
-    background: #f9f9f9;
-    border-radius: 10px;
-}
-
-.stats-display p {
-    color: #666;
-    font-size: 1.1em;
-}
-
-.game-info {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-    padding: 15px;
-    background: #f9f9f9;
-    border-radius: 10px;
-}
-
-.info-item {
-    text-align: center;
-}
-
-.info-item .label {
-    font-size: 1em;
-    color: #666;
-    margin-right: 5px;
-}
-
-.info-item .value {
-    font-size: 1.3em;
-    font-weight: bold;
-    color: #667eea;
+.board-wrap {
+    position: relative;
+    margin-bottom: 25px;
 }
 
 .sudoku-board {
@@ -128,12 +44,11 @@ body {
     background: #666;
     border: 3px solid #666;
     border-radius: 5px;
-    margin-bottom: 25px;
     aspect-ratio: 1;
 }
 
 .cell {
-    background: white;
+    background: #fff;
     border: 1px solid #ddd;
     display: flex;
     align-items: center;
@@ -166,12 +81,12 @@ body {
 }
 
 .cell.fixed {
-    color: #333;
+    color: var(--text);
     background: #f5f5f5;
 }
 
 .cell.user-input {
-    color: #667eea;
+    color: var(--accent);
 }
 
 .cell.error {
@@ -199,10 +114,10 @@ body {
     gap: 4px;
     min-height: 74px;
     padding: 15px;
-    border: 2px solid #667eea;
+    border: 2px solid var(--border);
     border-radius: 10px;
-    background: white;
-    color: #667eea;
+    background: var(--surface);
+    color: var(--accent);
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -220,8 +135,8 @@ body {
 }
 
 .num-btn:hover {
-    background: #667eea;
-    color: white;
+    background: var(--accent);
+    color: #fff;
     transform: scale(1.05);
 }
 
@@ -232,7 +147,7 @@ body {
 }
 
 .num-btn.depleted:hover {
-    background: white;
+    background: var(--surface);
     color: #aab4ea;
     transform: none;
 }
@@ -245,7 +160,7 @@ body {
 
 .num-btn.erase:hover {
     background: #95a5a6;
-    color: white;
+    color: #fff;
 }
 
 .game-controls {
@@ -259,74 +174,43 @@ body {
     padding: 12px 25px;
     font-size: 1em;
     border: none;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    color: #fff;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: var(--shadow-btn);
 }
 
 .control-btn.secondary-btn {
-    background: white;
-    color: #667eea;
-    border: 2px solid #667eea;
+    background: var(--surface);
+    color: var(--accent);
+    border: 2px solid var(--border);
     box-shadow: none;
 }
 
 .control-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
+    box-shadow: var(--shadow-btn-hover);
 }
 
 .control-btn.secondary-btn:hover {
-    background: #667eea;
-    color: white;
+    background: var(--accent);
+    color: #fff;
 }
 
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    animation: fadeIn 0.3s ease;
-}
-
-.modal-content h2 {
-    color: #4caf50;
-    margin-bottom: 20px;
-    font-size: 1.8em;
-}
-
-.modal-content p {
-    color: #666;
-    margin-bottom: 10px;
-    font-size: 1.1em;
-}
-
+/* 弹窗内的规则文案（成功标题以外的主题色） */
 .rules-modal-content h2 {
-    color: #667eea;
+    color: var(--accent);
 }
 
 .rules-modal-content p {
     text-align: left;
     line-height: 1.8;
+}
+
+.modal-content p {
+    font-size: 1.1em;
 }
 
 .modal-buttons {
@@ -337,55 +221,9 @@ body {
     margin-top: 20px;
 }
 
-.btn {
-    padding: 12px 30px;
-    font-size: 1em;
-    border: none;
-    border-radius: 25px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.modal-buttons .btn,
+.bottom-buttons .btn {
     width: 200px;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
-}
-
-.result-comparison {
-    margin: 15px 0;
-    padding: 12px;
-    background: #f5f5f5;
-    border-radius: 10px;
-}
-
-.result-comparison p {
-    margin: 5px 0;
-    font-size: 1em;
-}
-
-.last-time {
-    color: #666;
-    font-size: 0.95em;
-}
-
-.time-change {
-    font-weight: bold;
-    margin-top: 8px;
-}
-
-.time-change.faster {
-    color: #4caf50;
-}
-
-.time-change.slower {
-    color: #f44336;
-}
-
-.time-change.same {
-    color: #999;
 }
 
 .bottom-buttons {
@@ -396,28 +234,15 @@ body {
     margin-top: 30px;
 }
 
-.bottom-buttons .btn {
-    width: 200px;
-}
-
-.bottom-buttons .btn:first-child {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.bottom-buttons .btn:first-child:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
-}
-
 @media (max-width: 600px) {
     .container {
         padding: 25px 15px;
     }
-    
+
     .header h1 {
         font-size: 2em;
     }
-    
+
     .cell {
         font-size: 1.2em;
     }
@@ -434,7 +259,7 @@ body {
     .num-remaining {
         font-size: 0.68em;
     }
-    
+
     .modal-content {
         padding: 30px 20px;
     }

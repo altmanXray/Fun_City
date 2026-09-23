@@ -3,87 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>舒尔特游戏 - LittleGame</title>
-    <link rel="stylesheet" href="style.css">
+    <title>舒尔特方格盘 - LittleGame</title>
+    <link rel="stylesheet" href="../../assets/theme.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
 </head>
-<body>
+<body data-game="schulte">
     <div class="container">
-        <div class="header">
-            <h1>舒尔特游戏</h1>
-        </div>
-        
+        <header class="header">
+            <div>
+                <h1>舒尔特方格盘</h1>
+            </div>
+            <button class="return-lobby-btn ghost-btn">返回大厅</button>
+        </header>
+
         <div id="main-menu" class="screen">
             <h2>请选择游戏模式</h2>
-            <div class="mode-selector">
-                <button id="classic-mode-btn" class="mode-btn">经典模式</button>
-                <button id="standard-mode-btn" class="mode-btn">标准模式</button>
-                <button id="poetry-mode-btn" class="mode-btn">唐诗模式</button>
-            </div>
-            <div class="bottom-buttons">
-                <button class="return-lobby-btn btn">返回大厅</button>
-            </div>
-        </div>
-        
-        <div id="classic-mode-screen" class="screen" style="display: none;">
-            <h2>经典模式</h2>
-            <p class="mode-description">点击开始按钮开始游戏</p>
-            <button id="classic-start-btn" class="btn">开始游戏</button>
-            <div class="bottom-buttons">
-                <button class="back-btn btn">返回</button>
-                <button class="return-lobby-btn btn">返回大厅</button>
+            <div class="difficulty-grid">
+                <button id="classic-mode-btn" class="difficulty-btn">
+                    <span class="difficulty-name">经典模式</span>
+                    <span class="difficulty-detail">固定 5×5</span>
+                </button>
+                <button id="standard-mode-btn" class="difficulty-btn">
+                    <span class="difficulty-name">标准模式</span>
+                    <span class="difficulty-detail">3×3 ~ 9×9</span>
+                </button>
+                <button id="poetry-mode-btn" class="difficulty-btn">
+                    <span class="difficulty-name">唐诗300首</span>
+                    <span class="difficulty-detail">简体带拼音，按顺序点字</span>
+                </button>
             </div>
         </div>
-        
+
         <div id="standard-mode-screen" class="screen" style="display: none;">
             <h2>标准模式</h2>
             <p class="mode-description">选择难度直接开始游戏</p>
-            <div class="size-selector">
-                <button class="size-btn start-directly" data-size="3">3×3</button>
-                <button class="size-btn start-directly" data-size="4">4×4</button>
-                <button class="size-btn start-directly" data-size="5">5×5</button>
-                <button class="size-btn start-directly" data-size="6">6×6</button>
-                <button class="size-btn start-directly" data-size="7">7×7</button>
-                <button class="size-btn start-directly" data-size="8">8×8</button>
-                <button class="size-btn start-directly" data-size="9">9×9</button>
+            <div class="difficulty-grid">
+                <button class="difficulty-btn start-directly" data-size="3">
+                    <span class="difficulty-name">3×3</span>
+                    <span class="difficulty-detail">9 格</span>
+                </button>
+                <button class="difficulty-btn start-directly" data-size="4">
+                    <span class="difficulty-name">4×4</span>
+                    <span class="difficulty-detail">16 格</span>
+                </button>
+                <button class="difficulty-btn start-directly" data-size="5">
+                    <span class="difficulty-name">5×5</span>
+                    <span class="difficulty-detail">25 格</span>
+                </button>
+                <button class="difficulty-btn start-directly" data-size="6">
+                    <span class="difficulty-name">6×6</span>
+                    <span class="difficulty-detail">36 格</span>
+                </button>
+                <button class="difficulty-btn start-directly" data-size="7">
+                    <span class="difficulty-name">7×7</span>
+                    <span class="difficulty-detail">49 格</span>
+                </button>
+                <button class="difficulty-btn start-directly" data-size="8">
+                    <span class="difficulty-name">8×8</span>
+                    <span class="difficulty-detail">64 格</span>
+                </button>
+                <button class="difficulty-btn start-directly" data-size="9">
+                    <span class="difficulty-name">9×9</span>
+                    <span class="difficulty-detail">81 格</span>
+                </button>
             </div>
             <div class="bottom-buttons">
                 <button class="back-btn btn">返回</button>
-                <button class="return-lobby-btn btn">返回大厅</button>
             </div>
         </div>
-        
+
         <div id="poetry-mode-screen" class="screen" style="display: none;">
-            <h2>唐诗模式</h2>
+            <h2>唐诗300首</h2>
             <p id="poetry-mode-description" class="mode-description">正在加载唐诗诗库...</p>
             <div class="poetry-list" id="poetry-list"></div>
             <div class="bottom-buttons">
                 <button class="back-btn btn">返回</button>
-                <button class="return-lobby-btn btn">返回大厅</button>
             </div>
         </div>
-        
+
         <div id="game-screen" class="screen" style="display: none;">
             <div class="info-panel">
                 <div class="info-item">
-                    <span class="label">目标：</span>
-                    <span id="target-number" class="number">1</span>
+                    <span class="label">目标</span>
+                    <span id="target-number" class="value">1</span>
                 </div>
                 <div class="info-item">
-                    <span class="label">用时：</span>
-                    <span id="timer" class="number">0.00</span>秒
+                    <span class="label">用时</span>
+                    <span id="timer" class="value">0.00</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">最佳</span>
+                    <span id="best-time" class="value">--</span>
                 </div>
             </div>
             <div class="poetry-display" id="poetry-display" style="display: none;">
                 <h3 id="poetry-title"></h3>
                 <p id="poetry-content"></p>
             </div>
-            <div class="game-board" id="game-board"></div>
+            <div class="board-wrap">
+                <div class="game-board" id="game-board" aria-label="舒尔特方格棋盘"></div>
+                <div id="start-overlay" class="start-overlay">
+                    <button class="start-btn" type="button">开始游戏</button>
+                </div>
+            </div>
             <div class="controls">
                 <button id="restart-btn" class="btn">重新开始</button>
                 <button class="back-btn btn">返回</button>
             </div>
         </div>
-        
+
         <div id="result-modal" class="modal" style="display: none;">
             <div class="modal-content">
                 <h2>恭喜！你完成了游戏！</h2>
@@ -95,11 +123,15 @@
                 <div class="modal-buttons">
                     <button id="modal-next-btn" class="btn next-btn">下一关</button>
                     <button id="modal-restart-btn" class="btn">再来一局</button>
-                    <button id="modal-back-btn" class="btn">返回大厅</button>
+                    <button id="modal-back-btn" class="return-lobby-btn btn">返回大厅</button>
                 </div>
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="../../assets/util.js?v=3"></script>
+    <script src="../../assets/player.js?v=3"></script>
+    <script src="../../assets/audio.js?v=3"></script>
+    <script src="../../assets/features.js?v=5"></script>
+    <script src="script.js?v=4"></script>
 </body>
 </html>

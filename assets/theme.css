@@ -1,0 +1,665 @@
+/* LittleGame 统一主题 —— 所有页面共享的变量与基础组件
+   各游戏的 style.css 在此之后加载，只放自己的专有样式。 */
+
+:root {
+    /* 背景与容器 */
+    --bg-start: #5865d9;
+    --bg-end: #9a5bc6;
+    --surface: #fbf7ef;      /* 卡片/容器 */
+    --surface-alt: #ece2cf;  /* 信息面板 */
+    --surface-soft: #f4f0ff; /* 浅色悬停 */
+
+    /* 品牌紫 */
+    --btn-start: #5865d9;
+    --btn-end: #8d55bd;
+    --accent: #6f4fc3;       /* 标题 */
+    --accent-strong: #5d4bc2;
+    --border: #7666d8;
+
+    /* 文本 */
+    --text: #332f40;
+    --muted: #756b7a;
+
+    /* 语义色 */
+    --success: #2e9d55;
+    --danger: #e5484d;
+
+    --font: "Segoe UI", "Microsoft YaHei", sans-serif;
+    --shadow-card: 0 24px 70px rgba(42, 31, 73, 0.3);
+    --shadow-btn: 0 8px 18px rgba(88, 101, 217, 0.28);
+    --shadow-btn-hover: 0 12px 24px rgba(88, 101, 217, 0.28);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        linear-gradient(160deg, rgba(255, 211, 105, 0.32), transparent 34%),
+        linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+    font-family: var(--font);
+    color: var(--text);
+}
+
+/* 容器基础：颜色/圆角/阴影统一，各游戏只覆盖 width / padding */
+.container {
+    width: min(540px, 100%);
+    padding: 30px;
+    border-radius: 20px;
+    background: var(--surface);
+    box-shadow: var(--shadow-card);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- 通用按钮 ---------- */
+.btn,
+.ghost-btn {
+    min-width: 120px;
+    padding: 11px 20px;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.96rem;
+    font-weight: 800;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn {
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    color: #fff;
+    box-shadow: var(--shadow-btn);
+}
+
+.secondary-btn,
+.ghost-btn {
+    background: var(--surface);
+    color: var(--accent-strong);
+    border: 2px solid var(--border);
+    box-shadow: none;
+}
+
+.btn:hover,
+.ghost-btn:hover,
+.btn:focus-visible,
+.ghost-btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-btn-hover);
+    outline: none;
+}
+
+.secondary-btn:hover,
+.ghost-btn:hover {
+    background: var(--surface-soft);
+}
+
+/* ---------- 开始蒙层（所有游戏统一） ----------
+   用法：把它放进一个 position: relative 的棋盘容器里，
+   点击后加 .hidden 隐藏，游戏（含计时）随之开始。 */
+.start-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: inherit;
+    background: rgba(31, 25, 51, 0.55);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    cursor: pointer;
+}
+
+.start-overlay.hidden {
+    display: none;
+}
+
+.start-overlay .start-btn {
+    padding: 18px 48px;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    color: #fff;
+    font-size: 1.35rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow-btn);
+    transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.start-overlay .start-btn:hover,
+.start-overlay .start-btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-btn-hover);
+    outline: none;
+}
+
+/* ---------- 难度选择（所有游戏统一） ----------
+   用 flexbox + 卡片自身 max-width，任何情况下单张卡片都不会超过 200px。 */
+.difficulty-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    max-width: 540px;
+    margin: 0 auto 22px;
+}
+
+.difficulty-btn {
+    flex: 1 1 140px;
+    max-width: 200px;
+    min-height: 104px;
+    padding: 18px;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface);
+    color: var(--accent);
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.difficulty-btn:hover,
+.difficulty-btn:focus-visible {
+    background: var(--surface-soft);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-btn-hover);
+    outline: none;
+}
+
+.difficulty-name {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.difficulty-detail {
+    display: block;
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+/* 难度选择界面底部的「最佳记录」提示条（统一） */
+.best-panel {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 16px;
+    text-align: center;
+    color: var(--muted);
+    background: var(--surface-alt);
+    border-radius: 14px;
+    font-size: 1rem;
+}
+
+/* ---------- 游戏信息面板：用时 / 最佳记录 / 其它（统一） ---------- */
+.info-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 14px;
+    background: var(--surface-alt);
+    border-radius: 14px;
+}
+
+.info-item {
+    text-align: center;
+}
+
+.info-item .label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--muted);
+    font-size: 0.84rem;
+}
+
+.info-item .value {
+    color: var(--accent);
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+/* ---------- 弹窗 ---------- */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(31, 25, 51, 0.56);
+}
+
+.modal-content {
+    width: min(420px, 100%);
+    padding: 34px;
+    border-radius: 20px;
+    background: var(--surface);
+    text-align: center;
+    box-shadow: 0 24px 70px rgba(20, 15, 35, 0.32);
+    animation: fadeIn 0.24s ease;
+}
+
+.modal-content h2 {
+    color: var(--success);
+    margin-bottom: 16px;
+}
+
+.modal-content p {
+    margin-bottom: 10px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+/* ---------- 成绩对比（sudoku / schulte 共用） ---------- */
+.result-comparison {
+    margin: 15px 0;
+    padding: 12px;
+    background: var(--surface-alt);
+    border-radius: 10px;
+}
+
+.result-comparison p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+.last-time {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.time-change {
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.time-change.faster {
+    color: var(--success);
+}
+
+.time-change.slower {
+    color: var(--danger);
+}
+
+.time-change.same {
+    color: #999;
+}
+
+/* ---------- 功能层：游戏页 header 布局 ----------
+   标题独占首行横向显示，操作按钮（音乐/榜单/返回大厅）集中第二行 */
+body[data-game] .header {
+    flex-wrap: wrap;
+    row-gap: 10px;
+}
+
+body[data-game] .header > h1,
+body[data-game] .header > div:first-child {
+    flex: 0 0 100%;
+    text-align: center;
+}
+
+.lg-header-actions {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* ---------- 功能层：音乐开关 / 游戏内榜单按钮 ---------- */
+.lg-music-btn,
+.lg-lb-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.lg-music-btn.lg-off {
+    opacity: 0.55;
+}
+
+.lg-music-btn.lg-off .lg-music-icon {
+    filter: grayscale(1);
+}
+
+/* ---------- 功能层：通用弹窗（排行榜/成就/玩家） ---------- */
+.lg-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(31, 25, 51, 0.6);
+    animation: fadeIn 0.2s ease;
+}
+
+.lg-modal-content {
+    width: min(560px, 100%);
+    max-height: min(82vh, 720px);
+    display: flex;
+    flex-direction: column;
+    padding: 26px 28px;
+    border-radius: 20px;
+    background: var(--surface);
+    box-shadow: 0 24px 70px rgba(20, 15, 35, 0.32);
+    overflow: hidden;
+}
+
+.lg-modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.lg-modal-head h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text);
+}
+
+.lg-ach-count {
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-left: 6px;
+}
+
+.lg-close-btn {
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 50%;
+    background: var(--surface-alt);
+    color: var(--muted);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.lg-close-btn:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+.lg-modal-sub {
+    margin: 0 0 14px;
+    color: var(--muted);
+    font-size: 0.84rem;
+}
+
+/* 排行榜 */
+.lg-boards {
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.lg-game-section h3 {
+    margin: 14px 0 8px;
+    font-size: 1rem;
+    color: var(--accent-strong);
+}
+
+.lg-game-section:first-child h3 {
+    margin-top: 0;
+}
+
+.lg-board-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+}
+
+.lg-board {
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: var(--surface-alt);
+}
+
+.lg-board-title {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+}
+
+.lg-board-empty {
+    font-size: 0.82rem;
+    color: var(--muted);
+    opacity: 0.7;
+    padding: 4px 0;
+}
+
+.lg-board table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.lg-board td {
+    padding: 4px 2px;
+    color: var(--text);
+}
+
+.lg-rank {
+    width: 34px;
+    text-align: left;
+}
+
+.lg-val {
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.lg-extra {
+    margin-left: 6px;
+    font-size: 0.76rem;
+    font-weight: 400;
+    color: var(--muted);
+}
+
+.lg-date {
+    width: 72px;
+    text-align: right;
+    font-size: 0.74rem;
+    color: var(--muted);
+}
+
+/* 成就 */
+.lg-ach-list {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 4px;
+}
+
+.lg-ach {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: var(--surface-alt);
+    opacity: 0.62;
+}
+
+.lg-ach.lg-ach-got {
+    opacity: 1;
+    background: linear-gradient(135deg, var(--surface-alt), rgba(124, 108, 255, 0.12));
+}
+
+.lg-ach-icon {
+    font-size: 1.5rem;
+}
+
+.lg-ach-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.lg-ach-name {
+    font-weight: 700;
+    color: var(--text);
+    font-size: 0.92rem;
+}
+
+.lg-ach-date {
+    margin-left: 8px;
+    font-size: 0.74rem;
+    font-weight: 400;
+    color: var(--muted);
+}
+
+.lg-ach-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.lg-ach-prog {
+    margin-top: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(124, 108, 255, 0.18);
+    overflow: hidden;
+}
+
+.lg-ach-prog i {
+    display: block;
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--btn-start), var(--btn-end));
+}
+
+.lg-ach-prog-text {
+    font-size: 0.72rem;
+    color: var(--muted);
+}
+
+/* 玩家档案 */
+.lg-player-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.lg-player-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: var(--surface-alt);
+}
+
+.lg-player-row.lg-current {
+    outline: 2px solid var(--accent);
+}
+
+.lg-player-name {
+    font-weight: 700;
+    color: var(--text);
+}
+
+.lg-player-name em {
+    margin-left: 6px;
+    font-size: 0.76rem;
+    font-style: normal;
+    color: var(--accent);
+}
+
+.lg-player-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.lg-player-actions .ghost-btn {
+    padding: 4px 10px;
+    font-size: 0.78rem;
+}
+
+.lg-player-new {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.lg-player-new input {
+    flex: 1;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface-alt);
+    color: var(--text);
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.lg-player-new input:focus {
+    border-color: var(--accent);
+}
+
+.lg-player-new .btn {
+    padding: 9px 16px;
+    font-size: 0.85rem;
+}
+
+/* ---------- 功能层：toast ---------- */
+.lg-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    z-index: 1400;
+    transform: translate(-50%, 20px);
+    padding: 11px 20px;
+    border-radius: 999px;
+    background: rgba(38, 30, 64, 0.94);
+    color: #fff;
+    font-size: 0.9rem;
+    box-shadow: 0 10px 32px rgba(20, 15, 35, 0.4);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.lg-toast.lg-show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.lg-toast-achievement {
+    background: linear-gradient(135deg, #7c6cff, #b84dd6);
+    font-weight: 700;
+}
+
+@media (max-width: 600px) {
+    .lg-music-btn .lg-music-btn-label,
+    .lg-lb-btn span:last-child {
+        display: none;
+    }
+}
