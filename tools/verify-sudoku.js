@@ -1,3 +1,4 @@
+/* FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
 // 数独唯一解生成验证：与 games/sudoku/script.js 相同的算法副本
 const settings = { easy: 40, medium: 30, hard: 25, expert: 20 };
 

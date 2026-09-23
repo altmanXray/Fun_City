@@ -1,3 +1,4 @@
+/* FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
 class GameLobby {
     constructor() {
         this.games = {
@@ -45,3 +46,6 @@ class GameLobby {
 document.addEventListener('DOMContentLoaded', () => {
     new GameLobby();
 });
+
+/* FHDCC 控制台签名 */
+console.log('%cFHDCC LittleGame %c© 2026 FHDCC · All Rights Reserved', 'font-weight:bold;color:#7c5cff;font-size:14px', 'color:#888');

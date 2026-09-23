@@ -1,3 +1,4 @@
+/* FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
 /* LittleGame 共享工具：统一「时间显示」与「最佳记录」存取
    在各游戏 script.js 之前引入。 */
 const GameUtils = {

@@ -1,3 +1,4 @@
+/* FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
 /**
  * LittleGame 功能层：本地排行榜 + 成就系统 + 共享 UI（依赖 player.js / audio.js）
  *

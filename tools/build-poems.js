@@ -1,3 +1,4 @@
+/* FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
 /**
  * LittleGame 诗库构建脚本（离线工具，不参与游戏运行时）
  *

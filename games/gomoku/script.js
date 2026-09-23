@@ -1,3 +1,4 @@
+/* FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
 const BOARD_SIZE = 19;
 const EMPTY = 0;
 const BLACK = 1; // 玩家（人机模式下）/ 先手

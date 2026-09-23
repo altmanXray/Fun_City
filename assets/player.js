@@ -1,3 +1,4 @@
+/* FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
 /**
  * LittleGame 本地玩家档案（纯前端，数据存于本机浏览器 LocalStorage）
  *
