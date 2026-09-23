@@ -140,4 +140,4 @@ python -m http.server 8080
 
 ## 📄 许可证
 
-MIT License
+All Rights Reserved（保留所有权利）——本项目为个人原创作品，版权归 **FHDCC (altmanXray)** 所有。欢迎分享游戏链接给朋友在线体验，但未经书面授权请勿复制分发、二次发布或商用。详见 [LICENSE](LICENSE)。
