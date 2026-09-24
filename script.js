@@ -131,11 +131,6 @@ class GameLobby {
             btn.parentNode.replaceChild(nb, btn);
         });
 
-        // 3.5) 同步主题到 iframe
-        try {
-            doc.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') || 'violet');
-        } catch (e) { /* 忽略 */ }
-
         // 4) 接管音乐按钮 → 控制壳 BGM（UI 双向同步）
         doc.querySelectorAll('.lg-music-btn').forEach(btn => {
             const nb = btn.cloneNode(true);

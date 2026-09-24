@@ -632,16 +632,6 @@
             musicBtn.addEventListener('click', () => {
                 AudioManager.setBgm(!AudioManager.prefs.bgm);
             });
-            // 主题切换按钮（依赖 assets/theme-switcher.js）
-            if (window.ThemeManager) {
-                const themeBtn = document.createElement('button');
-                themeBtn.className = 'lg-tool-btn lg-theme-btn';
-                themeBtn.type = 'button';
-                themeBtn.title = '切换主题';
-                themeBtn.innerHTML = '<span>🎨</span><b>主题</b>';
-                themeBtn.addEventListener('click', () => ThemeManager.openPicker());
-                bar.appendChild(themeBtn);
-            }
             header.appendChild(bar);
             AudioManager.notifyButtons();
         },
