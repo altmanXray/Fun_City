@@ -11,6 +11,7 @@
     /* 背景与容器 */
     --bg-start: #5865d9;
     --bg-end: #9a5bc6;
+    --bg-tint: rgba(255, 211, 105, 0.32);
     
     --surface: #fbf7ef;
     --surface-alt: #ece2cf;
@@ -39,6 +40,185 @@
     --shadow-btn-hover: 0 12px 24px rgba(88, 101, 217, 0.28);
 }
 
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        linear-gradient(160deg, var(--bg-tint), transparent 34%),
+        linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+    font-family: var(--font);
+    color: var(--text);
+}
+
+/* 容器基础：颜色/圆角/阴影统一，各游戏只覆盖 width / padding */
+.container {
+    width: min(540px, 100%);
+    padding: 30px;
+    border-radius: 20px;
+    background: var(--surface);
+    box-shadow: var(--shadow-card);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- 通用按钮 ---------- */
+.btn,
+.ghost-btn {
+    min-width: 120px;
+    padding: 11px 20px;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.96rem;
+    font-weight: 800;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn {
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    color: #fff;
+    box-shadow: var(--shadow-btn);
+}
+
+.secondary-btn,
+.ghost-btn {
+    background: var(--surface);
+    color: var(--accent-strong);
+    border: 2px solid var(--border);
+    box-shadow: none;
+}
+
+.btn:hover,
+.ghost-btn:hover,
+.btn:focus-visible,
+.ghost-btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-btn-hover);
+    outline: none;
+}
+
+.secondary-btn:hover,
+.ghost-btn:hover {
+    background: var(--surface-soft);
+}
+
+/* ---------- 开始蒙层（所有游戏统一） ----------
+   用法：把它放进一个 position: relative 的棋盘容器里，
+   点击后加 .hidden 隐藏，游戏（含计时）随之开始。 */
+.start-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: inherit;
+    background: rgba(31, 25, 51, 0.55);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    cursor: pointer;
+}
+
+.start-overlay.hidden {
+    display: none;
+}
+
+.start-overlay .start-btn {
+    padding: 18px 48px;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    color: #fff;
+    font-size: 1.35rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow-btn);
+    transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.start-overlay .start-btn:hover,
+.start-overlay .start-btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-btn-hover);
+    outline: none;
+}
+
+/* ---------- 难度选择（所有游戏统一） ----------
+   用 flexbox + 卡片自身 max-width，任何情况下单张卡片都不会超过 200px。 */
+.difficulty-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    max-width: 540px;
+    margin: 0 auto 22px;
+}
+
+.difficulty-btn {
+    flex: 1 1 140px;
+    max-width: 200px;
+    min-height: 104px;
+    padding: 18px;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface);
+    color: var(--accent);
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.difficulty-btn:hover,
+.difficulty-btn:focus-visible {
+    background: var(--surface-soft);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-btn-hover);
+    outline: none;
+}
+
+.difficulty-name {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.difficulty-detail {
+    display: block;
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+/* 难度选择界面底部的「最佳记录」提示条（统一） */
+.best-panel {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 16px;
+    text-align: center;
+    color: var(--muted);
+    background: var(--surface-alt);
+    border-radius: 14px;
+    font-size: 1rem;
+}
 
 /* ---------- 游戏信息面板：用时 / 最佳记录 / 其它（统一） ---------- */
 .info-panel {
