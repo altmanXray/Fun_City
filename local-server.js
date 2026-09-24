@@ -65,5 +65,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(port, host, () => {
-  console.log(`LittleGame server running at http://${host}:${port}`);
+  console.log(`Fun City server running at http://${host}:${port}`);
 });

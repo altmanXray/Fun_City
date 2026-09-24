@@ -1,0 +1,345 @@
+/* FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
+/* MBTI 人格测试专有样式（通用部分见 ../../assets/theme.css） */
+
+.container {
+    width: min(640px, 100%);
+    padding: 34px 38px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 26px;
+}
+
+.header h1 {
+    font-size: 2.2em;
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.screen {
+    animation: fadeIn 0.3s ease;
+}
+
+.screen h2 {
+    text-align: center;
+    margin-bottom: 18px;
+    font-size: 1.5em;
+    color: var(--text);
+}
+
+/* ---------- 介绍页 ---------- */
+.intro-lead {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.intro-tips {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.intro-tip {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: var(--surface-alt);
+    color: var(--text);
+    font-size: 0.94rem;
+}
+
+.intro-tip span {
+    font-size: 1.3rem;
+}
+
+.intro-actions,
+.result-actions,
+.history-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+/* ---------- 答题页 ---------- */
+.quiz-top {
+    margin-bottom: 22px;
+}
+
+.progress-track {
+    height: 10px;
+    border-radius: 999px;
+    background: var(--surface-alt);
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--btn-start), var(--btn-end));
+    transition: width 0.25s ease;
+}
+
+.quiz-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+.quiz-timer {
+    font-variant-numeric: tabular-nums;
+}
+
+.question-text {
+    text-align: center;
+    font-size: 1.35em;
+    line-height: 1.6;
+    margin-bottom: 26px;
+    min-height: 2.2em;
+    color: var(--text);
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.option-btn {
+    padding: 18px 20px;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 1.02rem;
+    font-family: inherit;
+    line-height: 1.55;
+    cursor: pointer;
+    text-align: left;
+    transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+
+.option-btn::before {
+    content: attr(data-key) ' ';
+    color: var(--accent);
+    font-weight: 800;
+}
+
+.option-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-btn-hover);
+    background: var(--surface-soft);
+}
+
+.quiz-hint {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.82rem;
+    margin-top: 14px;
+}
+
+.quiz-actions {
+    text-align: center;
+    margin-top: 8px;
+}
+
+/* ---------- 结果页 ---------- */
+.result-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.result-emoji {
+    font-size: 3.2rem;
+    line-height: 1;
+}
+
+.result-code {
+    font-size: 2.4rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.result-name {
+    color: var(--muted);
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.result-keywords {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+.result-keywords span {
+    padding: 5px 13px;
+    border-radius: 999px;
+    background: var(--surface-alt);
+    color: var(--accent-strong);
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.dim-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 460px;
+    margin: 0 auto 24px;
+    padding: 16px 18px;
+    border-radius: 14px;
+    background: var(--surface-alt);
+}
+
+.dim-row {
+    display: grid;
+    grid-template-columns: 74px 1fr 74px;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.dim-row .dim-side {
+    color: var(--muted);
+}
+
+.dim-row .dim-side.win {
+    color: var(--accent-strong);
+}
+
+.dim-track {
+    position: relative;
+    height: 12px;
+    border-radius: 999px;
+    background: rgba(124, 108, 255, 0.12);
+}
+
+.dim-track::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    bottom: -3px;
+    left: 50%;
+    width: 2px;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.dim-fill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--btn-start), var(--btn-end));
+    transition: width 0.6s ease;
+}
+
+.result-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.result-section {
+    padding: 16px 18px;
+    border-radius: 14px;
+    background: var(--surface-alt);
+}
+
+.result-section h3 {
+    margin: 0 0 8px;
+    font-size: 1.02rem;
+    color: var(--accent-strong);
+}
+
+.result-section p {
+    margin: 0;
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 0.94rem;
+}
+
+/* ---------- 历史页 ---------- */
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 16px;
+    border-radius: 12px;
+    background: var(--surface-alt);
+}
+
+.history-main {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.history-summary {
+    font-weight: 800;
+    color: var(--accent-strong);
+}
+
+.history-meta {
+    color: var(--muted);
+    font-size: 0.82rem;
+}
+
+.history-empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 30px 0;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 24px 16px;
+    }
+
+    .dim-row {
+        grid-template-columns: 60px 1fr 60px;
+        font-size: 0.78rem;
+    }
+}

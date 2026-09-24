@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Fun City">
+  <rect x="46" y="46" width="420" height="420" rx="96" fill="#FFF6EC" stroke="#1A1A1A" stroke-width="16"/>
+  <!-- 手柄 -->
+  <rect x="116" y="196" width="280" height="150" rx="75" fill="#C9E7F7" stroke="#1A1A1A" stroke-width="16"/>
+  <!-- 十字键 -->
+  <g fill="#1A1A1A">
+    <rect x="158" y="246" width="66" height="24" rx="6"/>
+    <rect x="179" y="225" width="24" height="66" rx="6"/>
+  </g>
+  <!-- 按键 -->
+  <circle cx="318" cy="256" r="17" fill="#FF9EB5" stroke="#1A1A1A" stroke-width="10"/>
+  <circle cx="358" cy="236" r="17" fill="#FFD966" stroke="#1A1A1A" stroke-width="10"/>
+  <!-- 小功能点 -->
+  <circle cx="296" cy="308" r="7" fill="#1A1A1A"/>
+  <circle cx="322" cy="308" r="7" fill="#1A1A1A"/>
+  <!-- 气球 -->
+  <path d="M141 158 L145 196 M155 158 L151 196" fill="none" stroke="#1A1A1A" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="148" cy="124" r="34" fill="#FF9EB5" stroke="#1A1A1A" stroke-width="14"/>
+  <!-- 星星 -->
+  <path d="M396 106 L402 126 L422 132 L402 138 L396 158 L390 138 L370 132 L390 126 Z" fill="#FFD966" stroke="#1A1A1A" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M110 320 L114 334 L128 338 L114 342 L110 356 L106 342 L96 338 L106 334 Z" fill="#CDEFD9" stroke="#1A1A1A" stroke-width="8" stroke-linejoin="round"/>
+</svg>

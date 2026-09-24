@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打砖块 - Fun City</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/logo.svg">
+    <link rel="stylesheet" href="../../assets/theme.css?v=21">
+    <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-game="breakout">
+    <div class="container">
+        <header class="header">
+            <div><h1>打砖块</h1><p>挡板反弹，击碎所有砖块过关</p></div>
+            <button class="return-lobby-btn ghost-btn">返回大厅</button>
+        </header>
+        <main>
+            <div id="level-select" class="level-select">
+                <h2>选择关卡</h2>
+                <div id="level-grid" class="level-grid"></div>
+            </div>
+            <div id="game-screen" class="game-screen" style="display:none;">
+                <div class="hud">
+                    <span id="hud-level" class="hud-item">第 1 关</span>
+                    <span id="hud-score" class="hud-item">剩余 0 块</span>
+                    <span id="hud-lives" class="hud-item">❤️❤️❤️</span>
+                    <button id="back-levels" class="btn secondary-btn sm">关卡</button>
+                </div>
+                <div class="canvas-wrap"><canvas id="game" width="400" height="500"></canvas></div>
+                <p class="hint">移动鼠标 / 触屏滑动控制挡板</p>
+            </div>
+            <div id="result-overlay" class="result-overlay" style="display:none;">
+                <div class="result-card">
+                    <h2 id="result-title"></h2>
+                    <p id="result-text"></p>
+                    <div class="result-btns">
+                        <button id="result-retry" class="btn">重试</button>
+                        <button id="result-next" class="btn" style="display:none">下一关</button>
+                        <button id="result-levels" class="btn secondary-btn">关卡选择</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../../assets/util.js?v=3"></script>
+    <script src="../../assets/player.js?v=3"></script>
+    <script src="../../assets/audio.js?v=5"></script>
+    <script src="../../assets/features.js?v=12"></script>
+    <script src="../../assets/theme-switcher.js?v=3"></script>
+    <script src="script.js?v=1"></script>
+</body>
+</html>

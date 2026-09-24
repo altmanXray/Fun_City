@@ -1,4 +1,4 @@
-/* FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
+/* FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
 /* 五子棋专有样式（通用部分见 ../../assets/theme.css） */
 
 .container {
@@ -33,10 +33,11 @@
 }
 
 .mode-switch {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     flex: 1;
     gap: 8px;
-    min-width: 220px;
+    min-width: 240px;
 }
 
 .mode-btn {
@@ -63,9 +64,135 @@
     box-shadow: var(--shadow-btn);
 }
 
+/* 人机对战激活时：整组（按钮+档位角标）呈现为同一个渐变按钮，与双人激活态一致 */
+.mode-btn-wrap.active {
+    box-shadow: var(--shadow-btn);
+}
+
+.mode-btn-wrap.active .mode-btn {
+    border-color: transparent;
+}
+
+.mode-btn-wrap.active .level-caret {
+    background: linear-gradient(135deg, var(--btn-end), var(--btn-start));
+    border-color: transparent;
+    border-left: 1px solid rgba(255, 255, 255, 0.35);
+    color: #fff;
+}
+
+.mode-btn-wrap.active .level-caret:hover {
+    background: linear-gradient(135deg, var(--btn-end), var(--btn-start));
+}
+
+/* 机器人强度：人机对战按钮自带下拉选项（布局恒定，无占位行） */
+.mode-btn-wrap {
+    position: relative;
+    display: flex;
+    min-width: 0;
+}
+
+.mode-btn-wrap .mode-btn {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-radius: 12px 0 0 12px;
+}
+
+.level-caret {
+    flex: none;
+    padding: 8px 9px;
+    border: 2px solid #d8cdf1;
+    border-left: none;
+    border-radius: 0 12px 12px 0;
+    background: var(--surface-soft);
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 800;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.16s ease, border-color 0.16s ease;
+}
+
+.level-caret:hover {
+    border-color: var(--accent);
+}
+
+.level-caret.dim {
+    color: var(--muted);
+}
+
+.level-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 30;
+    width: 100%;
+    padding: 6px;
+    border-radius: 12px;
+    background: var(--surface);
+    box-shadow: 0 10px 28px rgba(40, 25, 90, 0.22);
+}
+
+.level-menu.open {
+    display: flex;
+    flex-direction: column;
+}
+
+.level-opt {
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+}
+
+.level-opt:hover {
+    background: var(--surface-soft);
+}
+
+.level-opt.active {
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    color: #fff;
+}
+
+.level-opt.active::after {
+    content: ' ✓';
+}
+
+/* 对局进行中档位锁定：选项置灰不可换 */
+.level-opt.locked {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.level-caret.locked {
+    opacity: 0.75;
+}
+
+/* 窄屏：档位名藏进下拉，角标只留 ▾，保证「人机对战」完整显示 */
+@media (max-width: 640px) {
+    .level-caret .level-name {
+        display: none;
+    }
+
+    .level-caret {
+        padding: 8px 12px;
+    }
+}
+
 .status-chip {
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 172px;
     gap: 8px;
     padding: 7px 13px;
     border-radius: 999px;
@@ -93,6 +220,20 @@
     font-size: 0.95rem;
     font-weight: 800;
     white-space: nowrap;
+}
+
+/* 机器人思考中：动态省略号 */
+.status-text.thinking::after {
+    content: '…';
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    animation: thinking-dots 1.2s steps(4) infinite;
+}
+
+@keyframes thinking-dots {
+    0% { width: 0; }
+    100% { width: 1.35em; }
 }
 
 .board-wrap {

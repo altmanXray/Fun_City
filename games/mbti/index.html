@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--
+  FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <style>html{background:linear-gradient(135deg,#5865d9,#9a5bc6) fixed}</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI 人格测试 - Fun City</title>
+    <link rel="stylesheet" href="../../assets/theme.css?v=21">
+    <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-game="mbti">
+    <div class="container">
+        <header class="header">
+            <div>
+                <h1>MBTI 人格测试</h1>
+            </div>
+            <button class="return-lobby-btn ghost-btn">返回大厅</button>
+        </header>
+
+        <main>
+            <!-- 介绍页 -->
+            <section id="intro-screen" class="screen">
+                <h2>发现你的人格类型</h2>
+                <p class="intro-lead">44 道二选一情境题，约 6~8 分钟。没有对错之分，凭<strong>第一直觉</strong>作答最准确。</p>
+                <div class="intro-tips">
+                    <div class="intro-tip"><span>🧭</span>四个维度：外向/内向 · 实感/直觉 · 思考/情感 · 判断/知觉</div>
+                    <div class="intro-tip"><span>⏱️</span>自动计时并保存历史，可对比不同时期的人格变化</div>
+                    <div class="intro-tip"><span>🍉</span>结果仅供自我探索参考，别被四个字母定义啦</div>
+                </div>
+                <div id="last-result" class="best-panel" style="display:none;"></div>
+                <div class="intro-actions">
+                    <button id="start-btn" class="btn">开始测试</button>
+                    <button id="history-btn" class="btn secondary-btn">历史记录</button>
+                </div>
+            </section>
+
+            <!-- 答题页 -->
+            <section id="quiz-screen" class="screen" style="display:none;">
+                <div class="quiz-top">
+                    <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+                    <div class="quiz-meta">
+                        <span id="q-counter">1 / 44</span>
+                        <span id="timer" class="quiz-timer">0.00</span>
+                    </div>
+                </div>
+                <h2 id="question-text" class="question-text"></h2>
+                <div class="options">
+                    <button id="opt-a" class="option-btn"></button>
+                    <button id="opt-b" class="option-btn"></button>
+                </div>
+                <p class="quiz-hint">可按键盘 1 / 2 快速选择</p>
+                <div class="quiz-actions">
+                    <button id="quit-btn" class="btn secondary-btn">退出测试</button>
+                </div>
+            </section>
+
+            <!-- 结果页 -->
+            <section id="result-screen" class="screen" style="display:none;">
+                <div class="result-head">
+                    <div id="result-emoji" class="result-emoji"></div>
+                    <div>
+                        <div id="result-code" class="result-code"></div>
+                        <div id="result-name" class="result-name"></div>
+                    </div>
+                </div>
+                <div id="result-keywords" class="result-keywords"></div>
+                <div id="dim-bars" class="dim-bars"></div>
+                <div id="result-sections" class="result-sections"></div>
+                <div class="result-actions">
+                    <button id="retry-btn" class="btn">再测一次</button>
+                    <button id="history-btn2" class="btn secondary-btn">历史记录</button>
+                </div>
+            </section>
+
+            <!-- 历史页 -->
+            <section id="history-screen" class="screen" style="display:none;">
+                <h2>测试历史</h2>
+                <p class="mode-description">按时间倒序，最多保留最近 50 条</p>
+                <div id="history-list" class="history-list"></div>
+                <div class="history-actions">
+                    <button id="clear-history-btn" class="btn secondary-btn">清空记录</button>
+                    <button id="back-btn" class="btn">返回</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../assets/util.js?v=3"></script>
+    <script src="../../assets/player.js?v=3"></script>
+    <script src="../../assets/audio.js?v=4"></script>
+    <script src="../../assets/features.js?v=12"></script>
+    <script src="../../assets/theme-switcher.js?v=3"></script>
+    <script src="script.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+/* FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
+/* 八字命理专有样式（通用部分见 ../../assets/theme.css） */
+
+.container {
+    width: min(680px, 100%);
+    padding: 34px 38px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 26px;
+}
+
+.header h1 {
+    font-size: 2.2em;
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.screen {
+    animation: fadeIn 0.3s ease;
+}
+
+.screen h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: var(--text);
+}
+
+.input-actions,
+.result-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.bazi-note {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    margin-top: 14px;
+}
+
+/* ---------- 命主摘要 ---------- */
+.bazi-summary {
+    padding: 14px 18px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(124, 108, 255, 0.12), rgba(108, 160, 255, 0.10));
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+.bazi-summary .bs-title {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: var(--accent-strong);
+}
+
+.bazi-summary .bs-sub {
+    color: var(--muted);
+    font-size: 0.86rem;
+    margin-top: 4px;
+}
+
+/* ---------- 四柱 ---------- */
+.pillars {
+    display: grid;
+    grid-template-columns: 64px repeat(4, 1fr) 64px;
+    gap: 8px;
+    padding: 16px 12px;
+    border-radius: 16px;
+    background: var(--surface-alt);
+    margin-bottom: 14px;
+}
+
+.pillar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.pillar-label {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.pillar-ss {
+    font-size: 0.74rem;
+    color: var(--accent);
+    font-weight: 700;
+    min-height: 1em;
+}
+
+.pillar-gan,
+.pillar-zhi {
+    width: 100%;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 10px;
+    font-size: 1.45rem;
+    font-weight: 900;
+    background: var(--surface);
+    color: var(--text);
+}
+
+.pillar-gan.wx-jin, .pillar-zhi.wx-jin { color: #b8860b; }
+.pillar-gan.wx-mu, .pillar-zhi.wx-mu { color: #2e7d32; }
+.pillar-gan.wx-shui, .pillar-zhi.wx-shui { color: #1565c0; }
+.pillar-gan.wx-huo, .pillar-zhi.wx-huo { color: #c62828; }
+.pillar-gan.wx-tu, .pillar-zhi.wx-tu { color: #8d6e63; }
+
+.pillar-cang {
+    font-size: 0.72rem;
+    color: var(--muted);
+}
+
+.pillar-col.day-master .pillar-gan {
+    box-shadow: 0 0 0 2px var(--accent) inset;
+    background: var(--surface-soft);
+}
+
+.pillar-empty {
+    color: var(--muted);
+    font-size: 0.8rem;
+    padding: 10px 0;
+}
+
+/* ---------- 区块 ---------- */
+.bazi-section {
+    padding: 16px 18px;
+    border-radius: 14px;
+    background: var(--surface-alt);
+    margin-bottom: 14px;
+}
+
+.bazi-section h3 {
+    margin: 0 0 10px;
+    font-size: 1.02rem;
+    color: var(--accent-strong);
+}
+
+/* 五行条 */
+.wx-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.wx-row {
+    display: grid;
+    grid-template-columns: 58px 1fr 30px;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.wx-track {
+    height: 12px;
+    border-radius: 999px;
+    background: rgba(124, 108, 255, 0.10);
+    overflow: hidden;
+}
+
+.wx-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.5s ease;
+}
+
+.wx-jin-f { background: #c9a227; }
+.wx-mu-f { background: #4caf50; }
+.wx-shui-f { background: #42a5f5; }
+.wx-huo-f { background: #ef5350; }
+.wx-tu-f { background: #a1887f; }
+
+.wx-text {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin: 10px 0 0;
+}
+
+/* 大运 / 流年 表 */
+.dy-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+.dy-table th,
+.dy-table td {
+    padding: 7px 8px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.dy-table th {
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+.dy-table td.gz {
+    font-weight: 800;
+    color: var(--accent-strong);
+}
+
+.dy-table tr.now td {
+    background: rgba(124, 108, 255, 0.10);
+}
+
+.dy-scroll {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* 命理短评 */
+.reading-text {
+    line-height: 1.8;
+    font-size: 0.94rem;
+    color: var(--text);
+    margin: 0;
+}
+
+.reading-text b {
+    color: var(--accent-strong);
+}
+
+/* ---------- 历史页 ---------- */
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 540px;
+    margin: 0 auto;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 16px;
+    border-radius: 12px;
+    background: var(--surface-alt);
+}
+
+.history-main {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.history-summary {
+    font-weight: 800;
+    color: var(--accent-strong);
+}
+
+.history-meta {
+    color: var(--muted);
+    font-size: 0.82rem;
+}
+
+.history-empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 30px 0;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 24px 16px;
+    }
+
+    .pillars {
+        grid-template-columns: 52px repeat(4, 1fr) 52px;
+        gap: 5px;
+        padding: 12px 6px;
+    }
+
+    .pillar-gan,
+    .pillar-zhi {
+        font-size: 1.15rem;
+        padding: 6px 0;
+    }
+}

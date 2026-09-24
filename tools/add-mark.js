@@ -2,19 +2,27 @@
 const fs = require('fs');
 const path = require('path');
 
-const MARK = 'FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。';
+const MARK = 'FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。';
 const JS_CSS = `/* ${MARK} */\n`;
 const HTML = `<!--\n  ${MARK}\n-->\n`;
 
 const files = [
   'index.html', 'script.js', 'style.css',
   'assets/theme.css', 'assets/util.js', 'assets/player.js', 'assets/audio.js', 'assets/features.js',
+  'assets/calendar-core.js',
   'games/schulte/index.html', 'games/schulte/script.js', 'games/schulte/style.css',
   'games/sudoku/index.html', 'games/sudoku/script.js', 'games/sudoku/style.css',
   'games/memory/index.html', 'games/memory/script.js', 'games/memory/style.css',
   'games/2048/index.html', 'games/2048/script.js', 'games/2048/style.css',
   'games/gomoku/index.html', 'games/gomoku/script.js', 'games/gomoku/style.css',
+  'games/mbti/index.html', 'games/mbti/script.js', 'games/mbti/style.css',
+  'games/zodiac/index.html', 'games/zodiac/script.js', 'games/zodiac/style.css',
+  'games/calendar/index.html', 'games/calendar/script.js', 'games/calendar/style.css',
+  'games/bazi/index.html', 'games/bazi/script.js', 'games/bazi/style.css',
+  'games/ziwei/index.html', 'games/ziwei/script.js', 'games/ziwei/style.css',
   'tools/build-poems.js', 'tools/verify-poems.js', 'tools/verify-sudoku.js',
+  'tools/verify-calendar.js', 'tools/verify-bazi.js', 'tools/verify-ziwei.js',
+  'tools/verify-zodiac-astro.js', 'tools/verify-zodiac-case.js', 'tools/add-mark.js'
 ];
 
 const ROOT = path.resolve(__dirname, '..');

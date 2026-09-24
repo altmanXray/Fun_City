@@ -1,6 +1,6 @@
-/* FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
+/* FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
 /**
- * LittleGame 本地玩家档案（纯前端，数据存于本机浏览器 LocalStorage）
+ * Fun City 本地玩家档案（纯前端，数据存于本机浏览器 LocalStorage）
  *
  * - 首次访问自动创建默认档案"玩家1"
  * - 支持同设备多个档案：切换 / 新建 / 改名 / 删除（删除档案会清空其排行榜与成就）

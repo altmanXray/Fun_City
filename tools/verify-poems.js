@@ -1,4 +1,4 @@
-/* FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
+/* FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
 // 输出质检：重名、名篇全文、游戏端对齐模拟
 const fs = require('fs');
 const data = JSON.parse(fs.readFileSync('D:/AIwork/little game/games/schulte/poems-tang300.json', 'utf8'));

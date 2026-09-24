@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Fun City 方案D 游乐帐篷">
+  <circle cx="256" cy="256" r="230" fill="#FFF6EC" stroke="#1A1A1A" stroke-width="16"/>
+  <!-- 旗 -->
+  <path d="M256 108 V84" stroke="#1A1A1A" stroke-width="12" stroke-linecap="round"/>
+  <path d="M256 84 L296 98 L256 112 Z" fill="#FFD966" stroke="#1A1A1A" stroke-width="10" stroke-linejoin="round"/>
+  <!-- 帐篷 -->
+  <path d="M256 118 L136 350 H376 Z" fill="#FFD9E8" stroke="#1A1A1A" stroke-width="16" stroke-linejoin="round"/>
+  <path d="M256 118 L206 350 H256 Z" fill="#FFF" stroke="none"/>
+  <path d="M256 118 L306 350 H256 Z" fill="#FFF" stroke="none"/>
+  <path d="M256 118 L136 350 M256 118 L376 350" stroke="#1A1A1A" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M232 350 L256 296 L280 350 Z" fill="#1A1A1A"/>
+  <!-- 地面 -->
+  <path d="M116 350 H396" stroke="#1A1A1A" stroke-width="16" stroke-linecap="round"/>
+  <!-- 星星与彩点 -->
+  <path d="M150 150 L156 170 L176 176 L156 182 L150 202 L144 182 L124 176 L144 170 Z" fill="#FFD966" stroke="#1A1A1A" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M368 132 L373 149 L390 154 L373 159 L368 176 L363 159 L346 154 L363 149 Z" fill="#C9E7F7" stroke="#1A1A1A" stroke-width="9" stroke-linejoin="round"/>
+  <circle cx="150" cy="250" r="10" fill="#C9E7F7" stroke="#1A1A1A" stroke-width="8"/>
+  <circle cx="380" cy="240" r="10" fill="#FF9EB5" stroke="#1A1A1A" stroke-width="8"/>
+</svg>

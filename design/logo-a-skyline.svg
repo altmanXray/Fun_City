@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Fun City badge">
+  <!-- FHDCC · Fun City badge logo | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. -->
+  <!-- 徽章底 -->
+  <circle cx="256" cy="256" r="230" fill="#FFF6EC" stroke="#1A1A1A" stroke-width="16"/>
+
+  <!-- 气球（在城市天际线上空） -->
+  <g>
+    <path d="M345 192 L349 240 M359 192 L355 240" fill="none" stroke="#1A1A1A" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="352" cy="146" r="46" fill="#FF9EB5" stroke="#1A1A1A" stroke-width="16"/>
+    <rect x="339" y="240" width="26" height="20" rx="5" fill="#F5C98B" stroke="#1A1A1A" stroke-width="10"/>
+  </g>
+
+  <!-- 星星（四角闪光） -->
+  <g fill="#FFD966" stroke="#1A1A1A" stroke-width="10" stroke-linejoin="round">
+    <path d="M150 112 L156 132 L176 138 L156 144 L150 164 L144 144 L124 138 L144 132 Z"/>
+    <path d="M243 76 L247 92 L263 96 L247 100 L243 116 L239 100 L223 96 L239 92 Z"/>
+    <path d="M408 174 L413 191 L430 196 L413 201 L408 218 L403 201 L386 196 L403 191 Z"/>
+  </g>
+
+  <!-- 地面 -->
+  <path d="M92 374 H420" stroke="#1A1A1A" stroke-width="16" stroke-linecap="round" fill="none"/>
+
+  <!-- 城市天际线（建筑坐在地面上） -->
+  <g stroke="#1A1A1A" stroke-width="16" stroke-linejoin="round">
+    <rect x="112" y="252" width="52" height="122" fill="#FFD9E8"/>
+    <rect x="164" y="206" width="54" height="168" fill="#C9E7F7"/>
+    <rect x="218" y="286" width="50" height="88" fill="#CDEFD9"/>
+    <rect x="268" y="232" width="56" height="142" fill="#FFF0AE"/>
+    <rect x="324" y="262" width="52" height="112" fill="#E3D4FF"/>
+  </g>
+
+  <!-- 门窗（平涂白，无描边） -->
+  <g fill="#FFFFFF">
+    <rect x="126" y="272" width="24" height="18" rx="3"/>
+    <rect x="126" y="306" width="24" height="18" rx="3"/>
+    <rect x="180" y="228" width="22" height="16" rx="3"/>
+    <rect x="180" y="258" width="22" height="16" rx="3"/>
+    <rect x="180" y="288" width="22" height="16" rx="3"/>
+    <rect x="234" y="340" width="20" height="34" rx="3"/>
+    <rect x="286" y="256" width="20" height="16" rx="3"/>
+    <rect x="286" y="288" width="20" height="16" rx="3"/>
+    <rect x="286" y="320" width="20" height="16" rx="3"/>
+    <rect x="340" y="282" width="20" height="16" rx="3"/>
+    <rect x="340" y="314" width="20" height="16" rx="3"/>
+  </g>
+</svg>

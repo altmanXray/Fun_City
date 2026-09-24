@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圣杯求签 - Fun City</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/logo.svg">
+    <link rel="stylesheet" href="../../assets/theme.css?v=21">
+    <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-game="moon-blocks">
+    <div class="container">
+        <header class="header">
+            <div><h1>圣杯求签</h1><p>默念心愿，掷筊问卜</p></div>
+            <button class="return-lobby-btn ghost-btn">返回大厅</button>
+        </header>
+        <main>
+            <div class="wish-input-wrap">
+                <input type="text" id="wish-input" class="wish-input" maxlength="30" placeholder="默念你的心愿（可选输入）">
+            </div>
+            <div id="throw-screen" class="throw-screen">
+                <div class="blocks-area" id="blocks-area">
+                    <div class="block left" id="block-left">
+                        <div class="block-face front">月</div>
+                        <div class="block-face back">阳</div>
+                    </div>
+                    <div class="block right" id="block-right">
+                        <div class="block-face front">月</div>
+                        <div class="block-face back">阳</div>
+                    </div>
+                </div>
+                <div class="streak-display" id="streak-display"></div>
+                <p class="result-text" id="result-text"></p>
+                <button id="throw-btn" class="btn">🙏 掷筊</button>
+            </div>
+            <div id="celebration" class="celebration" style="display:none;">
+                <div class="celebration-text">🎉 三圣筊！所求必应！🎉</div>
+            </div>
+            <div id="history-screen" class="history-screen" style="display:none;">
+                <h2>掷筊记录</h2>
+                <div id="history-list"></div>
+                <button id="back-throw" class="btn secondary-btn">返回掷筊</button>
+            </div>
+            <div class="bottom-btns">
+                <button id="history-btn" class="btn secondary-btn sm">记录</button>
+            </div>
+        </main>
+    </div>
+    <script src="../../assets/util.js?v=3"></script>
+    <script src="../../assets/player.js?v=3"></script>
+    <script src="../../assets/audio.js?v=5"></script>
+    <script src="../../assets/features.js?v=12"></script>
+    <script src="../../assets/theme-switcher.js?v=3"></script>
+    <script src="script.js?v=1"></script>
+</body>
+</html>

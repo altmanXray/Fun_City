@@ -1,36 +1,82 @@
-/* FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
+/* FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
 /* 游戏大厅专有样式（通用变量/基础见 assets/theme.css） */
 
 .lobby-container {
-    background: #fff;
+    background: var(--surface);
     border-radius: 20px;
     padding: 60px 40px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-card);
     max-width: 1200px;
     width: 100%;
     animation: fadeIn 0.5s ease;
 }
 
 .header {
-    text-align: center;
-    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 26px;
+}
+
+/* 品牌组合：徽章 + 文字块横排，整体居中 */
+.brand-lockup {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Fun City 徽章 logo：贴纸感微倾斜 */
+.logo-badge {
+    width: 72px;
+    height: 72px;
+    flex: none;
+    transform: rotate(-8deg);
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.14));
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .logo {
-    font-size: 3.5em;
+    font-size: 2.5em;
+    line-height: 1.08;
     background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
 }
 
 .subtitle {
-    font-size: 1.2em;
-    color: #666;
+    font-size: 0.95rem;
+    color: var(--muted);
 }
 
 /* 大厅功能工具栏（👤玩家 / 🏆排行榜 / 🏅成就，由 assets/features.js 注入） */
+
+/* ---------- 游戏舞台（常驻壳 iframe，游戏全屏呈现） ---------- */
+#stage {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+#stage iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+body.in-game {
+    overflow: hidden;
+}
+
 .lg-toolbar {
     display: flex;
     justify-content: center;
@@ -77,6 +123,23 @@
     box-shadow: 0 8px 20px rgba(255, 159, 67, 0.25);
 }
 
+/* 大厅分区：益智游戏 / 测试·命理 */
+.lobby-section {
+    margin-bottom: 10px;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    color: var(--text);
+    margin: 0 0 18px;
+    padding-left: 12px;
+    border-left: 4px solid var(--accent);
+}
+
+.lobby-section + .lobby-section {
+    margin-top: 30px;
+}
+
 .game-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -85,18 +148,19 @@
 }
 
 .game-card {
-    background: #f9f9f9;
+    background-color: var(--surface-soft);
     border-radius: 15px;
     padding: 30px;
     text-align: center;
-    transition: all 0.3s ease;
+    /* 仅过渡 transform/border，不过渡 background（IAB 计算样式引擎会卡在过渡中间值） */
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     border: 2px solid transparent;
     cursor: pointer;
 }
 
 .game-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-btn-hover);
     border-color: var(--accent);
 }
 
@@ -125,12 +189,19 @@
 }
 
 .coming-soon .game-icon {
-    background: #e0e0e0;
+    background: var(--surface-alt);
     box-shadow: none;
 }
 
 .icon-text {
     filter: brightness(0) invert(1);
+}
+
+/* 白色线稿 SVG 图标（替代 emoji） */
+.icon-svg {
+    width: 44px;
+    height: 44px;
+    display: block;
 }
 
 .coming-soon .icon-text {
@@ -139,12 +210,12 @@
 
 .game-title {
     font-size: 1.8em;
-    color: #333;
+    color: var(--text);
     margin-bottom: 10px;
 }
 
 .game-description {
-    color: #666;
+    color: var(--muted);
     font-size: 1em;
     margin-bottom: 20px;
 }
@@ -159,10 +230,10 @@
 
 .tag {
     padding: 5px 15px;
-    background: #e0e0e0;
+    background: var(--surface-alt);
     border-radius: 15px;
     font-size: 0.9em;
-    color: #666;
+    color: var(--muted);
 }
 
 .coming-soon .tag {
@@ -194,7 +265,7 @@
 
 .footer {
     text-align: center;
-    color: #999;
+    color: var(--muted);
     padding-top: 20px;
     border-top: 1px solid #e0e0e0;
 }

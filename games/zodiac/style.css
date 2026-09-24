@@ -1,0 +1,226 @@
+/* FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
+/* 星座解码专有样式（通用部分见 ../../assets/theme.css） */
+
+.container {
+    width: min(680px, 100%);
+    padding: 34px 38px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 26px;
+}
+
+.header h1 {
+    font-size: 2.2em;
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.screen {
+    animation: fadeIn 0.3s ease;
+}
+
+.screen h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: var(--text);
+}
+
+.input-actions,
+.result-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.calc-note {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    margin-top: 16px;
+}
+
+/* ---------- 三大星座卡 ---------- */
+.trio-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.trio-card {
+    padding: 16px 12px;
+    border-radius: 14px;
+    background: var(--surface-alt);
+    text-align: center;
+}
+
+.trio-card .trio-role {
+    color: var(--muted);
+    font-size: 0.84rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.trio-card .trio-emoji {
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.trio-card .trio-sign {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--accent-strong);
+    margin-top: 4px;
+}
+
+.trio-card .trio-sub {
+    color: var(--muted);
+    font-size: 0.78rem;
+    margin-top: 4px;
+}
+
+/* ---------- 结果区块 ---------- */
+.result-section {
+    padding: 16px 18px;
+    border-radius: 14px;
+    background: var(--surface-alt);
+    margin-bottom: 14px;
+}
+
+.result-section h3 {
+    margin: 0 0 8px;
+    font-size: 1.02rem;
+    color: var(--accent-strong);
+}
+
+.result-section p {
+    margin: 0;
+    line-height: 1.7;
+    font-size: 0.94rem;
+    color: var(--text);
+}
+
+.sun-sections {
+    max-width: 560px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.sun-sections .result-section {
+    margin-bottom: 0;
+}
+
+/* ---------- 适配榜 ---------- */
+.compat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-top: 4px;
+}
+
+.compat-row {
+    display: grid;
+    grid-template-columns: 92px 1fr 46px;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.compat-name {
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.compat-track {
+    height: 12px;
+    border-radius: 999px;
+    background: rgba(124, 108, 255, 0.12);
+    overflow: hidden;
+}
+
+.compat-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--btn-start), var(--btn-end));
+}
+
+.compat-score {
+    font-weight: 800;
+    color: var(--accent-strong);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.compat-best {
+    color: #1d6c26;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* ---------- 历史页 ---------- */
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 540px;
+    margin: 0 auto;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 16px;
+    border-radius: 12px;
+    background: var(--surface-alt);
+}
+
+.history-main {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.history-summary {
+    font-weight: 800;
+    color: var(--accent-strong);
+}
+
+.history-meta {
+    color: var(--muted);
+    font-size: 0.82rem;
+}
+
+.history-empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 30px 0;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 24px 16px;
+    }
+
+    .compat-row {
+        grid-template-columns: 84px 1fr 42px;
+        font-size: 0.84rem;
+    }
+}

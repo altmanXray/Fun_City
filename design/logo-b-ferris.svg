@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Fun City 方案B 摩天轮">
+  <circle cx="256" cy="256" r="230" fill="#FFF6EC" stroke="#1A1A1A" stroke-width="16"/>
+  <!-- 摩天轮 -->
+  <path d="M214 262 L200 420 M298 262 L312 420" stroke="#1A1A1A" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <circle cx="256" cy="240" r="150" fill="none" stroke="#1A1A1A" stroke-width="14"/>
+  <g stroke="#1A1A1A" stroke-width="10">
+    <path d="M256 90 V390 M106 240 H406 M147 131 L365 349 M365 131 L147 349"/>
+  </g>
+  <circle cx="256" cy="240" r="22" fill="#FFD966" stroke="#1A1A1A" stroke-width="12"/>
+  <!-- 吊舱 -->
+  <g stroke="#1A1A1A" stroke-width="10">
+    <circle cx="256" cy="90" r="17" fill="#FF9EB5"/>
+    <circle cx="346" cy="150" r="17" fill="#C9E7F7"/>
+    <circle cx="381" cy="240" r="17" fill="#CDEFD9"/>
+    <circle cx="346" cy="330" r="17" fill="#FFF0AE"/>
+    <circle cx="256" cy="390" r="17" fill="#E3D4FF"/>
+    <circle cx="166" cy="330" r="17" fill="#FFC4A3"/>
+    <circle cx="131" cy="240" r="17" fill="#C9E7F7"/>
+    <circle cx="166" cy="150" r="17" fill="#FFF0AE"/>
+  </g>
+  <!-- 星星 -->
+  <path d="M150 112 L156 132 L176 138 L156 144 L150 164 L144 144 L124 138 L144 132 Z" fill="#FFD966" stroke="#1A1A1A" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M392 118 L396 132 L410 136 L396 140 L392 154 L388 140 L374 136 L388 132 Z" fill="#FF9EB5" stroke="#1A1A1A" stroke-width="8" stroke-linejoin="round"/>
+</svg>

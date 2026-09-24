@@ -1,0 +1,326 @@
+/* FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
+/* 万年历专有样式（通用部分见 ../../assets/theme.css） */
+
+.container {
+    width: min(640px, 100%);
+    padding: 30px 34px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 2.2em;
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ---------- 控制 ---------- */
+.cal-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.cal-nav {
+    width: 42px;
+    height: 42px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    color: var(--accent-strong);
+    font-size: 1.5rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: border-color 0.16s ease, background 0.16s ease;
+}
+
+.cal-nav:hover {
+    border-color: var(--accent);
+    background: var(--surface-soft);
+}
+
+.cal-title-box {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.cal-title-year {
+    color: var(--muted);
+    font-weight: 700;
+    margin: 0 4px 0 2px;
+}
+
+.cal-select {
+    padding: 8px 10px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.cal-today {
+    min-width: auto;
+    padding: 9px 16px;
+    font-size: 0.9rem;
+}
+
+/* ---------- 月历 ---------- */
+.cal-board {
+    padding: 14px;
+    border-radius: 16px;
+    background: var(--surface-alt);
+}
+
+.cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.cal-weekdays span {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.86rem;
+    font-weight: 800;
+}
+
+.cal-weekdays .weekend {
+    color: #c0564f;
+}
+
+.cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.cal-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1px;
+    padding: 6px 2px 7px;
+    border-radius: 10px;
+    background: var(--surface);
+    border: 2px solid transparent;
+    cursor: pointer;
+    min-height: 58px;
+    transition: border-color 0.14s ease, transform 0.14s ease;
+}
+
+.cal-cell:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.cal-cell.other {
+    opacity: 0.35;
+}
+
+.cal-cell.today {
+    border-color: var(--accent);
+    background: var(--surface-soft);
+}
+
+.cal-cell.selected {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+}
+
+.cal-cell.selected .cal-day,
+.cal-cell.selected .cal-sub {
+    color: #fff;
+}
+
+.cal-day {
+    font-size: 1.12rem;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.2;
+}
+
+.cal-cell.weekend .cal-day {
+    color: #c0564f;
+}
+
+.cal-sub {
+    font-size: 0.68rem;
+    color: var(--muted);
+    line-height: 1.2;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cal-sub.term,
+.cal-sub.lfestival {
+    color: #1d6c26;
+    font-weight: 700;
+}
+
+.cal-sub.sfestival {
+    color: #1565c0;
+    font-weight: 700;
+}
+
+.cal-sub.month-first {
+    color: var(--accent-strong);
+    font-weight: 700;
+}
+
+/* ---------- 详情 ---------- */
+.day-detail {
+    margin-top: 16px;
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: var(--surface-alt);
+}
+
+.dd-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.dd-solar {
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: var(--text);
+}
+
+.dd-lunar {
+    font-size: 1rem;
+    color: var(--accent-strong);
+    font-weight: 700;
+}
+
+.dd-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dd-row {
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.6;
+}
+
+.dd-row b {
+    color: var(--accent-strong);
+}
+
+.dd-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.dd-tag {
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    background: var(--surface);
+    color: var(--accent);
+}
+
+/* 今日诗句 */
+.dd-poem {
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.dd-poem-text {
+    font-family: KaiTi, 楷体, serif;
+    font-size: 1.05rem;
+    color: var(--text);
+    line-height: 1.6;
+}
+.dd-poem-from {
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+/* 十二时辰表 */
+.dd-hours { margin-top: 12px; }
+.dd-hours-title {
+    color: var(--muted);
+    font-size: 0.84rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+.dd-hours-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+    gap: 6px;
+}
+.dd-hour {
+    padding: 6px 10px;
+    border-radius: 10px;
+    background: var(--surface);
+    font-size: 0.82rem;
+    color: var(--text);
+    font-weight: 700;
+    white-space: nowrap;
+}
+.dd-hour i {
+    font-style: normal;
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 400;
+    margin: 0 2px;
+}
+
+.cal-note {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    margin-top: 14px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 22px 14px;
+    }
+
+    .cal-cell {
+        min-height: 50px;
+        padding: 4px 1px 5px;
+    }
+
+    .cal-day {
+        font-size: 1rem;
+    }
+
+    .cal-sub {
+        font-size: 0.62rem;
+    }
+}

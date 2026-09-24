@@ -1,8 +1,9 @@
-/* FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
+/* FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
 /**
- * LittleGame 功能层：本地排行榜 + 成就系统 + 共享 UI（依赖 player.js / audio.js）
+ * Fun City 功能层：本地排行榜 + 成就系统 + 共享 UI（依赖 player.js / audio.js）
  *
  * - LG.Records.add({game, mode, value, extra})   上报一条成绩（自动归属当前玩家）
+ * - LG.History.add(tool, {summary, detail, ms})  追加一条测试/命理历史记录（按玩家归属）
  * - LG.Achievements.report(event, data)          上报游戏事件，驱动成就与累计统计
  * - UI 自动装配：
  *   · 所有页面 header 注入 🎵 音乐开关
@@ -45,7 +46,14 @@
         },
         gomoku: {
             name: '五子棋',
-            boards: [{ mode: 'fastest_win', label: '最快获胜（人机）', unit: 'time' }]
+            boards: [
+                { mode: 'fastest_caiji', label: '菜鸡·最快获胜', unit: 'time' },
+                { mode: 'fastest_std', label: '标准·最快获胜', unit: 'time' },
+                { mode: 'fastest_expert', label: '专家·最快获胜', unit: 'time' },
+                { mode: 'fastest_master', label: '大师·最快获胜', unit: 'time' },
+                { mode: 'fastest_chovy', label: '我Chovy·最快获胜', unit: 'time' },
+                { mode: 'fastest_god', label: '超级大神·最快获胜', unit: 'time' }
+            ]
         }
     };
 
@@ -106,6 +114,70 @@
         }
     };
 
+    // ---------- 测试/命理历史记录（追加式日志，区别于 Top10 榜单） ----------
+    const History = {
+        KEY: 'lg_history_v1',
+        MAX: 50,
+
+        readAll() {
+            try {
+                const data = JSON.parse(localStorage.getItem(this.KEY));
+                if (data && typeof data === 'object') return data;
+            } catch (e) { /* 损坏重建 */ }
+            return {};
+        },
+
+        writeAll(data) {
+            localStorage.setItem(this.KEY, JSON.stringify(data));
+        },
+
+        // tool: 'mbti' | 'zodiac' | 'bazi' | 'ziwei'；entry: { summary, detail?, ms? }
+        add(tool, entry) {
+            const id = Player.currentId();
+            if (!id || !tool || !entry || !entry.summary) return null;
+            const all = this.readAll();
+            const mine = all[id] = all[id] || {};
+            const list = mine[tool] = mine[tool] || [];
+            const record = {
+                t: Date.now(),
+                ms: Number.isFinite(entry.ms) ? Math.round(entry.ms) : null,
+                summary: String(entry.summary).slice(0, 40),
+                detail: entry.detail == null ? undefined : String(entry.detail).slice(0, 120)
+            };
+            list.push(record);
+            if (list.length > this.MAX) list.splice(0, list.length - this.MAX);
+            this.writeAll(all);
+            return record;
+        },
+
+        // 某工具历史（新→旧）；playerId 缺省取当前玩家
+        list(tool, playerId) {
+            const id = playerId || Player.currentId();
+            if (!id) return [];
+            const mine = this.readAll()[id];
+            const list = (mine && mine[tool]) || [];
+            return list.slice().sort((a, b) => b.t - a.t);
+        },
+
+        clear(tool) {
+            const id = Player.currentId();
+            if (!id) return;
+            const all = this.readAll();
+            if (all[id]) {
+                delete all[id][tool];
+                this.writeAll(all);
+            }
+        }
+    };
+
+    // 测试·命理工具（历史记录归属榜单弹窗「测试·命理」区）
+    const TEST_TOOLS = [
+        { tool: 'mbti', name: '🧭 MBTI 人格' },
+        { tool: 'zodiac', name: '✨ 星座解码' },
+        { tool: 'bazi', name: '📜 八字命理' },
+        { tool: 'ziwei', name: '🌌 紫微斗数' }
+    ];
+
     // ---------- 成就 ----------
     const ACHIEVEMENTS = [
         { id: 'schulte_first', icon: '🎯', name: '初露锋芒', desc: '舒尔特方格：完成任意模式一局', check: s => s.schulte && s.schulte.wins >= 1 },
@@ -126,9 +198,16 @@
         { id: 't2048', icon: '🌟', name: '2048 达成', desc: '2048：合成 2048！', check: s => (s.g2048 && s.g2048.maxTile || 0) >= 2048 },
         { id: 'gomoku_first_ai', icon: '⚫', name: '首胜AI', desc: '五子棋人机模式战胜 AI', check: s => s.gomoku && s.gomoku.winsAI >= 1 },
         { id: 'gomoku_fast', icon: '⏱️', name: '速战速决', desc: '60 秒内人机获胜', check: s => s.gomoku && s.gomoku.bestWin != null && s.gomoku.bestWin < 60000 },
+        { id: 'gomoku_master', icon: '🎓', name: '大师克星', desc: '战胜大师档机器人', check: s => !!(s.gomoku && s.gomoku.beat_master) },
+        { id: 'gomoku_chovy', icon: '🏆', name: '我Chovy克星', desc: '战胜"我Chovy"档机器人', check: s => !!(s.gomoku && s.gomoku.beat_chovy) },
+        { id: 'gomoku_god', icon: '🌟', name: '超级大神克星', desc: '战胜超级大神档机器人', check: s => !!(s.gomoku && s.gomoku.beat_god) },
         { id: 'plays_10', icon: '🎮', name: '小有所成', desc: '累计完成 10 局游戏', progress: s => [Math.min(s.plays || 0, 10), 10], check: s => (s.plays || 0) >= 10 },
         { id: 'plays_50', icon: '🎯', name: '游戏达人', desc: '累计完成 50 局游戏', progress: s => [Math.min(s.plays || 0, 50), 50], check: s => (s.plays || 0) >= 50 },
-        { id: 'all_games', icon: '🥇', name: '五项全能', desc: '四种游戏各获一胜，且 2048 合成过 512', check: s => !!(s.schulte && s.schulte.wins && s.sudoku && s.sudoku.wins && s.memory && s.memory.wins && s.gomoku && s.gomoku.winsAI && s.g2048 && s.g2048.maxTile >= 512) }
+        { id: 'all_games', icon: '🥇', name: '五项全能', desc: '四种游戏各获一胜，且 2048 合成过 512', check: s => !!(s.schulte && s.schulte.wins && s.sudoku && s.sudoku.wins && s.memory && s.memory.wins && s.gomoku && s.gomoku.winsAI && s.g2048 && s.g2048.maxTile >= 512) },
+        { id: 'mbti_first', icon: '🧭', name: '认识自己', desc: '完成一次 MBTI 测试', check: s => (s.tests && s.tests.mbti || 0) >= 1 },
+        { id: 'zodiac_first', icon: '✨', name: '仰望星空', desc: '完成一次星座解码', check: s => (s.tests && s.tests.zodiac || 0) >= 1 },
+        { id: 'bazi_first', icon: '📜', name: '初窥天机', desc: '完成一次八字排盘', check: s => (s.tests && s.tests.bazi || 0) >= 1 },
+        { id: 'ziwei_first', icon: '🌌', name: '紫微初探', desc: '完成一次紫微排盘', check: s => (s.tests && s.tests.ziwei || 0) >= 1 }
     ];
 
     const Achievements = {
@@ -228,12 +307,21 @@
                     if (data.vsAI) {
                         s.winsAI = (s.winsAI || 0) + 1;
                         s.bestWin = s.bestWin == null ? data.ms : Math.min(s.bestWin, data.ms);
+                        // 记录战胜过的档位（大师/我Chovy/超级大神 成就用）
+                        if (data.level) s['beat_' + data.level] = true;
                     }
                     break;
                 }
                 case 'gomoku_lose':
                     stats.plays++;
                     break;
+                case 'test_done': {
+                    // 测试/命理完成事件：data.tool = mbti|zodiac|bazi|ziwei（不计入游戏局数）
+                    if (!data.tool) break;
+                    const s = touch('tests');
+                    s[data.tool] = (s[data.tool] || 0) + 1;
+                    break;
+                }
             }
 
             this.writeStats(stats);
@@ -289,7 +377,7 @@
             }, 3200);
         },
 
-        // 游戏页 header 操作区：🎵音乐 / 🏆本游戏榜单 / 返回大厅，集中一行放在标题下方
+        // 游戏页 header 操作区：🎵音乐 / 🏆本游戏榜单（测试工具为📜记录）/ 返回大厅，集中一行放在标题下方
         injectGameHeaderActions(header, gameKey) {
             if (!header || header.querySelector('.lg-header-actions')) return;
             const actions = document.createElement('div');
@@ -304,7 +392,9 @@
             });
             actions.appendChild(musicBtn);
 
-            if (gameKey) {
+            // 游戏页注入本游戏榜单；仅为有榜单体系的游戏注入
+            // （测试工具页自带历史记录页；万年历无排行榜体系，均不注入）
+            if (gameKey && LB_META[gameKey]) {
                 const lbBtn = document.createElement('button');
                 lbBtn.className = 'lg-lb-btn ghost-btn';
                 lbBtn.type = 'button';
@@ -324,6 +414,7 @@
 
         // ---------- 排行榜弹窗 ----------
         openLeaderboard(focusGame) {
+            const isTestTool = TEST_TOOLS.some(t => t.tool === focusGame);
             // 展示顺序显式声明（避免 JS 对象把数字键"2048"排到最前）
             const order = ['schulte', 'sudoku', 'memory', '2048', 'gomoku'];
             const games = focusGame ? [focusGame] : order;
@@ -334,7 +425,7 @@
             wrap.innerHTML = `
                 <div class="lg-modal-content">
                     <div class="lg-modal-head">
-                        <h2>🏆 排行榜</h2>
+                        <h2>${isTestTool ? '📜 测算记录' : '🏆 排行榜'}</h2>
                         <button class="lg-close-btn" aria-label="关闭">✕</button>
                     </div>
                     <p class="lg-modal-sub">当前玩家：<b>${player ? player.name : '--'}</b> · 记录保存在本机浏览器</p>
@@ -347,6 +438,7 @@
             const boardsEl = wrap.querySelector('.lg-boards');
             for (const gameKey of games) {
                 const gameMeta = meta[gameKey];
+                if (!gameMeta) continue; // 测试工具无游戏榜单，走下方「测试·命理」区
                 const gameSection = document.createElement('div');
                 gameSection.className = 'lg-game-section';
                 gameSection.innerHTML = `<h3>${gameMeta.name}</h3>`;
@@ -374,6 +466,38 @@
                 }
                 gameSection.appendChild(boards);
                 boardsEl.appendChild(gameSection);
+            }
+
+            // ---------- 测试·命理：每次测算都入榜（追加式，非 Top10） ----------
+            // 大厅显示全部；测试工具页只看自己；游戏页聚焦本游戏时不掺测试记录
+            const showTests = !focusGame || isTestTool;
+            const tools = isTestTool ? TEST_TOOLS.filter(t => t.tool === focusGame) : TEST_TOOLS;
+            const testSection = document.createElement('div');
+            testSection.className = 'lg-game-section';
+            testSection.innerHTML = `<h3>${isTestTool ? TEST_TOOLS.find(t => t.tool === focusGame).name : '测试 · 命理'}</h3>`;
+            const testBoard = document.createElement('div');
+            testBoard.className = 'lg-board';
+            let testHtml = '';
+            for (const t of tools) {
+                const rows = History.list(t.tool);
+                testHtml += `<div class="lg-board-title">${t.name}${rows.length ? ` · 共 ${rows.length} 次` : ''}</div>`;
+                if (!rows.length) {
+                    testHtml += '<div class="lg-board-empty">暂无测算记录</div>';
+                } else {
+                    testHtml += '<table><tbody>' + rows.map(r => {
+                        const dt = new Date(r.t);
+                        const p2 = n => String(n).padStart(2, '0');
+                        const ts = `${dt.getFullYear()}-${p2(dt.getMonth() + 1)}-${p2(dt.getDate())} ${p2(dt.getHours())}:${p2(dt.getMinutes())}`;
+                        const dur = r.ms != null ? GameUtils.formatTime(r.ms) + ' 秒' : '';
+                        const extra = r.detail ? `<span class="lg-extra">${r.detail}</span>` : '';
+                        return `<tr><td class="lg-val">${r.summary}${extra}</td><td class="lg-date">${ts}${dur ? ' · ' + dur : ''}</td></tr>`;
+                    }).join('') + '</tbody></table>';
+                }
+            }
+            testBoard.innerHTML = testHtml;
+            if (showTests) {
+                testSection.appendChild(testBoard);
+                boardsEl.appendChild(testSection);
             }
         },
 
@@ -508,6 +632,16 @@
             musicBtn.addEventListener('click', () => {
                 AudioManager.setBgm(!AudioManager.prefs.bgm);
             });
+            // 主题切换按钮（依赖 assets/theme-switcher.js）
+            if (window.ThemeManager) {
+                const themeBtn = document.createElement('button');
+                themeBtn.className = 'lg-tool-btn lg-theme-btn';
+                themeBtn.type = 'button';
+                themeBtn.title = '切换主题';
+                themeBtn.innerHTML = '<span>🎨</span><b>主题</b>';
+                themeBtn.addEventListener('click', () => ThemeManager.openPicker());
+                bar.appendChild(themeBtn);
+            }
             header.appendChild(bar);
             AudioManager.notifyButtons();
         },
@@ -517,6 +651,28 @@
     // ---------- 启动装配 ----------
     document.addEventListener('DOMContentLoaded', () => {
         Player.ensureDefault();
+
+        // 一次性迁移：五子棋旧榜单 fastest_win → fastest_std（按档位拆分后）
+        try {
+            if (!localStorage.getItem('lg_gomoku_lb_migrated')) {
+                const all = JSON.parse(localStorage.getItem('lg_records_v1') || '{}');
+                for (const pid of Object.keys(all)) {
+                    const g = all[pid] && all[pid].gomoku;
+                    if (g && Array.isArray(g.fastest_win) && g.fastest_win.length) {
+                        const tgt = Array.isArray(g.fastest_std) ? g.fastest_std.slice() : [];
+                        g.fastest_win.forEach(e => {
+                            if (!tgt.some(t => t.v === e.v && t.date === e.date)) tgt.push(e);
+                        });
+                        tgt.sort((a, b) => a.v - b.v);
+                        g.fastest_std = tgt.slice(0, 10);
+                        delete g.fastest_win;
+                    }
+                }
+                localStorage.setItem('lg_records_v1', JSON.stringify(all));
+                localStorage.setItem('lg_gomoku_lb_migrated', '1');
+            }
+        } catch (e) { /* 迁移失败不影响运行 */ }
+
         const header = document.querySelector('header.header');
         const isLobby = document.body.hasAttribute('data-lobby');
 
@@ -530,5 +686,5 @@
     });
 
     // 暴露全局接口（游戏脚本调用）
-    window.LG = { Records, Achievements, UI, Player, meta: LB_META };
+    window.LG = { Records, History, Achievements, UI, Player, meta: LB_META };
 })();

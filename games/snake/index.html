@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪吃蛇 - Fun City</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/logo.svg">
+    <link rel="stylesheet" href="../../assets/theme.css?v=21">
+    <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-game="snake">
+    <div class="container">
+        <header class="header">
+            <div><h1>贪吃蛇</h1><p>吃食物成长，撞墙撞自己结束</p></div>
+            <button class="return-lobby-btn ghost-btn">返回大厅</button>
+        </header>
+        <main>
+            <div id="level-select" class="level-select">
+                <h2>选择关卡</h2>
+                <div id="level-grid" class="level-grid"></div>
+            </div>
+            <div id="game-screen" class="game-screen" style="display:none;">
+                <div class="hud">
+                    <span id="hud-level" class="hud-item">第 1 关</span>
+                    <span id="hud-score" class="hud-item">分数 0 / 10</span>
+                    <span id="hud-best" class="hud-item">最高 --</span>
+                    <button id="back-levels" class="btn secondary-btn sm">关卡</button>
+                </div>
+                <div class="canvas-wrap"><canvas id="game" width="400" height="400"></canvas></div>
+                <p class="hint" id="game-hint">方向键 / 滑动屏幕控制方向</p>
+            </div>
+            <div id="result-overlay" class="result-overlay" style="display:none;">
+                <div class="result-card">
+                    <h2 id="result-title"></h2>
+                    <p id="result-text"></p>
+                    <div class="result-btns">
+                        <button id="result-retry" class="btn">重试</button>
+                        <button id="result-next" class="btn" style="display:none">下一关</button>
+                        <button id="result-levels" class="btn secondary-btn">关卡选择</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../../assets/util.js?v=3"></script>
+    <script src="../../assets/player.js?v=3"></script>
+    <script src="../../assets/audio.js?v=5"></script>
+    <script src="../../assets/features.js?v=12"></script>
+    <script src="../../assets/theme-switcher.js?v=3"></script>
+    <script src="script.js?v=1"></script>
+</body>
+</html>

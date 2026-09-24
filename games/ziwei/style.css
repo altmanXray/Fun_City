@@ -1,0 +1,284 @@
+/* FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
+/* 紫微斗数专有样式（通用部分见 ../../assets/theme.css） */
+
+.container {
+    width: min(700px, 100%);
+    padding: 32px 36px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.header h1 {
+    font-size: 2.2em;
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.screen {
+    animation: fadeIn 0.3s ease;
+}
+
+.screen h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: var(--text);
+}
+
+.input-actions,
+.result-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.ziwei-note {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    margin-top: 14px;
+}
+
+/* ---------- 摘要 ---------- */
+.zw-summary {
+    padding: 14px 18px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(124, 108, 255, 0.12), rgba(156, 39, 176, 0.08));
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+.zw-summary .bs-title {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--accent-strong);
+}
+
+.zw-summary .bs-sub {
+    color: var(--muted);
+    font-size: 0.86rem;
+    margin-top: 4px;
+}
+
+/* ---------- 命盘 4×4 ---------- */
+.zw-chart {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, minmax(96px, auto));
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.zw-cell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 8px 24px;
+    border-radius: 10px;
+    background: var(--surface-alt);
+    min-height: 96px;
+}
+
+.zw-cell.soul {
+    box-shadow: 0 0 0 2px var(--accent) inset;
+    background: var(--surface-soft);
+}
+
+.zw-cell.body-mark::after {
+    content: '身';
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    font-size: 0.68rem;
+    color: #9c27b0;
+    font-weight: 800;
+}
+
+.zw-stars {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.zw-star {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.35;
+}
+
+.zw-star.major { color: #6a3ab2; }
+.zw-star.minor { color: var(--muted); font-weight: 600; font-size: 0.74rem; }
+.zw-star .sihua {
+    display: inline-block;
+    margin-left: 3px;
+    padding: 0 4px;
+    border-radius: 6px;
+    font-size: 0.66rem;
+    color: #fff;
+    background: #ef6c57;
+}
+.zw-star .sihua.lu { background: #e67e22; }
+.zw-star .sihua.quan { background: #c0392b; }
+.zw-star .sihua.ke { background: #27847c; }
+.zw-star .sihua.ji { background: #7b1fa2; }
+
+.zw-cell-label {
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.72rem;
+}
+
+.zw-palace-name {
+    font-weight: 800;
+    color: var(--accent-strong);
+}
+
+.zw-daxian {
+    color: var(--muted);
+    font-size: 0.68rem;
+}
+
+.zw-center {
+    grid-column: 2 / 4;
+    grid-row: 2 / 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 14px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(124, 108, 255, 0.10), rgba(156, 39, 176, 0.06));
+    text-align: center;
+}
+
+.zw-center .zc-1 { font-size: 1.05rem; font-weight: 900; color: var(--accent-strong); }
+.zw-center .zc-2 { font-size: 0.86rem; color: var(--text); }
+.zw-center .zc-3 { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+
+/* ---------- 解读 ---------- */
+.zw-section {
+    padding: 16px 18px;
+    border-radius: 14px;
+    background: var(--surface-alt);
+    margin-bottom: 14px;
+}
+
+.zw-section h3 {
+    margin: 0 0 8px;
+    font-size: 1.02rem;
+    color: var(--accent-strong);
+}
+
+.zw-section p {
+    margin: 0 0 8px;
+    line-height: 1.75;
+    font-size: 0.93rem;
+    color: var(--text);
+}
+
+.zw-section p:last-child { margin-bottom: 0; }
+
+.palace-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.palace-item {
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--surface);
+}
+
+.palace-item .pi-head {
+    font-weight: 800;
+    color: var(--accent-strong);
+    margin-bottom: 4px;
+    font-size: 0.94rem;
+}
+
+.palace-item .pi-text {
+    color: var(--text);
+    font-size: 0.88rem;
+    line-height: 1.7;
+}
+
+/* ---------- 历史页 ---------- */
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 540px;
+    margin: 0 auto;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 16px;
+    border-radius: 12px;
+    background: var(--surface-alt);
+}
+
+.history-main {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.history-summary {
+    font-weight: 800;
+    color: var(--accent-strong);
+}
+
+.history-meta {
+    color: var(--muted);
+    font-size: 0.82rem;
+}
+
+.history-empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 30px 0;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 22px 12px;
+    }
+
+    .zw-chart {
+        gap: 4px;
+    }
+
+    .zw-cell {
+        padding: 5px 5px 22px;
+        min-height: 84px;
+    }
+
+    .zw-star { font-size: 0.7rem; }
+    .zw-star.minor { font-size: 0.64rem; }
+    .zw-palace-name { font-size: 0.66rem; }
+}

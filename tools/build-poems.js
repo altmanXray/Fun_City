@@ -1,6 +1,6 @@
-/* FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
+/* FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
 /**
- * LittleGame 诗库构建脚本（离线工具，不参与游戏运行时）
+ * Fun City 诗库构建脚本（离线工具，不参与游戏运行时）
  *
  * 用途：生成 games/schulte/poems-tang300.json（简体 + 逐字带调拼音）
  *

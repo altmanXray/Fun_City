@@ -1,110 +1,234 @@
 <!DOCTYPE html>
 <!--
-  FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。
+  FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。
 -->
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <style>html{background:linear-gradient(135deg,#5865d9,#9a5bc6) fixed}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LittleGame - 游戏大厅</title>
-    <link rel="stylesheet" href="assets/theme.css?v=4">
-    <link rel="stylesheet" href="style.css?v=3">
+    <title>Fun City - 游戏大厅</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <link rel="stylesheet" href="assets/theme.css?v=21">
+    <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body data-lobby>
     <div class="lobby-container">
         <header class="header">
-            <h1 class="logo">LittleGame</h1>
-            <p class="subtitle">精选休闲游戏合集</p>
+            <div class="brand-lockup">
+                <img src="assets/logo.svg" class="logo-badge" alt="Fun City">
+                <div class="brand-text">
+                    <h1 class="logo">Fun City</h1>
+                    <p class="subtitle">精选休闲游戏 · 测试命理合集</p>
+                </div>
+            </div>
         </header>
         
-        <main class="game-grid">
-            <div class="game-card" data-game="schulte">
-                <div class="game-icon">
-                    <span class="icon-text">🎯</span>
-                </div>
-                <h3 class="game-title">舒尔特方格</h3>
-                <p class="game-description">提升专注力与反应速度</p>
-                <div class="game-tags">
-                    <span class="tag">益智</span>
-                    <span class="tag">训练</span>
-                </div>
-                <button class="play-btn">开始游戏</button>
-            </div>
-            
-            <div class="game-card" data-game="sudoku">
-                <div class="game-icon">
-                    <span class="icon-text">🔢</span>
-                </div>
-                <h3 class="game-title">数独</h3>
-                <p class="game-description">经典数字逻辑填空游戏</p>
-                <div class="game-tags">
-                    <span class="tag">逻辑</span>
-                    <span class="tag">休闲</span>
-                </div>
-                <button class="play-btn">开始游戏</button>
-            </div>
+        <main>
+            <section class="lobby-section">
+                <h2 class="section-title">🧠 益智游戏</h2>
+                <div class="game-grid">
+                    <div class="game-card" data-game="schulte">
+                        <div class="game-icon">
+                            <svg viewBox="0 0 64 64" class="icon-svg"><circle cx="32" cy="32" r="24" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="32" r="14" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="32" r="4" fill="#FFFFFF"/></svg>
+                        </div>
+                        <h3 class="game-title">舒尔特方格</h3>
+                        <p class="game-description">提升专注力与反应速度</p>
+                        <div class="game-tags">
+                            <span class="tag">益智</span>
+                            <span class="tag">训练</span>
+                        </div>
+                        <button class="play-btn">开始游戏</button>
+                    </div>
 
-            <div class="game-card" data-game="memory">
-                <div class="game-icon">
-                    <span class="icon-text">🧠</span>
-                </div>
-                <h3 class="game-title">记忆翻牌</h3>
-                <p class="game-description">翻开卡片，找出所有成对图案</p>
-                <div class="game-tags">
-                    <span class="tag">记忆</span>
-                    <span class="tag">配对</span>
-                </div>
-                <button class="play-btn">开始游戏</button>
-            </div>
+                    <div class="game-card" data-game="sudoku">
+                        <div class="game-icon">
+                            <svg viewBox="0 0 64 64" class="icon-svg"><rect x="12" y="12" width="40" height="40" rx="7" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M25.3 12v40 M38.6 12v40 M12 25.3h40 M12 38.6h40" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <h3 class="game-title">数独</h3>
+                        <p class="game-description">经典数字逻辑填空游戏</p>
+                        <div class="game-tags">
+                            <span class="tag">逻辑</span>
+                            <span class="tag">休闲</span>
+                        </div>
+                        <button class="play-btn">开始游戏</button>
+                    </div>
 
-            <div class="game-card" data-game="2048">
-                <div class="game-icon">
-                    <span class="icon-text">🧮</span>
-                </div>
-                <h3 class="game-title">2048</h3>
-                <p class="game-description">滑动数字方块，合并冲击高分</p>
-                <div class="game-tags">
-                    <span class="tag">策略</span>
-                    <span class="tag">数字</span>
-                </div>
-                <button class="play-btn">开始游戏</button>
-            </div>
+                    <div class="game-card" data-game="memory">
+                        <div class="game-icon">
+                            <svg viewBox="0 0 64 64" class="icon-svg"><rect x="8" y="16" width="22" height="32" rx="4" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="30" y="22" width="24" height="30" rx="4" fill="#FFFFFF" opacity="0.25" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M35 32c2.5-3 6.5-.8 5 2.5-1 2.3-5 4.5-5 4.5s-4-2.2-5-4.5c-1.5-3.3 2.5-5.5 5-2.5Z" fill="#FFFFFF" stroke="none"/></svg>
+                        </div>
+                        <h3 class="game-title">记忆翻牌</h3>
+                        <p class="game-description">翻开卡片，找出所有成对图案</p>
+                        <div class="game-tags">
+                            <span class="tag">记忆</span>
+                            <span class="tag">配对</span>
+                        </div>
+                        <button class="play-btn">开始游戏</button>
+                    </div>
 
-            <div class="game-card" data-game="gomoku">
-                <div class="game-icon">
-                    <span class="icon-text">⚫</span>
-                </div>
-                <h3 class="game-title">五子棋</h3>
-                <p class="game-description">连成五子取胜，支持人机与双人</p>
-                <div class="game-tags">
-                    <span class="tag">对弈</span>
-                    <span class="tag">策略</span>
-                </div>
-                <button class="play-btn">开始游戏</button>
-            </div>
+                    <div class="game-card" data-game="2048">
+                        <div class="game-icon">
+                            <svg viewBox="0 0 64 64" class="icon-svg"><rect x="10" y="10" width="44" height="44" rx="8" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="32" y="39" font-size="15" font-weight="800" text-anchor="middle" font-family="Arial,sans-serif" fill="#FFFFFF">2048</text></svg>
+                        </div>
+                        <h3 class="game-title">2048</h3>
+                        <p class="game-description">滑动数字方块，合并冲击高分</p>
+                        <div class="game-tags">
+                            <span class="tag">策略</span>
+                            <span class="tag">数字</span>
+                        </div>
+                        <button class="play-btn">开始游戏</button>
+                    </div>
 
-            <div class="game-card coming-soon">
-                <div class="game-icon">
-                    <span class="icon-text">🎮</span>
+                    <div class="game-card" data-game="gomoku">
+                        <div class="game-icon">
+                            <svg viewBox="0 0 64 64" class="icon-svg"><rect x="10" y="10" width="44" height="44" rx="5" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 10v44 M35 10v44 M10 22h44 M10 35h44" stroke="#FFFFFF" stroke-width="3.5" fill="none"/><circle cx="28.5" cy="28.5" r="5.5" fill="#FFFFFF"/><circle cx="41.5" cy="41.5" r="5.5" fill="#FFFFFF"/></svg>
+                        </div>
+                        <h3 class="game-title">五子棋</h3>
+                        <p class="game-description">连成五子取胜，支持人机与双人</p>
+                        <div class="game-tags">
+                            <span class="tag">对弈</span>
+                            <span class="tag">策略</span>
+                        </div>
+                        <button class="play-btn">开始游戏</button>
+                    </div>
+
+                    <div class="game-card" data-game="snake">
+                        <div class="game-icon"><svg viewBox="0 0 64 64" class="icon-svg"><path d="M14 32 C14 20 26 14 36 16 C46 18 52 26 48 36 C44 46 32 50 24 46 C16 42 12 40 14 32Z" fill="#48d9a4" stroke="#FFF" stroke-width="3"/><circle cx="38" cy="24" r="2" fill="#1a1a2e"/><circle cx="44" cy="24" r="2" fill="#1a1a2e"/><circle cx="50" cy="14" r="4" fill="#ff6b6b"/></svg></div>
+                        <h3 class="game-title">贪吃蛇</h3>
+                        <p class="game-description">8 关挑战，过关解锁新关卡</p>
+                        <div class="game-tags"><span class="tag">经典</span><span class="tag">闯关</span></div>
+                        <button class="play-btn">开始游戏</button>
+                    </div>
+
+                    <div class="game-card" data-game="breakout">
+                        <div class="game-icon"><svg viewBox="0 0 64 64" class="icon-svg"><rect x="10" y="14" width="10" height="6" fill="#e74c3c"/><rect x="22" y="14" width="10" height="6" fill="#e67e22"/><rect x="34" y="14" width="10" height="6" fill="#f1c40f"/><rect x="46" y="14" width="8" height="6" fill="#2ecc71"/><rect x="14" y="22" width="10" height="6" fill="#3498db"/><rect x="26" y="22" width="10" height="6" fill="#9b59b6"/><rect x="38" y="22" width="10" height="6" fill="#e74c3c"/><circle cx="32" cy="40" r="4" fill="#FFF"/><rect x="22" y="50" width="20" height="4" rx="2" fill="#7c5cff"/></svg></div>
+                        <h3 class="game-title">打砖块</h3>
+                        <p class="game-description">8 关砖块布局，弹球通关</p>
+                        <div class="game-tags"><span class="tag">街机</span><span class="tag">闯关</span></div>
+                        <button class="play-btn">开始游戏</button>
+                    </div>
+
+                    <div class="game-card" data-game="othello">
+                        <div class="game-icon"><svg viewBox="0 0 64 64" class="icon-svg"><rect x="10" y="10" width="44" height="44" rx="4" fill="#2d7a3a" stroke="#FFF" stroke-width="3"/><circle cx="24" cy="24" r="8" fill="#1a1a1a" stroke="#FFF" stroke-width="2"/><circle cx="40" cy="24" r="8" fill="#f5f5f5" stroke="#888" stroke-width="2"/><circle cx="24" cy="40" r="8" fill="#f5f5f5" stroke="#888" stroke-width="2"/><circle cx="40" cy="40" r="8" fill="#1a1a1a" stroke="#FFF" stroke-width="2"/></svg></div>
+                        <h3 class="game-title">黑白棋</h3>
+                        <p class="game-description">翻转夹住的棋子，终局多者胜</p>
+                        <div class="game-tags"><span class="tag">棋盘</span><span class="tag">对战</span></div>
+                        <button class="play-btn">开始游戏</button>
+                    </div>
+
+                    <div class="game-card" data-game="idiom">
+                        <div class="game-icon"><svg viewBox="0 0 64 64" class="icon-svg"><rect x="14" y="12" width="36" height="14" rx="3" fill="#7c5cff" opacity="0.85"/><rect x="14" y="30" width="36" height="14" rx="3" fill="#8d55bd" opacity="0.85"/><rect x="14" y="48" width="36" height="10" rx="3" fill="#a575d8" opacity="0.85"/><text x="32" y="22" text-anchor="middle" dominant-baseline="central" fill="#FFF" font-size="9" font-weight="800">成语</text><text x="32" y="39" text-anchor="middle" dominant-baseline="central" fill="#FFF" font-size="9" font-weight="800">接龙</text></svg></div>
+                        <h3 class="game-title">成语接龙</h3>
+                        <p class="game-description">四选一接龙，每个成语附解释</p>
+                        <div class="game-tags"><span class="tag">文化</span><span class="tag">学习</span></div>
+                        <button class="play-btn">开始挑战</button>
+                    </div>
                 </div>
-                <h3 class="game-title">更多游戏</h3>
-                <p class="game-description">敬请期待...</p>
-                <div class="game-tags">
-                    <span class="tag">开发中</span>
+            </section>
+
+            <section class="lobby-section">
+                <h2 class="section-title">🔮 测试 · 命理</h2>
+                <div class="game-grid">
+                    <div class="game-card" data-game="mbti">
+                        <div class="game-icon">
+                            <svg viewBox="0 0 64 64" class="icon-svg"><circle cx="32" cy="32" r="24" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M42 22 L35 37 L22 42 L29 27 Z" fill="#FFFFFF"/><circle cx="32" cy="32" r="3.5" fill="#FFFFFF"/></svg>
+                        </div>
+                        <h3 class="game-title">MBTI 人格</h3>
+                        <p class="game-description">44 题测出你的 16 型人格，带历史记录</p>
+                        <div class="game-tags">
+                            <span class="tag">人格</span>
+                            <span class="tag">测试</span>
+                        </div>
+                        <button class="play-btn">开始测试</button>
+                    </div>
+
+                    <div class="game-card" data-game="zodiac">
+                        <div class="game-icon">
+                            <svg viewBox="0 0 64 64" class="icon-svg"><path d="M40 8 A26 26 0 1 0 56 42 A20.5 20.5 0 0 1 40 8 Z" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-linejoin="round"/><path d="M48 10 L50.5 17.5 L58 20 L50.5 22.5 L48 30 L45.5 22.5 L38 20 L45.5 17.5 Z" fill="#FFFFFF"/></svg>
+                        </div>
+                        <h3 class="game-title">星座解码</h3>
+                        <p class="game-description">太阳/月亮/上升星座与适配分析</p>
+                        <div class="game-tags">
+                            <span class="tag">星座</span>
+                            <span class="tag">测算</span>
+                        </div>
+                        <button class="play-btn">开始测算</button>
+                    </div>
+
+                    <div class="game-card" data-game="calendar">
+                        <div class="game-icon">
+                            <svg viewBox="0 0 64 64" class="icon-svg"><rect x="8" y="14" width="48" height="42" rx="7" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 28h48" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 8v12 M43 8v12" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="23" cy="38" r="4.5" fill="#FFFFFF"/><circle cx="41" cy="38" r="4.5" fill="#FFFFFF"/><circle cx="23" cy="48" r="4.5" fill="#FFFFFF"/></svg>
+                        </div>
+                        <h3 class="game-title">万年历</h3>
+                        <p class="game-description">农历、节气、节日与每日宜忌</p>
+                        <div class="game-tags">
+                            <span class="tag">农历</span>
+                            <span class="tag">查询</span>
+                        </div>
+                        <button class="play-btn">立即查看</button>
+                    </div>
+
+                    <div class="game-card" data-game="bazi">
+                        <div class="game-icon">
+                            <svg viewBox="0 0 64 64" class="icon-svg"><rect x="14" y="8" width="36" height="48" rx="4" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 22h20 M22 31h20 M22 40h13" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <h3 class="game-title">八字命理</h3>
+                        <p class="game-description">四柱排盘、五行分析与大运流年</p>
+                        <div class="game-tags">
+                            <span class="tag">八字</span>
+                            <span class="tag">命理</span>
+                        </div>
+                        <button class="play-btn">开始排盘</button>
+                    </div>
+
+                    <div class="game-card" data-game="ziwei">
+                        <div class="game-icon">
+                            <svg viewBox="0 0 64 64" class="icon-svg"><circle cx="32" cy="32" r="13" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="32" cy="32" rx="26" ry="10" stroke="#FFFFFF" stroke-width="3.5" fill="none" transform="rotate(-18 32 32)"/><circle cx="9" cy="22" r="3.5" fill="#FFFFFF"/><circle cx="55" cy="44" r="3.5" fill="#FFFFFF"/></svg>
+                        </div>
+                        <h3 class="game-title">紫微斗数</h3>
+                        <p class="game-description">十二宫命盘与主星解读</p>
+                        <div class="game-tags">
+                            <span class="tag">紫微</span>
+                            <span class="tag">命盘</span>
+                        </div>
+                        <button class="play-btn">开始排盘</button>
+                    </div>
+
+                    <div class="game-card" data-game="daily-fortune">
+                        <div class="game-icon"><svg viewBox="0 0 64 64" class="icon-svg"><rect x="22" y="16" width="20" height="38" rx="4" fill="#8b4513" stroke="#FFF" stroke-width="3"/><rect x="26" y="10" width="4" height="8" fill="#deb887"/><rect x="34" y="10" width="4" height="8" fill="#deb887"/><text x="32" y="38" text-anchor="middle" dominant-baseline="central" fill="#deb887" font-size="10" font-weight="900">签</text></svg></div>
+                        <h3 class="game-title">每日一签</h3>
+                        <p class="game-description">每天一支签，运势早知道</p>
+                        <div class="game-tags"><span class="tag">运势</span><span class="tag">每日</span></div>
+                        <button class="play-btn">摇签</button>
+                    </div>
+
+                    <div class="game-card" data-game="moon-blocks">
+                        <div class="game-icon"><svg viewBox="0 0 64 64" class="icon-svg"><path d="M18 20 C18 12 26 10 30 14 C34 10 42 12 42 20 C42 30 34 38 30 44 C26 38 18 30 18 20Z" fill="#daa520" stroke="#FFF" stroke-width="3"/><text x="30" y="28" text-anchor="middle" dominant-baseline="central" fill="#FFF" font-size="8" font-weight="900">聖</text><path d="M38 36 C38 30 44 28 47 32 C50 28 56 30 56 36 C56 42 50 48 47 52 C44 48 38 42 38 36Z" fill="#b8860b" stroke="#FFF" stroke-width="2" opacity="0.8"/></svg></div>
+                        <h3 class="game-title">圣杯求签</h3>
+                        <p class="game-description">掷筊问卜，连中三圣筊有惊喜</p>
+                        <div class="game-tags"><span class="tag">民俗</span><span class="tag">问卜</span></div>
+                        <button class="play-btn">掷筊</button>
+                    </div>
                 </div>
-                <button class="play-btn disabled">即将上线</button>
-            </div>
+            </section>
         </main>
-        
+
         <footer class="footer">
-            <p>© 2024 LittleGame</p>
+            <p>© 2026 Fun City</p>
         </footer>
     </div>
-    
+
+    <!-- 游戏舞台：常驻壳的 iframe（音乐在壳内连续播放，切游戏不销毁音频） -->
+    <div id="stage" aria-label="游戏舞台">
+        <iframe id="game-frame" title="游戏内容"></iframe>
+    </div>
+
     <script src="assets/util.js?v=3"></script>
     <script src="assets/player.js?v=3"></script>
-    <script src="assets/audio.js?v=3"></script>
-    <script src="assets/features.js?v=5"></script>
-    <script src="script.js"></script>
+    <script src="assets/audio.js?v=5"></script>
+    <script src="assets/features.js?v=12"></script>
+    <script src="assets/theme-switcher.js?v=3"></script>
+    <script src="script.js?v=4"></script>
 </body>
 </html>

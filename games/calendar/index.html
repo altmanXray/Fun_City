@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+  FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <style>html{background:linear-gradient(135deg,#5865d9,#9a5bc6) fixed}</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>万年历 - Fun City</title>
+    <link rel="stylesheet" href="../../assets/theme.css?v=21">
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body data-game="calendar">
+    <div class="container">
+        <header class="header">
+            <div>
+                <h1>万年历</h1>
+            </div>
+            <button class="return-lobby-btn ghost-btn">返回大厅</button>
+        </header>
+
+        <main>
+            <section class="cal-controls">
+                <button id="prev-btn" class="cal-nav" title="上个月">‹</button>
+                <div class="cal-title-box">
+                    <select id="year-sel" class="cal-select" aria-label="年份"></select>
+                    <span class="cal-title-year">年</span>
+                    <select id="month-sel" class="cal-select" aria-label="月份"></select>
+                    <span class="cal-title-year">月</span>
+                </div>
+                <button id="next-btn" class="cal-nav" title="下个月">›</button>
+                <button id="today-btn" class="btn secondary-btn cal-today">今天</button>
+            </section>
+
+            <section class="cal-board">
+                <div class="cal-weekdays">
+                    <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span>
+                    <span class="weekend">六</span><span class="weekend">日</span>
+                </div>
+                <div id="cal-grid" class="cal-grid"></div>
+            </section>
+
+            <section id="day-detail" class="day-detail"></section>
+
+            <p class="cal-note">节气时刻为简化天文算法计算，与官方时刻可能相差数分钟；宜忌按建除十二神推演，民俗参考、博君一笑。</p>
+        </main>
+    </div>
+
+    <script src="../../assets/util.js?v=3"></script>
+    <script src="../../assets/player.js?v=3"></script>
+    <script src="../../assets/audio.js?v=4"></script>
+    <script src="../../assets/features.js?v=12"></script>
+    <script src="../../assets/theme-switcher.js?v=3"></script>
+    <script src="../../assets/calendar-core.js?v=2"></script>
+    <script src="script.js?v=4"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--
+  FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <style>html{background:linear-gradient(135deg,#5865d9,#9a5bc6) fixed}</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星座解码 - Fun City</title>
+    <link rel="stylesheet" href="../../assets/theme.css?v=21">
+    <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-game="zodiac">
+    <div class="container">
+        <header class="header">
+            <div>
+                <h1>星座解码</h1>
+            </div>
+            <button class="return-lobby-btn ghost-btn">返回大厅</button>
+        </header>
+
+        <main>
+            <!-- 输入页 -->
+            <section id="input-screen" class="screen">
+                <h2>你的出生星图</h2>
+                <p class="mode-description">输入出生信息，解锁太阳 / 月亮 / 上升星座与适配分析</p>
+                <div class="form-grid">
+                    <div class="form-item">
+                        <label class="form-label" for="birth-date">出生日期（公历）</label>
+                        <input type="date" id="birth-date" min="1900-01-01" max="2100-12-31" value="2000-01-01">
+                    </div>
+                    <div class="form-item">
+                        <label class="form-label" for="birth-time">出生时间（越准越好）</label>
+                        <input type="time" id="birth-time" value="12:00">
+                    </div>
+                    <div class="form-item">
+                        <label class="form-label" for="birth-city">出生城市</label>
+                        <select id="birth-city"></select>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <span class="form-label">不确定出生时间？</span>
+                    <div class="pill-group">
+                        <label class="pill"><input type="radio" name="time-known" value="yes" checked><span>知道时间</span></label>
+                        <label class="pill"><input type="radio" name="time-known" value="no"><span>不记得了</span></label>
+                    </div>
+                </div>
+                <div class="input-actions">
+                    <button id="calc-btn" class="btn">✨ 开始解码</button>
+                    <button id="history-btn" class="btn secondary-btn">历史记录</button>
+                </div>
+                <p class="calc-note">月亮 / 上升星座依赖出生时刻，时间越精确结果越准；结果仅供娱乐与自我探索参考。</p>
+            </section>
+
+            <!-- 结果页 -->
+            <section id="result-screen" class="screen" style="display:none;">
+                <div id="trio-cards" class="trio-cards"></div>
+                <div id="element-summary" class="result-section"></div>
+                <div id="sun-profile"></div>
+                <div id="compat-block"></div>
+                <p class="calc-note">计算基于简化天文算法：太阳星座精确，月亮星座误差 &lt;0.3°，上升星座随出生时间每约 2 小时变化一个星座。仅供娱乐参考。</p>
+                <div class="result-actions">
+                    <button id="again-btn" class="btn">再测一次</button>
+                    <button id="history-btn2" class="btn secondary-btn">历史记录</button>
+                </div>
+            </section>
+
+            <!-- 历史页 -->
+            <section id="history-screen" class="screen" style="display:none;">
+                <h2>测算历史</h2>
+                <p class="mode-description">按时间倒序，最多保留最近 50 条</p>
+                <div id="history-list" class="history-list"></div>
+                <div class="result-actions">
+                    <button id="clear-history-btn" class="btn secondary-btn">清空记录</button>
+                    <button id="back-btn" class="btn">返回</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../assets/util.js?v=3"></script>
+    <script src="../../assets/player.js?v=3"></script>
+    <script src="../../assets/audio.js?v=4"></script>
+    <script src="../../assets/features.js?v=12"></script>
+    <script src="../../assets/theme-switcher.js?v=3"></script>
+    <script src="script.js?v=1"></script>
+</body>
+</html>

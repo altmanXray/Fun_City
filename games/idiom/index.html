@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成语接龙 - Fun City</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/logo.svg">
+    <link rel="stylesheet" href="../../assets/theme.css?v=21">
+    <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-game="idiom">
+    <div class="container">
+        <header class="header">
+            <div><h1>成语接龙</h1><p>选对下一个成语，学习成语知识</p></div>
+            <button class="return-lobby-btn ghost-btn">返回大厅</button>
+        </header>
+        <main>
+            <div id="start-screen" class="start-screen">
+                <h2>选择模式</h2>
+                <div class="mode-grid">
+                    <button class="mode-btn" data-mode="timed">⏱️ 限时挑战<br><small>60 秒内答对最多</small></button>
+                    <button class="mode-btn" data-mode="casual">📖 休闲学习<br><small>不限时，慢慢学</small></button>
+                </div>
+            </div>
+            <div id="game-screen" class="game-screen" style="display:none;">
+                <div class="hud">
+                    <span id="hud-streak" class="hud-item">连对 0</span>
+                    <span id="hud-timer" class="hud-item"></span>
+                    <span id="hud-best" class="hud-item">最佳 0</span>
+                </div>
+                <div class="idiom-current" id="idiom-current">
+                    <div class="idiom-text" id="idiom-text"></div>
+                    <div class="idiom-py" id="idiom-py"></div>
+                    <div class="idiom-meaning" id="idiom-meaning"></div>
+                    <div class="chain-arrow">↓ 尾字「<span id="last-char"></span>」接龙 ↓</div>
+                </div>
+                <div class="options" id="options"></div>
+                <div class="idiom-result" id="idiom-result" style="display:none;">
+                    <div class="idiom-full" id="idiom-full"></div>
+                </div>
+                <button id="quit-btn" class="btn secondary-btn sm">退出</button>
+            </div>
+            <div id="over-overlay" class="result-overlay" style="display:none;">
+                <div class="result-card">
+                    <h2 id="over-title"></h2>
+                    <p id="over-text"></p>
+                    <div class="result-btns">
+                        <button id="over-retry" class="btn">再来一局</button>
+                        <button id="over-menu" class="btn secondary-btn">返回菜单</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../../assets/util.js?v=3"></script>
+    <script src="../../assets/player.js?v=3"></script>
+    <script src="../../assets/audio.js?v=5"></script>
+    <script src="../../assets/features.js?v=12"></script>
+    <script src="../../assets/theme-switcher.js?v=3"></script>
+    <script src="script.js?v=1"></script>
+</body>
+</html>

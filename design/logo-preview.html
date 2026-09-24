@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun City Logo 方案预览</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(160deg, #efe9ff, #dfe7ff);
+            min-height: 100vh;
+            padding: 40px 24px;
+            color: #333;
+        }
+        h1 { text-align: center; margin-bottom: 8px; }
+        p.tip { text-align: center; color: #777; margin-bottom: 30px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 26px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 22px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        .card img { width: 100%; max-width: 260px; }
+        .card h2 { font-size: 1.1rem; margin: 10px 0 4px; }
+        .card p { color: #888; font-size: 0.86rem; line-height: 1.5; }
+        .card .tag {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 3px 14px;
+            border-radius: 999px;
+            background: #efe9ff;
+            color: #6a3ab2;
+            font-weight: 800;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fun City · Logo 方案预览</h1>
+    <p class="tip">四套同风格（粗黑描边 + 柔色平涂贴纸风），挑一套喜欢的告诉我编号即可替换大厅徽章 / favicon / README</p>
+    <div class="grid">
+        <div class="card">
+            <span class="tag">方案 A · 现行</span>
+            <img src="logo-a-skyline.svg" alt="方案A">
+            <h2>城市天际线</h2>
+            <p>小楼 + 气球 + 星星，最贴合"Fun City"名字的直白表达</p>
+        </div>
+        <div class="card">
+            <span class="tag">方案 B</span>
+            <img src="logo-b-ferris.svg" alt="方案B">
+            <h2>摩天轮游乐场</h2>
+            <p>八色吊舱摩天轮，"游乐园"氛围拉满，最有欢乐感</p>
+        </div>
+        <div class="card">
+            <span class="tag">方案 C</span>
+            <img src="logo-c-gamepad.svg" alt="方案C">
+            <h2>游戏手柄</h2>
+            <p>圆角方徽章 + 手柄 + 气球，"游戏平台"属性最强</p>
+        </div>
+        <div class="card">
+            <span class="tag">方案 D</span>
+            <img src="logo-d-tent.svg" alt="方案D">
+            <h2>游乐帐篷</h2>
+            <p>马戏帐篷 + 旗帜彩点，马戏团式的热闹与俏皮</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,19 +1,27 @@
-/* FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
-/* LittleGame 统一主题 —— 所有页面共享的变量与基础组件
+/* FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
+/* Fun City 统一主题 —— 所有页面共享的变量与基础组件
    各游戏的 style.css 在此之后加载，只放自己的专有样式。 */
+
+/* 跨页面平滑过渡（Chromium/Edge 原生支持；不支持的浏览器自动回退为直接切换） */
+@view-transition {
+    navigation: auto;
+}
 
 :root {
     /* 背景与容器 */
     --bg-start: #5865d9;
     --bg-end: #9a5bc6;
-    --surface: #fbf7ef;      /* 卡片/容器 */
-    --surface-alt: #ece2cf;  /* 信息面板 */
-    --surface-soft: #f4f0ff; /* 浅色悬停 */
+    --bg-tint: rgba(255, 211, 105, 0.32);
+    --surface: #fbf7ef;
+    --surface-alt: #ece2cf;
+    --surface-soft: #f4f0ff;
+    --radius-card: 20px;
+    --radius-btn: 999px;
 
     /* 品牌紫 */
     --btn-start: #5865d9;
     --btn-end: #8d55bd;
-    --accent: #6f4fc3;       /* 标题 */
+    --accent: #6f4fc3;
     --accent-strong: #5d4bc2;
     --border: #7666d8;
 
@@ -31,6 +39,201 @@
     --shadow-btn-hover: 0 12px 24px rgba(88, 101, 217, 0.28);
 }
 
+/* ================= 7 套主题 ================= */
+
+/* 🌑 暗夜 */
+[data-theme="dark"] {
+    --bg-start: #0f0f1a; --bg-end: #1a1a2e; --bg-tint: rgba(167, 139, 250, 0.06);
+    --surface: #252535; --surface-alt: #2d2d42; --surface-soft: #2a2a3e;
+    --btn-start: #7c5cff; --btn-end: #9d7bff;
+    --accent: #a78bfa; --accent-strong: #c4b5fd; --border: #4a3f6b;
+    --text: #e2e2f0; --muted: #8888a8;
+    --shadow-card: 0 24px 70px rgba(0, 0, 0, 0.5);
+    --shadow-btn: 0 8px 18px rgba(124, 92, 255, 0.3);
+    --shadow-btn-hover: 0 12px 24px rgba(124, 92, 255, 0.4);
+}
+
+/* 🌊 海洋 */
+[data-theme="ocean"] {
+    --bg-start: #0ea5e9; --bg-end: #14b8a6; --bg-tint: rgba(255, 255, 255, 0.15);
+    --surface: #f0fdff; --surface-alt: #e0f7fa; --surface-soft: #ecfeff;
+    --btn-start: #0891b2; --btn-end: #06b6d4;
+    --accent: #0891b2; --accent-strong: #0e7490; --border: #22d3ee;
+    --text: #164e63; --muted: #6b9eb5;
+    --shadow-card: 0 24px 70px rgba(8, 145, 178, 0.25);
+    --shadow-btn: 0 8px 18px rgba(8, 145, 178, 0.3);
+    --shadow-btn-hover: 0 12px 24px rgba(8, 145, 178, 0.35);
+}
+
+/* 🌅 落日 */
+[data-theme="sunset"] {
+    --bg-start: #f97316; --bg-end: #ec4899; --bg-tint: rgba(255, 255, 255, 0.18);
+    --surface: #fff7ed; --surface-alt: #ffedd5; --surface-soft: #fff1e6;
+    --btn-start: #ea580c; --btn-end: #f97316;
+    --accent: #ea580c; --accent-strong: #c2410c; --border: #fb923c;
+    --text: #431407; --muted: #9a6b55;
+    --shadow-card: 0 24px 70px rgba(234, 88, 12, 0.25);
+    --shadow-btn: 0 8px 18px rgba(234, 88, 12, 0.3);
+    --shadow-btn-hover: 0 12px 24px rgba(234, 88, 12, 0.35);
+}
+
+/* 🌲 森林 */
+[data-theme="forest"] {
+    --bg-start: #059669; --bg-end: #65a30d; --bg-tint: rgba(255, 255, 255, 0.12);
+    --surface: #f0fdf4; --surface-alt: #dcfce7; --surface-soft: #ecfdf5;
+    --btn-start: #16a34a; --btn-end: #22c55e;
+    --accent: #16a34a; --accent-strong: #15803d; --border: #4ade80;
+    --text: #14532d; --muted: #6b9b78;
+    --shadow-card: 0 24px 70px rgba(22, 163, 74, 0.22);
+    --shadow-btn: 0 8px 18px rgba(22, 163, 74, 0.28);
+    --shadow-btn-hover: 0 12px 24px rgba(22, 163, 74, 0.33);
+}
+
+/* 🎀 Hello Kitty */
+[data-theme="kitty"] {
+    --bg-start: #ffb6c1; --bg-end: #fff0f5; --bg-tint: rgba(255, 255, 255, 0.3);
+    --surface: #ffffff; --surface-alt: #fff0f5; --surface-soft: #fff5f8;
+    --btn-start: #e91e63; --btn-end: #f06292;
+    --accent: #e91e63; --accent-strong: #c2185b; --border: #f8bbd0;
+    --text: #4a148c; --muted: #ad6b8a;
+    --radius-card: 24px;
+    --shadow-card: 0 24px 70px rgba(233, 30, 99, 0.15);
+    --shadow-btn: 0 8px 18px rgba(233, 30, 99, 0.25);
+    --shadow-btn-hover: 0 12px 24px rgba(233, 30, 99, 0.3);
+}
+
+/* 👊 街霸 */
+[data-theme="streetfighter"] {
+    --bg-start: #1a0a0a; --bg-end: #2d1b1b; --bg-tint: rgba(255, 107, 53, 0.08);
+    --surface: #2a2a2a; --surface-alt: #333333; --surface-soft: #3a2a2a;
+    --btn-start: #ff6b35; --btn-end: #ff8c42;
+    --accent: #ff6b35; --accent-strong: #ffa500; --border: #ff6b35;
+    --radius-card: 8px; --radius-btn: 6px;
+    --text: #f5f0e0; --muted: #aa9990;
+    --shadow-card: 0 24px 70px rgba(255, 107, 53, 0.2);
+    --shadow-btn: 0 8px 18px rgba(255, 107, 53, 0.35);
+    --shadow-btn-hover: 0 12px 24px rgba(255, 107, 53, 0.45);
+}
+
+/* ---------- Hello Kitty 装饰 ---------- */
+[data-theme="kitty"] body {
+    background-image:
+        radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 240, 245, 0.5) 0%, transparent 50%),
+        linear-gradient(135deg, var(--bg-start), var(--bg-end));
+}
+
+/* ---------- 大厅卡片背景强制跟随主题（绕过 CSS 变量在某些浏览器的 background 简写解析问题） ---------- */
+[data-theme="violet"] .game-card { background-color: #f4f0ff; }
+[data-theme="dark"] .game-card { background-color: #2a2a3e; }
+[data-theme="ocean"] .game-card { background-color: #ecfeff; }
+[data-theme="sunset"] .game-card { background-color: #fff1e6; }
+[data-theme="forest"] .game-card { background-color: #ecfdf5; }
+[data-theme="kitty"] .game-card { background-color: #fff5f8; }
+[data-theme="streetfighter"] .game-card { background-color: #3a2a2a; }
+
+/* 大厅文本颜色强制跟随主题 */
+[data-theme="dark"] .game-title,
+[data-theme="dark"] .section-title { color: #a78bfa !important; }
+[data-theme="dark"] .game-description,
+[data-theme="dark"] .subtitle,
+[data-theme="dark"] .footer p { color: #8888a8 !important; }
+[data-theme="dark"] .tag { color: #c4b5fd !important; }
+
+[data-theme="ocean"] .game-title,
+[data-theme="ocean"] .section-title { color: #0891b2 !important; }
+[data-theme="ocean"] .game-description,
+[data-theme="ocean"] .subtitle,
+[data-theme="ocean"] .footer p { color: #6b9eb5 !important; }
+
+[data-theme="sunset"] .game-title,
+[data-theme="sunset"] .section-title { color: #ea580c !important; }
+[data-theme="sunset"] .game-description,
+[data-theme="sunset"] .subtitle,
+[data-theme="sunset"] .footer p { color: #9a6b55 !important; }
+
+[data-theme="forest"] .game-title,
+[data-theme="forest"] .section-title { color: #16a34a !important; }
+[data-theme="forest"] .game-description,
+[data-theme="forest"] .subtitle,
+[data-theme="forest"] .footer p { color: #6b9b78 !important; }
+
+[data-theme="kitty"] .game-title,
+[data-theme="kitty"] .section-title { color: #e91e63 !important; }
+[data-theme="kitty"] .game-description,
+[data-theme="kitty"] .subtitle,
+[data-theme="kitty"] .footer p { color: #ad6b8a !important; }
+[data-theme="kitty"] .tag { color: #e91e63 !important; }
+
+[data-theme="streetfighter"] .game-title,
+[data-theme="streetfighter"] .section-title { color: #ff6b35 !important; }
+[data-theme="streetfighter"] .game-description,
+[data-theme="streetfighter"] .subtitle,
+[data-theme="streetfighter"] .footer p { color: #aa9990 !important; }
+[data-theme="streetfighter"] .tag { color: #ffa500 !important; }
+
+/* 游戏页标题与正文也跟随主题 */
+[data-theme="dark"] .header h1 { color: #a78bfa !important; -webkit-text-fill-color: #a78bfa !important; }
+[data-theme="dark"] .header p { color: #8888a8 !important; }
+[data-theme="ocean"] .header h1 { color: #0891b2 !important; -webkit-text-fill-color: #0891b2 !important; }
+[data-theme="ocean"] .header p { color: #6b9eb5 !important; }
+[data-theme="sunset"] .header h1 { color: #ea580c !important; -webkit-text-fill-color: #ea580c !important; }
+[data-theme="sunset"] .header p { color: #9a6b55 !important; }
+[data-theme="forest"] .header h1 { color: #16a34a !important; -webkit-text-fill-color: #16a34a !important; }
+[data-theme="forest"] .header p { color: #6b9b78 !important; }
+[data-theme="kitty"] .header h1 { color: #e91e63 !important; -webkit-text-fill-color: #e91e63 !important; }
+[data-theme="kitty"] .header p { color: #ad6b8a !important; }
+[data-theme="streetfighter"] .header h1 { color: #ff6b35 !important; -webkit-text-fill-color: #ff6b35 !important; text-shadow: 0 0 20px rgba(255,107,53,0.5); }
+[data-theme="streetfighter"] .header p { color: #aa9990 !important; }
+
+/* ---------- Hello Kitty 按钮弹跳 ---------- */
+[data-theme="kitty"] .btn,
+[data-theme="kitty"] .play-btn {
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(233, 30, 99, 0.2);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+[data-theme="kitty"] .btn:hover,
+[data-theme="kitty"] .play-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+}
+[data-theme="kitty"] .container,
+[data-theme="kitty"] .lobby-container {
+    border: 3px solid var(--border);
+}
+[data-theme="kitty"] .tag {
+    background: #fce4ec;
+    color: #e91e63;
+}
+
+/* ---------- 街霸装饰 ---------- */
+[data-theme="streetfighter"] body {
+    background-image:
+        repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px),
+        linear-gradient(135deg, var(--bg-start), var(--bg-end));
+}
+[data-theme="streetfighter"] .btn,
+[data-theme="streetfighter"] .play-btn {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 900;
+    clip-path: polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%);
+}
+[data-theme="streetfighter"] h1,
+[data-theme="streetfighter"] .logo {
+    text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+    letter-spacing: 2px;
+}
+[data-theme="streetfighter"] .container,
+[data-theme="streetfighter"] .lobby-container {
+    border: 2px solid rgba(255, 107, 53, 0.3);
+}
+[data-theme="streetfighter"] .tag {
+    background: #3a2a2a;
+    color: #ffa500;
+    border: 1px solid #ff6b35;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -44,10 +247,12 @@ body {
     align-items: center;
     justify-content: center;
     background:
-        linear-gradient(160deg, rgba(255, 211, 105, 0.32), transparent 34%),
+        linear-gradient(160deg, var(--bg-tint), transparent 34%),
         linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
     font-family: var(--font);
     color: var(--text);
+    transition: background 0.3s ease, color 0.3s ease;
+}
 }
 
 /* 容器基础：颜色/圆角/阴影统一，各游戏只覆盖 width / padding */
@@ -236,6 +441,92 @@ body {
     color: var(--accent);
     font-size: 1.25rem;
     font-weight: 800;
+}
+
+/* ---------- 表单组件：测试/命理页的生日表单（共用） ---------- */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin: 0 0 18px;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
+
+.form-item .form-label {
+    color: var(--muted);
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.form-item input[type="text"],
+.form-item input[type="date"],
+.form-item input[type="time"],
+.form-item select {
+    padding: 10px 12px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 0.98rem;
+    font-family: inherit;
+    transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.form-item input:focus,
+.form-item select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.15);
+}
+
+/* 单选/多选药丸组（性别、时辰等） */
+.pill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.pill {
+    position: relative;
+}
+
+.pill input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.pill span {
+    display: inline-block;
+    padding: 8px 14px;
+    border: 2px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+}
+
+.pill:hover span {
+    border-color: var(--accent);
+}
+
+.pill input:checked + span {
+    background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    border-color: transparent;
+    color: #fff;
+}
+
+.pill input:focus-visible + span {
+    box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.15);
 }
 
 /* ---------- 弹窗 ---------- */
@@ -663,4 +954,128 @@ body[data-game] .header > div:first-child {
     .lg-lb-btn span:last-child {
         display: none;
     }
+}
+
+/* ---------- 主题选择器 ---------- */
+.lg-theme-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.lg-theme-content {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 24px 28px;
+    max-width: 420px;
+    width: 92%;
+    box-shadow: var(--shadow-card);
+}
+
+.lg-theme-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.lg-theme-head h2 {
+    font-size: 1.2rem;
+    color: var(--accent-strong);
+}
+
+.lg-theme-close {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--muted);
+    padding: 4px 8px;
+    border-radius: 8px;
+}
+
+.lg-theme-close:hover {
+    background: var(--surface-alt);
+}
+
+.lg-theme-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+.lg-theme-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 8px;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.lg-theme-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+.lg-theme-card.active {
+    border-color: var(--accent);
+    background: var(--surface-alt);
+    box-shadow: var(--shadow-btn);
+}
+
+.lg-theme-swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.lg-theme-name {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.lg-theme-check {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    color: var(--accent);
+    font-weight: 900;
+    font-size: 0.9rem;
+}
+
+/* 主题切换按钮（大厅工具栏） */
+.lg-theme-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface-soft);
+    color: var(--text);
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.lg-theme-btn:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
 }

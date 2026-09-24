@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <!--
-  FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。
+  FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。
 -->
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <style>html{background:linear-gradient(135deg,#5865d9,#9a5bc6) fixed}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>五子棋 - LittleGame</title>
-    <link rel="stylesheet" href="../../assets/theme.css?v=4">
-    <link rel="stylesheet" href="style.css?v=6">
+    <title>五子棋 - Fun City</title>
+    <link rel="stylesheet" href="../../assets/theme.css?v=21">
+    <link rel="stylesheet" href="style.css?v=17">
 </head>
 <body data-game="gomoku">
     <div class="container">
@@ -23,7 +24,18 @@
         <main>
             <section class="top-row" aria-label="对战模式与状态">
                 <div class="mode-switch">
-                    <button class="mode-btn active" data-mode="pve" type="button">人机对战</button>
+                    <div class="mode-btn-wrap" id="pve-wrap">
+                        <button class="mode-btn active" data-mode="pve" type="button">人机对战</button>
+                        <button class="level-caret" id="level-caret" type="button" title="选择机器人强度" aria-haspopup="true"><span class="level-name">标准</span> ▾</button>
+                        <div class="level-menu" id="level-menu" role="menu" style="display:none;position:absolute;top:calc(100% + 6px);left:0;z-index:30;min-width:118px;padding:6px;border-radius:12px;background:#fbf7ef;box-shadow:0 10px 28px rgba(40,25,90,0.22);">
+                            <button class="level-opt" data-level="caiji" type="button" role="menuitem">菜鸡</button>
+                            <button class="level-opt active" data-level="std" type="button" role="menuitem">标准</button>
+                            <button class="level-opt" data-level="expert" type="button" role="menuitem">专家</button>
+                            <button class="level-opt" data-level="master" type="button" role="menuitem">大师</button>
+                            <button class="level-opt" data-level="chovy" type="button" role="menuitem">我Chovy</button>
+                            <button class="level-opt" data-level="god" type="button" role="menuitem">超级大神</button>
+                        </div>
+                    </div>
                     <button class="mode-btn" data-mode="pvp" type="button">双人对战</button>
                 </div>
                 <div class="status-chip">
@@ -65,8 +77,9 @@
 
     <script src="../../assets/util.js?v=3"></script>
     <script src="../../assets/player.js?v=3"></script>
-    <script src="../../assets/audio.js?v=3"></script>
-    <script src="../../assets/features.js?v=5"></script>
-    <script src="script.js?v=6"></script>
+    <script src="../../assets/audio.js?v=4"></script>
+    <script src="../../assets/features.js?v=12"></script>
+    <script src="../../assets/theme-switcher.js?v=3"></script>
+    <script src="script.js?v=16"></script>
 </body>
 </html>

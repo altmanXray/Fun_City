@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黑白棋 - Fun City</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/logo.svg">
+    <link rel="stylesheet" href="../../assets/theme.css?v=21">
+    <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-game="othello">
+    <div class="container">
+        <header class="header">
+            <div><h1>黑白棋</h1><p>翻转夹住的对方棋子，终局多者胜</p></div>
+            <button class="return-lobby-btn ghost-btn">返回大厅</button>
+        </header>
+        <main>
+            <div class="score-bar">
+                <span class="score black">⚫ <b id="score-black">2</b></span>
+                <span id="turn-indicator">轮到黑棋</span>
+                <span class="score white">⚪ <b id="score-white">2</b></span>
+            </div>
+            <div id="board-wrap"><svg id="board" viewBox="0 0 400 400"></svg></div>
+            <div class="controls">
+                <button id="restart-btn" class="btn">重新开始</button>
+            </div>
+            <div id="result-overlay" class="result-overlay" style="display:none;">
+                <div class="result-card">
+                    <h2 id="result-title"></h2>
+                    <p id="result-text"></p>
+                    <button id="result-restart" class="btn">再来一局</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../../assets/util.js?v=3"></script>
+    <script src="../../assets/player.js?v=3"></script>
+    <script src="../../assets/audio.js?v=5"></script>
+    <script src="../../assets/features.js?v=12"></script>
+    <script src="../../assets/theme-switcher.js?v=3"></script>
+    <script src="script.js?v=1"></script>
+</body>
+</html>

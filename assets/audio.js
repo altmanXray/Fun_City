@@ -1,10 +1,12 @@
-/* FHDCC · LittleGame | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
+/* FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
 /**
- * LittleGame 全局音频管理（Web Audio API 实时合成，无音频资产、零依赖）
+ * Fun City 全局音频管理（Web Audio API 实时合成，无音频资产、零依赖）
  *
  * - AudioManager.play(name)：短音效（click/flip/pop/success/error/win/lose）
  * - 背景音乐：轻快的大调五声拨弦循环（约 105 BPM，柔和低音量，无缝循环），
  *   遵守浏览器自动播放策略：首次用户手势后才启动
+ * - 跨页面旋律续接：切页时把旋律小节位置写入 sessionStorage（lg_bgm_step），
+ *   新页面解锁后从同一小节继续播放，而不是每次从头来
  * - 偏好持久化于 localStorage lg_audio_v1 = { bgm: bool, sfx: bool }，跨页面一致
  */
 const AudioManager = {
@@ -17,6 +19,7 @@ const AudioManager = {
     bgmStep: 0,
     unlocked: false,
     prefs: { bgm: true, sfx: true },
+    STEP_KEY: 'lg_bgm_step',
 
     init() {
         try {
@@ -26,6 +29,15 @@ const AudioManager = {
                 this.prefs.sfx = saved.sfx !== false;
             }
         } catch (e) { /* 忽略损坏的偏好 */ }
+
+        // 切页前保存旋律位置，新页面解锁后从同一小节续播
+        const saveStep = () => {
+            if (this.bgmTimer) {
+                try { sessionStorage.setItem(this.STEP_KEY, String(this.bgmStep)); } catch (e) { /* 忽略 */ }
+            }
+        };
+        window.addEventListener('pagehide', saveStep);
+        document.addEventListener('visibilitychange', () => { if (document.hidden) saveStep(); });
 
         // 首次用户手势解锁音频上下文，并按偏好启动背景音乐
         const unlock = () => {
@@ -72,6 +84,14 @@ const AudioManager = {
         } catch (e) { /* 存储不可用时静默 */ }
     },
 
+    // 公开解锁入口（壳转发 iframe 内手势时使用；幂等）
+    unlockNow() {
+        this.unlocked = true;
+        this.ensureCtx();
+        if (this.prefs.bgm) this.startBgm();
+        this.notifyButtons();
+    },
+
     // ---------- 音效 ----------
     play(name) {
         if (!this.prefs.sfx) return;
@@ -98,7 +118,7 @@ const AudioManager = {
             case 'click':   // 轻点：柔和短促
                 tone(660, 0, 0.06, 'triangle', 0.5);
                 break;
-            case 'flip':    // 翻牌：噪声气流感用两个快速滑音模拟
+            case 'flip':    // 翻牌：快速滑音
                 tone(320, 0, 0.09, 'sine', 0.5, 640);
                 break;
             case 'pop':     // 合并：弹性上滑
@@ -181,14 +201,22 @@ const AudioManager = {
             this.bgmNextTime += stepDur;
             this.bgmStep++;
         }
+        // 持续记录旋律位置：切页后续播
+        try { sessionStorage.setItem(this.STEP_KEY, String(this.bgmStep)); } catch (e) { /* 忽略 */ }
     },
 
     startBgm() {
         const ctx = this.ensureCtx();
         if (!ctx || ctx.state !== 'running' || this.bgmTimer) return;
         this.buildNoteTable();
+        // 跨页面续播：恢复上次切页时的旋律位置
+        let saved = 0;
+        try {
+            const raw = sessionStorage.getItem(this.STEP_KEY);
+            if (raw != null) saved = Number(raw) || 0;
+        } catch (e) { saved = 0; }
+        this.bgmStep = saved;
         this.bgmNextTime = ctx.currentTime + 0.1;
-        this.bgmStep = 0;
         this.bgmTimer = setInterval(() => this.scheduleBgm(), 250);
         this.scheduleBgm();
     },
@@ -208,6 +236,7 @@ const AudioManager = {
             this.startBgm();
         } else {
             this.stopBgm();
+            try { sessionStorage.removeItem(this.STEP_KEY); } catch (e) { /* 忽略 */ }
         }
         this.notifyButtons();
     },

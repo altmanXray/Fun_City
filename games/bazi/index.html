@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--
+  FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <style>html{background:linear-gradient(135deg,#5865d9,#9a5bc6) fixed}</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>八字命理 - Fun City</title>
+    <link rel="stylesheet" href="../../assets/theme.css?v=21">
+    <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-game="bazi">
+    <div class="container">
+        <header class="header">
+            <div>
+                <h1>八字命理</h1>
+            </div>
+            <button class="return-lobby-btn ghost-btn">返回大厅</button>
+        </header>
+
+        <main>
+            <!-- 输入页 -->
+            <section id="input-screen" class="screen">
+                <h2>排出你的四柱</h2>
+                <p class="mode-description">生辰八字 · 五行旺衰 · 大运流年</p>
+                <div class="form-grid">
+                    <div class="form-item">
+                        <label class="form-label" for="birth-date">出生日期（公历）</label>
+                        <input type="date" id="birth-date" min="1900-01-01" max="2100-12-31" value="2000-01-01">
+                    </div>
+                    <div class="form-item">
+                        <label class="form-label" for="birth-time">出生时间</label>
+                        <input type="time" id="birth-time" value="12:00">
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-item">
+                        <span class="form-label">时辰</span>
+                        <div class="pill-group">
+                            <label class="pill"><input type="radio" name="hour-known" value="yes" checked><span>知道时辰</span></label>
+                            <label class="pill"><input type="radio" name="hour-known" value="no"><span>不知道</span></label>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <span class="form-label">性别（定大运顺逆）</span>
+                        <div class="pill-group">
+                            <label class="pill"><input type="radio" name="gender" value="male" checked><span>♂ 男</span></label>
+                            <label class="pill"><input type="radio" name="gender" value="female"><span>♀ 女</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-actions">
+                    <button id="calc-btn" class="btn">📜 开始排盘</button>
+                    <button id="history-btn" class="btn secondary-btn">历史记录</button>
+                </div>
+                <p class="bazi-note">按北京时间排盘（立春换年、十二节换月）；命理内容仅供娱乐与文化参考。</p>
+            </section>
+
+            <!-- 结果页 -->
+            <section id="result-screen" class="screen" style="display:none;">
+                <div id="bazi-summary" class="bazi-summary"></div>
+                <div id="pillars-block"></div>
+                <div id="wuxing-block"></div>
+                <div id="dayun-block"></div>
+                <div id="liunian-block"></div>
+                <div id="reading-block"></div>
+                <p class="bazi-note">以上分析基于简化规则（得令+同党计分），与职业命理师或有出入；命运始终在自己手里 ✊。</p>
+                <div class="result-actions">
+                    <button id="again-btn" class="btn">再测一次</button>
+                    <button id="history-btn2" class="btn secondary-btn">历史记录</button>
+                </div>
+            </section>
+
+            <!-- 历史页 -->
+            <section id="history-screen" class="screen" style="display:none;">
+                <h2>排盘历史</h2>
+                <p class="mode-description">按时间倒序，最多保留最近 50 条</p>
+                <div id="history-list" class="history-list"></div>
+                <div class="result-actions">
+                    <button id="clear-history-btn" class="btn secondary-btn">清空记录</button>
+                    <button id="back-btn" class="btn">返回</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../assets/util.js?v=3"></script>
+    <script src="../../assets/player.js?v=3"></script>
+    <script src="../../assets/audio.js?v=4"></script>
+    <script src="../../assets/features.js?v=12"></script>
+    <script src="../../assets/theme-switcher.js?v=3"></script>
+    <script src="../../assets/calendar-core.js?v=2"></script>
+    <script src="script.js?v=1"></script>
+</body>
+</html>

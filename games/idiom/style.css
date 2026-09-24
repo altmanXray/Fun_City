@@ -1,0 +1,44 @@
+/* FHDCC · Fun City | Copyright (c) 2026 FHDCC (altmanXray) — All Rights Reserved. 个人原创作品，未经授权禁止挪用与二次分发。 */
+/* 成语接龙专有样式 */
+
+.container { width: min(520px, 100%); padding: 24px 28px; }
+.header { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 20px; }
+.header h1 { font-size: 2rem; background: linear-gradient(135deg, var(--btn-start), var(--btn-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.header p { margin-top: 2px; color: var(--muted); font-size: 0.9rem; }
+
+.start-screen h2 { text-align: center; margin-bottom: 20px; }
+.mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 340px; margin: 0 auto; }
+.mode-btn { padding: 24px 16px; border: 2px solid var(--border); border-radius: 16px; background: var(--surface-soft); font-size: 1rem; font-weight: 800; color: var(--accent-strong); cursor: pointer; text-align: center; line-height: 1.6; transition: all 0.15s; }
+.mode-btn:hover { border-color: var(--accent); transform: translateY(-2px); }
+.mode-btn small { display: block; font-weight: 400; color: var(--muted); font-size: 0.8rem; margin-top: 4px; }
+
+.game-screen { text-align: center; }
+.hud { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+.hud-item { padding: 5px 12px; border-radius: 999px; background: var(--surface-alt); font-size: 0.85rem; font-weight: 700; color: var(--accent-strong); }
+
+.idiom-current { padding: 18px 20px; border-radius: 16px; background: var(--surface-alt); margin-bottom: 16px; }
+.idiom-text { font-size: 2rem; font-weight: 900; color: var(--accent-strong); font-family: KaiTi, 楷体, serif; }
+.idiom-py { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
+.idiom-meaning { color: var(--text); font-size: 0.92rem; margin-top: 8px; line-height: 1.6; }
+.chain-arrow { margin-top: 10px; font-size: 0.88rem; color: var(--accent); font-weight: 700; }
+.chain-arrow span { color: #e65100; font-size: 1.1rem; }
+
+.options { display: grid; gap: 10px; max-width: 400px; margin: 0 auto 16px; }
+.opt-btn { padding: 14px 18px; border: 2px solid var(--border); border-radius: 14px; background: var(--surface-soft); font-size: 1.1rem; font-weight: 700; font-family: KaiTi, 楷体, serif; color: var(--text); cursor: pointer; transition: all 0.12s; }
+.opt-btn:hover { border-color: var(--accent); }
+.opt-btn.correct { border-color: #43a047; background: #e8f5e9; color: #2e7d32; }
+.opt-btn.wrong { border-color: #e53935; background: #ffebee; color: #c62828; }
+
+.idiom-result { max-width: 400px; margin: 0 auto 16px; padding: 14px 18px; border-radius: 14px; background: #e8f5e9; border: 2px solid #a5d6a7; }
+.idiom-full { text-align: left; line-height: 1.8; font-size: 0.9rem; color: #2e7d32; }
+.idiom-full b { font-size: 1.1rem; font-family: KaiTi, 楷体, serif; }
+
+.btn.sm { padding: 6px 14px; font-size: 0.82rem; min-width: auto; }
+
+.result-overlay { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.55); }
+.result-card { background: var(--surface); border-radius: 20px; padding: 30px 40px; text-align: center; }
+.result-card h2 { font-size: 1.6rem; color: var(--accent-strong); margin-bottom: 8px; }
+.result-card p { color: var(--muted); margin-bottom: 20px; }
+.result-btns { display: flex; gap: 10px; justify-content: center; }
+
+@media (max-width: 500px) { .container { padding: 18px 14px; } .header h1 { font-size: 1.6rem; } .idiom-text { font-size: 1.6rem; } .mode-grid { grid-template-columns: 1fr; } }
